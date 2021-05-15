@@ -89,3 +89,29 @@ Log out | 4 | 4
 Contact | 3 | 5
 Purchase | 4 | 5
 Site Analytics | 1 | 1
+
+### Scope
+- Main features (For Minimal Viable Product)
+    - Navigation Menu
+    - Pagination for Books page
+    - Search Functionality
+    - Call to action Register area on landing page
+    - Register
+    - Log in
+    - Log out
+    - User Profile page 
+    - User can Add/Edit/Delete Books
+    - User can Add/Edit/Delete Reviews
+    - Administrator can delete Users and their content
+    - Contact Form
+    - Visual feedback for users on their actions
+    - Fully responsive website
+    - Purchase
+    - 404 Error page
+
+- Secondary / Future Features:
+    - Site Analytics Page
+    - User Favourites Page
+    - View most popular books
+    - Username/Password retrieval
+    - Chatbot Functionality
