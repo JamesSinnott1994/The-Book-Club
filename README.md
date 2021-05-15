@@ -177,23 +177,23 @@ A different website structure appears depending on whether a user is logged in o
 
 ### Skeleton
 1. Home Page Wireframe
-    - [Not Logged In](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/home-not-logged-in.pdf)
-    - [Logged In](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/home-logged-in.pdf)
+    - [Not Logged In](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/home-not-logged-in.pdf)
+    - [Logged In](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/home-logged-in.pdf)
 2. Books Page Wireframe
-    - [Books](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/books.pdf)
+    - [Books](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/books.pdf)
 3. Book Page Wireframe
-    - [Book](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/book.pdf)
+    - [Book](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/book.pdf)
 4. Contact Page Wireframe
-    - [Contact](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/contact.pdf)
+    - [Contact](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/contact.pdf)
 5. Search Page Wireframe
-    - [Search](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/search.pdf)
+    - [Search](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/search.pdf)
 6. Log In Page Wireframe
-    - [Log In](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/log-in.pdf)
+    - [Log In](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/log-in.pdf)
 7. Register Page Wireframe
-    - [Register](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/register.pdf)
+    - [Register](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/register.pdf)
 8. Profile Page Wireframe
-    - [Profile](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/profile.pdf)
+    - [Profile](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/profile.pdf)
 9. Add Book Page Wireframe
-    - [Add Book](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/add-book.pdf)
+    - [Add Book](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/add-book.pdf)
 10. 404 Error Page Wireframe
-    - [404 Error Page](https://github.com/JamesSinnott1994/test-book/blob/master/wireframes/404-error-page.pdf)
+    - [404 Error Page](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/404-error-page.pdf)
