@@ -115,3 +115,62 @@ Site Analytics | 1 | 1
     - View most popular books
     - Username/Password retrieval
     - Chatbot Functionality
+
+### Structure
+A different website structure appears depending on whether a user is logged in or not.
+
+#### Structure when not logged in
+1. Home Page
+- Will display a Navigation bar along the top of the screen (Common to all pages). This will contain the site Logo as well as the following link elements:
+    - Home
+    - Books
+    - Contact
+    - Search Icon
+    - Login
+    - Register
+    
+- Will contain a Search Area below the navigation bar.
+- Will contain a Call-To-Action register button below the search area on the left.
+- Will contain a "View Library" button below the search area on the right.
+- Will show the most popular books.
+- Will show some quotes about reading.
+- Will display a footer on the bottom (which will be common across all pages) that contains copyright information, contact details, as well as links to the administrator's social media.
+2. Books Page
+- This page will display a list of all books on the site. Pagination will be used to control the number of books shown to the user.
+- When user clicks on a particular book, it will bring them to a page which contains all the details for that book.
+3. Book Page
+- Display details for a particular book.
+4. Search Page
+- Returns results (if any) of books for the search query submitted by the user.
+- Will be similar to the Books page.
+5. Login Page
+- Simple login form for the user.
+6. Register Page
+- Simple register form for the user.
+7. Contact Page
+- Form that will allow users to contact the site administrator for any queries.
+
+#### Structure when logged in
+1. Home Page
+- Similar to above but with the following link elements for a logged in user:
+    - Home
+    - Profile
+    - Add Book
+    - Books
+    - Contact
+    - Search Icon
+    - Logout
+- Call-To-Action register button described above will be replaced by an "Add Book" button for logged in users.
+2. Profile Page
+- Displays information about the user.
+- Shows books added by the user.
+3. Add Book Page
+- Will display a form that allows the user to enter information about a book they would like to add to the website.
+4. Books Page
+- Same as previously described.
+5. Book Page
+- Same as previously described.
+6. Search Page
+- Same as previously described.
+7. Contact Page
+- Same as previously described.
