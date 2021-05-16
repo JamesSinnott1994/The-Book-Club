@@ -16,6 +16,7 @@ The purpose of this project is to build a book review and recommendation site.
         - [Colour Scheme](#colour-scheme)
         - [Media](#media)
         - [Effects](#effects)
+- [Database Schema](#database-schema)
 - [Technologies](#technologies)
 - [Testing](#testing)
 - [Deployment](#deployment)
@@ -219,3 +220,13 @@ A different website structure appears depending on whether a user is logged in o
 - Effects:
     - There will be Flash messages to give the user feedback on some of their actions.
     - There will be hover effects over links, buttons and input boxes.
+
+## Database Schema
+
+- There are four collections in the database:
+    1. users
+    2. books
+    3. reviews
+    4. genres
+
+![Database Schema](readme-images/schema.png)
