@@ -197,3 +197,25 @@ A different website structure appears depending on whether a user is logged in o
     - [Add Book](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/add-book.pdf)
 10. 404 Error Page Wireframe
     - [404 Error Page](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/404-error-page.pdf)
+
+### Surface
+- Typography:
+    - Oswald will be the font that is used for header, titles and links.
+    - Roboto will be the font used for the paragraph text.
+
+- Colour scheme:
+    ![Colour Scheme](readme-images/palette.PNG)
+
+    - For the navbar and footbar, the colour used is Medium Blue.
+    - Colour for the main search area and ordinary buttons is Iris.
+    - Primary background colour is White.
+    - Secondary background colour is Peach.
+    - Edit Buttons are Slimy Green.
+    - Register and Delete buttons are Vermillion.
+
+- Media:
+    - The only images used on the site will be those uploaded by users i.e. book covers.
+
+- Effects:
+    - There will be Flash messages to give the user feedback on some of their actions.
+    - There will be hover effects over links, buttons and input boxes.
