@@ -1,5 +1,7 @@
 import os
-from flask import Flask
+from flask import (
+    Flask, flash, render_template,
+    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 if os.path.exists("env.py"):
@@ -11,7 +13,7 @@ app = Flask(__name__)
 
 # App configuration
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("URI")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY") # Required for some Flask functions
 
 # Instance of PyMongo
@@ -20,8 +22,8 @@ mongo = PyMongo(app)
 
 # Default root
 @app.route("/")
-def hello():
-    return "Hello World!"
+def home():
+    return render_template("index.html")
 
 
 # Tells app how and where to host application
