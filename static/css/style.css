@@ -1,0 +1,30 @@
+nav {
+    background-color: #4021BD;
+}
+
+#logo {
+    font-size: 1.5rem;
+}
+
+/*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #logo {
+        font-size: 2.1rem;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* // X-Large devices (large desktops, 1280px and up) */
+/* @media (min-width: 1280px) and (min-height: 802px):  { */
+@media (min-width: 1280px) {
+}
+
+/* // XX-Large devices (larger desktops, 1600px and up) */
+/* @media (min-width: 1600px) and (min-height: 992px){ */
+@media (min-width: 1600px) {
+}

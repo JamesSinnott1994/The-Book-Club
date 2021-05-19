@@ -12,7 +12,46 @@
 </head>
 <body>
     
-    <h1>Base.html</h1>
+    <header>
+
+        <!-- top navbar -->
+        <nav class="nav-extended">
+            <div class="nav-wrapper">
+                
+                <a href="#" id="logo" class="brand-logo">The Book Club</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+
+                <!-- These links will only be seen from the Burger menu on smaller screen sizes -->
+                <ul class="right hide-on-small-and-down">
+                    <li><a href="{{ url_for('login') }}">Log In</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                </ul>
+
+                <!-- Search icon will be seen on all screen sizes -->
+                <ul class="right">
+                    <li><a href="#"><i class="fas fa-search"></i></a></li>
+                </ul>
+
+                <!-- These will only be seen from the Burger menu on medium and smaller screen sizes -->
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('books') }}">Books</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <!-- mobile sidebar  -->
+        <ul class="sidenav" id="mobile-demo">
+            <li><h5 class="center-align deep-purple-text text-darken 4">The Book Club</h5></li>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('books') }}">Books</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('login') }}">Log In</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+        </ul>
+    </header>
 
     {% block content %}
     {% endblock %}
