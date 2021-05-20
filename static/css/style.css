@@ -12,6 +12,27 @@ nav {
     margin-left: 2.5em;
 }
 
+main {
+    font-family: Roboto, sans-serif;
+}
+
+form i {
+    color: #4021BD;
+}
+
+.btn-color {
+    background-color: #4021BD;
+}
+
+.btn-color:hover {
+    background-color: rgb(96, 104, 216);
+}
+
+/* Override Materialize.css active class */
+.input-field .prefix.active {
+    color: rgb(96, 104, 216);
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
@@ -22,6 +43,9 @@ nav {
     #logo {
         font-size: 2.5rem;
         margin-left: 2em;
+    }
+    .row-spacing {
+        margin-bottom: 80px;
     }
 }
 
