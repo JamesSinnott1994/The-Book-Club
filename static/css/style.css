@@ -1,22 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Oswald:100,200,300,400,500,600,700');
+
 nav {
+    font-family: Oswald, sans-serif;
     background-color: #4021BD;
 }
 
 #logo {
     font-size: 1.5rem;
+    left: 0;
+    transform: none;
+    margin-left: 2.5em;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+    nav ul a {
+        font-size: 2rem;
+    }
     #logo {
-        font-size: 2.1rem;
+        font-size: 2.5rem;
+        margin-left: 2em;
     }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    #logo {
+        margin-left: 0.5em;
+    }
 }
 
 /* // X-Large devices (large desktops, 1280px and up) */
