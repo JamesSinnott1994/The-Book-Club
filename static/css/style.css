@@ -5,6 +5,12 @@ nav {
     background-color: #4021BD;
 }
 
+.flashes {
+    line-height: 2;
+    color: white;
+    background-color: #EA0F0B;
+}
+
 #logo {
     font-size: 1.5rem;
     left: 0;
