@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Oswald:100,200,300,400,500,600,700');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 nav {
     font-family: Oswald, sans-serif;
     background-color: #4021BD;
@@ -39,6 +45,41 @@ form i {
     color: rgb(96, 104, 216);
 }
 
+#search-area {
+    background-color: #414CD9;
+    height: 35vh;
+    position: relative;
+}
+
+.search-container {
+    position: absolute;
+    width: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search-bar {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.search-bar button {
+    padding-top: 10px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.search-bar i:hover {
+    color: #414CD9;
+}
+
+#query {
+    padding-top: 10px;
+    border-bottom: none;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
@@ -52,6 +93,16 @@ form i {
     }
     .row-spacing {
         margin-bottom: 80px;
+    }
+
+    .search-bar button {
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+    #query {
+        padding-top: 20px;
+        padding-bottom: 10px;
+        font-size: 30px;
     }
 }
 

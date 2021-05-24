@@ -2,6 +2,32 @@
 
 {% block content %}
 
-    <h2>Index.html</h2>
+    <section id="search-area">
+
+        <form action="" method="post">
+
+            <div class="search-container row valign-wrapper center-align">
+
+                <div class="search-bar input-field col s12">
+
+                    <!-- <i class="fas fa-search prefix light-blue-text text-darken-4"></i> -->
+                    <button class="prefix light-blue-text text-darken-4"><i class="fas fa-search"></i></button>
+                    
+                    <input type="text" name="query" id="query" minlength="3" placeholder="Search" required>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </section>
 
 {% endblock %}
+
+<!-- <form action="">
+    <div id="search-container">
+        <button type="submit"><i class="fa fa-search"></i></button>
+        <input type="text" placeholder="Search.." name="search" > 
+    </div>
+</form> -->
