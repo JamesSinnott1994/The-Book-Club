@@ -78,9 +78,14 @@ form i {
 }
 
 .call-to-action-area {
-    height: 57vh;
     background-color: red;
     margin-top: 2rem;
+}
+
+.cta-icon {
+    margin-top: 0.5em;
+    color: #4021BD;
+    font-size: 50px;
 }
 
 .call-to-action-area p {
@@ -136,7 +141,9 @@ form i {
         margin-top: 2rem;
         font-size: 1.5em;
     }
-    
+    .cta-icon {
+        font-size: 75px;
+    }
 }
 
 /* // Large devices (desktops, 992px and up) */
