@@ -28,16 +28,13 @@ main {
     font-family: Roboto, sans-serif;
 }
 
+main h4 {
+    font-family: Oswald, sans-serif;
+    letter-spacing: 1px;
+}
+
 form i {
     color: #4021BD;
-}
-
-.btn-color {
-    background-color: #4021BD;
-}
-
-.btn-color:hover {
-    background-color: rgb(96, 104, 216);
 }
 
 /* Override Materialize.css active class */
@@ -80,6 +77,34 @@ form i {
     border-bottom: none;
 }
 
+.call-to-action-area {
+    height: 57vh;
+    background-color: red;
+    margin-top: 2rem;
+}
+
+.call-to-action-area p {
+    font-size: 1.25em;
+}
+
+.cta-col {
+    background-color: white;
+}
+
+.btn-container {
+    margin-top: 2em;
+    margin-bottom: 3.5em;
+}
+
+.cta-btn {
+    border-radius: 20px;
+    background-color: #4021BD;
+}
+
+.cta-btn:hover {
+    background-color: rgb(96, 104, 216);
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
@@ -104,6 +129,14 @@ form i {
         padding-bottom: 10px;
         font-size: 30px;
     }
+    main h4 {
+        font-size: 2.5rem;
+    }
+    .call-to-action-area p {
+        margin-top: 2rem;
+        font-size: 1.5em;
+    }
+    
 }
 
 /* // Large devices (desktops, 992px and up) */
