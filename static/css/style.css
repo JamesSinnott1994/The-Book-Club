@@ -78,7 +78,6 @@ form i {
 }
 
 .call-to-action-area {
-    background-color: red;
     margin-top: 2rem;
 }
 
@@ -108,6 +107,24 @@ form i {
 
 .cta-btn:hover {
     background-color: rgb(96, 104, 216);
+}
+
+#quotes-area {
+    color: black;
+    background-color: #FFE5B4;
+}
+
+#quotes-area h4 {
+    padding-top: 2rem;
+}
+
+#quotes-area p, q {
+    font-size: 1.25em;
+    font-style: italic;
+}
+
+.quote-paragraph {
+    margin: 1em 0;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
@@ -143,6 +160,9 @@ form i {
     }
     .cta-icon {
         font-size: 75px;
+    }
+    #quotes-area p, q {
+        font-size: 1.5em;
     }
 }
 
