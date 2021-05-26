@@ -127,6 +127,14 @@ form i {
     margin: 1em 0;
 }
 
+.btn-color {
+    background-color: #4021BD;
+}
+
+.btn-color:hover {
+    background-color: rgb(96, 104, 216);
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */

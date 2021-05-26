@@ -38,6 +38,10 @@ def books():
 # Contact page
 @app.route("/contact")
 def contact():
+
+    if request.method == "POST":
+        pass
+
     return render_template("contact.html")
 
 

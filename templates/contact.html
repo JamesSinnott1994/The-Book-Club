@@ -2,6 +2,53 @@
 
 {% block content %}
 
-    <h2>Contact.html</h2>
+    <h3 class="center-align">Contact</h3>
+
+    <div class="row">
+
+        <form class="col s12 m10 l8 xl-2 offset-m1 offset-l2 offset-xl2" method="POST" action="{{ url_for('contact') }}">
+
+            <div class="card-panel">
+
+                <!-- name -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-user prefix"></i>
+                        <input id="name" name="name" type="text" minlength="5"
+                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+
+                <!-- email -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-envelope prefix"></i>
+                        <input id="email" name="email" type="email" class="validate" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+
+                <!-- comment -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-comment prefix"></i>
+                        <textarea id="comment" name="comment" class="materialize-textarea"></textarea>
+                        <label for="comment">Comment</label>
+                    </div>
+                </div>
+
+                <!-- login -->
+                <div class="row">
+                    <button type="submit" class="col s12 btn-large btn-color text-shadow">
+                        Submit <i class="fas fa-paper-plane white-text"></i>
+                    </button>
+                </div>
+                
+            </div>
+
+        </form>
+
+    </div>
 
 {% endblock %}
