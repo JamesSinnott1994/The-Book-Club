@@ -120,6 +120,10 @@ def profile(username):
 
     return redirect(url_for("login"))
 
+@app.route("/add_book", methods=["GET", "POST"])
+def add_book():
+    genres = mongo.db.genres.find().sort("genre", 1)
+    return render_template("add-book.html", genres=genres)
 
 # Tells app how and where to host application
 if __name__ == "__main__":

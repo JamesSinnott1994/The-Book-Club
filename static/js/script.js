@@ -20,4 +20,7 @@ $(document).ready(function(){
 
         $(".call-to-action-area p").height(maxHeight);
     }
+
+    // Genre select
+    $('select').formSelect();
 });
