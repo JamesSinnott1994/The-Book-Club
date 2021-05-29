@@ -1,10 +1,12 @@
+import imghdr
 import os
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for)
+    redirect, request, session, url_for, abort)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 if os.path.exists("env.py"):
     import env
 
@@ -17,9 +19,28 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY") # Required for some Flask functions
 
+# Prevents files that are over 1 MB from being uploaded as a Defensive Design feature
+# (This relates to uploading the cover image for a book)
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+
+# Validating File Names
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
+
+# Location for uploaded images
+app.config['UPLOAD_PATH'] = 'uploads'
+
 # Instance of PyMongo
 # Ensures our Flask app is properly communicating with the Mongo database
 mongo = PyMongo(app)
+
+# Helper function
+def validate_image(stream):
+    header = stream.read(512)
+    stream.seek(0) 
+    format = imghdr.what(None, header)
+    if not format:
+        return None
+    return '.' + (format if format != 'jpeg' else 'jpg')
 
 # Default root
 # Home page
@@ -122,6 +143,22 @@ def profile(username):
 
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
+    # https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
+    if request.method == "POST":
+        # Create book document for books collection
+        book = {
+            "title": request.form.get("title"),
+            "author": request.form.get("author"),
+            "genre": request.form.get("genre"),
+            "image": request.form.get("image"),
+            "description": request.form.get("description"),
+            "uploaded_by": session["user"],
+            "rating": 0
+        }
+        mongo.db.books.insert_one(book)
+        flash("Book successfully added to the library!")
+        return redirect(url_for("books"))
+
     genres = mongo.db.genres.find().sort("genre", 1)
     return render_template("add-book.html", genres=genres)
 

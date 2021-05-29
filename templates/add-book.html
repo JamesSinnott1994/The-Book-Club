@@ -6,7 +6,7 @@
 
     <div class="row">
 
-        <form class="col s12 m10 l8 xl-2 offset-m1 offset-l2 offset-xl2" method="POST" action="{{ url_for('add_book') }}">
+        <form class="col s12 m10 l8 xl-2 offset-m1 offset-l2 offset-xl2" method="POST" action="{{ url_for('add_book') }}" enctype="multipart/form-data">
 
             <div class="card-panel">
 
@@ -14,8 +14,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-book prefix"></i>
-                        <input id="title" name="title" type="text" minlength="5"
-                            maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                        <input id="title" name="title" type="text" minlength="2" maxlength="100" class="validate" required>
                         <label for="title">Title</label>
                     </div>
                 </div>
@@ -24,7 +23,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-user prefix"></i>
-                        <input id="author" name="author" type="text" class="validate" required>
+                        <input id="author" name="author" type="text" minlength="2" maxlength="100" class="validate" required>
                         <label for="author">Author</label>
                     </div>
                 </div>
@@ -33,31 +32,38 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-folder prefix"></i>
-                        <select>
+                        <select id="genre" name="genre" class="validate" required>
                             <option value="" disabled selected>Choose your genre</option>
                             {% for genre in genres %}
                                 <option value="{{ genre.genre }}">{{ genre.genre }}</option>
                             {% endfor %}
                         </select>
-                        <label>Select Genre</label>
+                        <label for="genre">Select Genre</label>
                     </div>
                 </div>
 
-                <div class="file-field input-field">
-                    <div class="btn btn-color">
-                        <span>Upload Image</span>
-                        <input type="file">
+                <!-- image url -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-image prefix"></i>
+                        <input id="image" name="image" type="text" class="validate" required>
+                        <label for="image">Cover Image URL</label>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                </div>
+
+                <!-- description -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-book-open prefix"></i>
+                        <textarea id="description" name="description" class="materialize-textarea"></textarea>
+                        <label for="description">Description</label>
                     </div>
                 </div>
                 
-
-                <!-- submit -->
+                <!-- add book -->
                 <div class="row">
                     <button type="submit" class="col s12 btn-large btn-color text-shadow">
-                        Submit <i class="fas fa-paper-plane white-text"></i>
+                        Add Book <i class="far fa-plus-square white-text"></i>
                     </button>
                 </div>
                 
