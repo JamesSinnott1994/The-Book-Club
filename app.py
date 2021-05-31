@@ -1,5 +1,6 @@
 import imghdr
 import os
+import math
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, abort)
@@ -53,7 +54,22 @@ def home():
 # Books page
 @app.route("/books")
 def books():
-    return render_template("books.html")
+    # 1.
+    # Gets the number of books in the books collection
+    number_of_books = mongo.db.books.estimated_document_count()
+    print(number_of_books)
+
+    books_per_page = 8
+
+    # Gets the number of pages for pagination
+    number_of_pages = math.ceil(number_of_books / books_per_page)
+    print(number_of_pages)
+
+    # 2.
+    # Retrieve 8 books
+    books = list(mongo.db.books.find().limit(2))
+
+    return render_template("books.html", number_of_pages=number_of_pages, books=books)
 
 
 # Contact page

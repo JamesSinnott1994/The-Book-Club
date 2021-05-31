@@ -135,6 +135,54 @@ form i {
     background-color: rgb(96, 104, 216);
 }
 
+/* Books Page */
+
+#pagination-area {
+    height: 10vh;
+}
+
+#pagination-container {
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.pagination {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pag-active {
+    background-color: #4021BD;
+}
+
+.book {
+    background-color: springgreen;
+    margin-bottom: 2em;
+}
+
+.book-img-container {
+    background-color: red;
+    margin: 0 auto;
+    width: 60%;
+    height: 300px;
+}
+
+.book-img {
+    width: 100%;
+    height: 100%;
+}
+
+.book-info {
+    width: 60%;
+    margin: 0 auto;
+    background-color: yellow;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
