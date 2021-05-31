@@ -17,10 +17,12 @@
 
     <section id="book-display-area" class="row">
         {% for book in books %}
-            <div class="book col s12">
+            <div class="book col s12 m6 l3">
 
                 <div class="book-img-container">
-                    <img class="book-img" src="{{ book.image }}">
+                    <a href="">
+                        <img class="book-img" src="{{ book.image }}">
+                    </a>
                 </div>
 
                 <div class="book-info center-align">

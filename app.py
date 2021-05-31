@@ -67,7 +67,7 @@ def books():
 
     # 2.
     # Retrieve 8 books
-    books = list(mongo.db.books.find().limit(2))
+    books = list(mongo.db.books.find().limit(8))
 
     return render_template("books.html", number_of_pages=number_of_pages, books=books)
 
