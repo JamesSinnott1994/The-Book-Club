@@ -20,7 +20,7 @@
             <div class="book col s12 m6 l3">
 
                 <div class="book-img-container">
-                    <a href="">
+                    <a href="{{ url_for('book', book_id=book._id) }}">
                         <img class="book-img" src="{{ book.image }}">
                     </a>
                 </div>

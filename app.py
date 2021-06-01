@@ -72,6 +72,21 @@ def books():
     return render_template("books.html", number_of_pages=number_of_pages, books=books)
 
 
+@app.route("/book/<book_id>", methods=["GET", "POST"])
+def book(book_id):
+    # # grab the session user's username from db
+    # book_id = mongo.db.books.find_one(
+    #     {"username": session["user"]})["username"]
+
+    # if session["user"]:
+    #     return render_template("profile.html", username=username)
+
+    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
+    print(book)
+
+    return render_template("book.html", book=book)
+
+
 # Contact page
 @app.route("/contact")
 def contact():
