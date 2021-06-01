@@ -53,34 +53,40 @@ def home():
 
 # Books page
 @app.route("/books")
-def books():
+@app.route("/books/<page>")
+def books(page=1):
     # 1.
     # Gets the number of books in the books collection
     number_of_books = mongo.db.books.estimated_document_count()
-    print(number_of_books)
 
-    books_per_page = 8
+    # Books per page
+    BOOKS_PER_PAGE = 8
+
+    # For going through pages
+    offset = -1
 
     # Gets the number of pages for pagination
-    number_of_pages = math.ceil(number_of_books / books_per_page)
-    print(number_of_pages)
+    number_of_pages = math.ceil(number_of_books / BOOKS_PER_PAGE)
 
-    # 2.
-    # Retrieve 8 books
-    books = list(mongo.db.books.find().limit(8))
+    # Retrieve books
+    books = list(mongo.db.books.aggregate([
+        {
+            "$skip": (BOOKS_PER_PAGE * (offset + int(page)))
+        },
+        {
+            "$limit": BOOKS_PER_PAGE
+        }
+    ]))
 
-    return render_template("books.html", number_of_pages=number_of_pages, books=books)
+    # # 2.
+    # # Retrieve 8 books
+    # books = list(mongo.db.books.find().limit(BOOKS_PER_PAGE))
+
+    return render_template("books.html", number_of_pages=number_of_pages, books=books, page=page)
 
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
 def book(book_id):
-    # # grab the session user's username from db
-    # book_id = mongo.db.books.find_one(
-    #     {"username": session["user"]})["username"]
-
-    # if session["user"]:
-    #     return render_template("profile.html", username=username)
-
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
     print(book)
 

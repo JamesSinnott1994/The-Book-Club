@@ -161,12 +161,10 @@ form i {
 }
 
 .book {
-    background-color: springgreen;
     margin-bottom: 2em;
 }
 
 .book-img-container {
-    background-color: red;
     margin: 0 auto;
     width: 60%;
     height: 300px;
@@ -180,7 +178,6 @@ form i {
 .book-info {
     width: 60%;
     margin: 0 auto;
-    background-color: yellow;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/

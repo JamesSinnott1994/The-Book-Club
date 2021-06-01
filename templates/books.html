@@ -6,9 +6,9 @@
         <div id="pagination-container">
             <ul class="pagination">
                 <li class="disabled"><a href="#!"><i class="fas fa-chevron-left"></i></a></li>
-                <li class="pag-active"><a href="#!" class="white-text">1</a></li>
+                <li class="pag-active"><a href="{{ url_for('books', page=1) }}" class="white-text">1</a></li>
                 {% for page in range(1, number_of_pages) %}
-                    <li class="waves-effect book-display"><a href="#!">{{ page+1 }}</a></li>
+                    <li class="waves-effect book-display"><a href="{{ url_for('books', page=page+1) }}">{{ page+1 }}</a></li>
                 {% endfor %}
                 <li class="waves-effect"><a href="#!"><i class="fas fa-chevron-right"></i></a></li>
             </ul>
