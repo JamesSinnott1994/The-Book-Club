@@ -68,6 +68,22 @@ def books(page=1):
     # Gets the number of pages for pagination
     number_of_pages = math.ceil(number_of_books / BOOKS_PER_PAGE)
 
+    # For chevron links
+    previous_page = 1
+    next_page = number_of_pages
+
+    if page == 0:  # Prevents going to page 0
+        previous_page = 1
+    
+    if page == number_of_pages:  # Prevents going beyond the max number of pages
+        next_page = number_of_pages
+
+    # For deciding "active" class
+    current_page = int(page)
+
+    # previous_page = int(page) - 1
+    # next_page = int(page) + 1
+
     # Retrieve books
     books = list(mongo.db.books.aggregate([
         {
@@ -82,7 +98,7 @@ def books(page=1):
     # # Retrieve 8 books
     # books = list(mongo.db.books.find().limit(BOOKS_PER_PAGE))
 
-    return render_template("books.html", number_of_pages=number_of_pages, books=books, page=page)
+    return render_template("books.html", number_of_pages=number_of_pages, books=books, page=page, next_page=next_page, previous_page=previous_page, current_page=current_page)
 
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
