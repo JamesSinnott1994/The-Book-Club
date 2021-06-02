@@ -177,7 +177,19 @@ form i {
 
 .book-info {
     width: 60%;
-    margin: 0 auto;
+    margin: 1em auto;
+}
+
+.book-info a {
+    color: black;
+}
+
+.book-info a:hover {
+    color: rgb(31, 31, 192);
+}
+
+.book-img-container:hover {
+    opacity: 0.9;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
