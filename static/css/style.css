@@ -192,6 +192,55 @@ form i {
     opacity: 0.9;
 }
 
+/* Book page */
+
+#book-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#book-page-info-area {
+    margin-top: 3em;
+}
+
+.book-page-img-container {
+    margin: 0 auto;
+    width: 85%;
+    height: 400px;
+}
+
+.book-details {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.book-details h4 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: normal;
+}
+
+.book-details h6 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#book-description, #reviews {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.book-btn-container {
+}
+
+.book-btn {
+    border-radius: 10px;
+    background-color: #4021BD;
+    color: white;
+}
+
+.book-btn:hover {
+    background-color: rgb(96, 104, 216);
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
@@ -229,12 +278,17 @@ form i {
     #quotes-area p, q {
         font-size: 1.5em;
     }
+    /* Book page */
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     #logo {
         margin-left: 0.5em;
+    }
+    /* Book page */
+    .book-page-img-container {
+        height: 500px;
     }
 }
 

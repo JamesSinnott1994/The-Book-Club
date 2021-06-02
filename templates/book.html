@@ -2,6 +2,44 @@
 
 {% block content %}
 
-    <h2>Book.html</h2>
+    <section id="book-page-wrapper">
+
+        <section id="book-page-info-area" class="row">
+
+            <div class="book-page-info col s12 m5">
+                <div class="book-page-img-container">
+                    <img class="book-img" src="{{ book.image }}">
+                </div>
+            </div>
+
+            <div class="book-page-info col s12 m7">
+                <div class="book-details">
+                    <h4 class="left-align">{{ book.title }}</h4>
+                    <h6>{{ book.author }}</h6>
+                    <h6>Genre: {{ book.genre }}</h6>
+                </div>
+
+                <div class="book-btn-container left-align">
+                    <a href="#" class="btn book-btn">
+                        Buy
+                    </a>
+                </div>
+
+            </div>
+                
+
+        </section>
+
+        <section id="book-description">
+            <h5>Description</h5>
+            <p>{{ book.description }}</p>
+        </section>
+
+        <section id="reviews">
+            <h5>Reviews</h5>
+            <p>{{ book.description }}</p>
+        </section>
+
+    </section>
 
 {% endblock %}
