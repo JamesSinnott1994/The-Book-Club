@@ -215,6 +215,27 @@ def add_book():
     genres = mongo.db.genres.find().sort("genre", 1)
     return render_template("add-book.html", genres=genres)
 
+
+@app.route("/edit_book/<book_id>", methods=["GET", "POST"])
+def edit_book(book_id):
+    if request.method == "POST":
+        updated_book = {
+            "title": request.form.get("title"),
+            "author": request.form.get("author"),
+            "genre": request.form.get("genre"),
+            "image": request.form.get("image"),
+            "description": request.form.get("description"),
+            "uploaded_by": session["user"],
+            "rating": 0
+        }
+        mongo.db.books.update({"_id": ObjectId(book_id)}, updated_book)
+        flash("Book Successfully Updated")
+        return redirect(url_for("book", book_id=book_id))
+
+    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
+    genres = mongo.db.genres.find().sort("genre", 1)
+    return render_template("edit-book.html", book=book, genres=genres)
+
 # Tells app how and where to host application
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

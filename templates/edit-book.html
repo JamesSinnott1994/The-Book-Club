@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h3 class="center-align">Edit Book</h3>
+
+    <div class="row">
+
+        <form class="col s12 m10 l8 xl-2 offset-m1 offset-l2 offset-xl2" method="POST" action="{{ url_for('edit_book', book_id=book._id) }}" enctype="multipart/form-data">
+
+            <div class="card-panel">
+
+                <!-- title -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-book prefix"></i>
+                        <input id="title" name="title" type="text" minlength="2" maxlength="100" class="validate" value="{{ book.title }}" required>
+                        <label for="title">Title</label>
+                    </div>
+                </div>
+
+                <!-- author -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-user prefix"></i>
+                        <input id="author" name="author" type="text" minlength="2" maxlength="100" class="validate" value="{{ book.author }}" required>
+                        <label for="author">Author</label>
+                    </div>
+                </div>
+
+                <!-- genre -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-folder prefix"></i>
+                        <select id="genre" name="genre" class="validate" required>
+                            <option value="" disabled selected>Choose your genre</option>
+                            {% for genre in genres %}
+                                {% if genre.genre == book.genre %}
+                                    <option selected value="{{ genre.genre }}">{{ genre.genre }}</option>
+                                {% else %}
+                                    <option value="{{ genre.genre }}">{{ genre.genre }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <label for="genre">Select Genre</label>
+                    </div>
+                </div>
+
+                <!-- image url -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-image prefix"></i>
+                        <input id="image" name="image" type="text" class="validate" value="{{ book.image }}" required>
+                        <label for="image">Cover Image URL</label>
+                    </div>
+                </div>
+
+                <!-- description -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-book-open prefix"></i>
+                        <textarea id="description" name="description" class="materialize-textarea">{{ book.description }}</textarea>
+                        <label for="description">Description</label>
+                    </div>
+                </div>
+
+                <!-- submit button -->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <!-- cancel button -->
+                        <a href="{{ url_for('books') }}" class="btn-large red text-shadow">
+                            Cancel <i class="fas fa-times-circle right white-text"></i>
+                        </a>
+                        <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+                            Edit Task <i class="fas fa-edit right white-text"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
