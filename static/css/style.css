@@ -152,6 +152,11 @@ form i {
 
 /* Books Page */
 
+#books-page-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 #pagination-area {
     height: 10vh;
 }

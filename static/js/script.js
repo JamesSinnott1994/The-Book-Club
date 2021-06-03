@@ -24,12 +24,18 @@ $(document).ready(function(){
     // Genre select
     $('select').formSelect();
 
-    // // Change active class when a Pagination link is clicked on
-    // // Binds click events to the pagination list items on the books page
-    // let numberOfPages = 0;
-    // $(".pagination .pag-link").each((i, link) => {
-    //     $(link).bind('click', () => {
-    //         $(link).addClass("pag-active");
-    //     });
-    // });
+    // Make each book div the same height on the books page
+    function makeBookDivHeightSame() {
+        let maxHeight = 0;
+
+        $("#book-display-area .book").each((i, book) => {
+            if ($(book).height() > maxHeight) { 
+                maxHeight = $(book).height();
+            }
+        });
+
+        $("#book-display-area .book").height(maxHeight);
+        console.log("HERE");
+    }
+    makeBookDivHeightSame();
 });

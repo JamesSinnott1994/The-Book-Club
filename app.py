@@ -93,6 +93,13 @@ def books(page=1):
         }
     ]))
 
+    print("*************************")
+    print("")
+    for book in books:
+        print(book["title"])
+    print("")
+    print("*************************")
+
     # # 2.
     # # Retrieve 8 books
     # books = list(mongo.db.books.find().limit(BOOKS_PER_PAGE))
@@ -240,6 +247,7 @@ def edit_book(book_id):
 def delete_book(book_id):
     mongo.db.books.remove({"_id": ObjectId(book_id)})
     flash("Book Successfully Deleted")
+    print("DELETED")
     return redirect(url_for("books"))
 
 # Tells app how and where to host application
