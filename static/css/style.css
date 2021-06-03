@@ -6,6 +6,20 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.footer-bg-color {
+    background-color: #4021BD;
+}
+
+.page-footer ul li {
+    display: inline-block;
+}
+
 nav {
     font-family: Oswald, sans-serif;
     background-color: #4021BD;
@@ -25,6 +39,7 @@ nav {
 }
 
 main {
+    flex: 1 0 auto;
     font-family: Roboto, sans-serif;
 }
 
@@ -243,7 +258,7 @@ form i {
 
 /* 404 Error Page */
 
-#error-area {
+#error-page {
     max-width: 1200px;
     margin: 0 auto;
 }
