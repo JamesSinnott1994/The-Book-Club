@@ -34,14 +34,13 @@ app.config['UPLOAD_PATH'] = 'uploads'
 # Ensures our Flask app is properly communicating with the Mongo database
 mongo = PyMongo(app)
 
-# Helper function
-def validate_image(stream):
-    header = stream.read(512)
-    stream.seek(0) 
-    format = imghdr.what(None, header)
-    if not format:
-        return None
-    return '.' + (format if format != 'jpeg' else 'jpg')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
+
 
 # Default root
 # Home page
