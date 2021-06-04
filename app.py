@@ -122,8 +122,7 @@ def book(book_id):
 
     # https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists
     query = {"book_id": {"$eq": book_id}}
-    reviews = list(mongo.db.reviews.find(query)) 
-    print(reviews)
+    reviews = list(mongo.db.reviews.find(query))
 
     return render_template("book.html", book=book, reviews=reviews)
 
@@ -259,6 +258,11 @@ def edit_book(book_id):
 @app.route("/delete_book/<book_id>")
 def delete_book(book_id):
     mongo.db.books.remove({"_id": ObjectId(book_id)})
+
+    # Delete all reviews associated with the book
+    query = {"book_id": {"$eq": book_id}}
+    mongo.db.reviews.remove(query)
+
     flash("Book Successfully Deleted")
     return redirect(url_for("books"))
 
