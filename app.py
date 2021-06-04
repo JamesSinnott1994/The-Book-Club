@@ -1,6 +1,7 @@
 import imghdr
 import os
 import math
+import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for, abort)
@@ -93,25 +94,36 @@ def books(page=1):
         }
     ]))
 
-    print("*************************")
-    print("")
-    for book in books:
-        print(book["title"])
-    print("")
-    print("*************************")
-
-    # # 2.
-    # # Retrieve 8 books
-    # books = list(mongo.db.books.find().limit(BOOKS_PER_PAGE))
-
     return render_template("books.html", number_of_pages=number_of_pages, books=books, page=page, next_page=next_page, previous_page=previous_page, current_page=current_page)
 
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
 def book(book_id):
-    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
-    print(book)
 
+    if request.method == "POST":
+        # Add Review
+
+
+        review = {
+            "title": request.form.get("title"),
+            "comment": request.form.get("comment"),
+            "book_id": book_id,
+            "reviewed_by": session["user"],
+            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
+            "rating": 3
+        }
+        print("*********************************")
+        print(book_id)
+        print(review)
+        print("*********************************")
+        mongo.db.reviews.insert_one(review)
+        flash("Review added!")
+        return redirect(url_for("book", book_id=book_id))
+
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(book_id)
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
     return render_template("book.html", book=book)
 
 
@@ -247,7 +259,6 @@ def edit_book(book_id):
 def delete_book(book_id):
     mongo.db.books.remove({"_id": ObjectId(book_id)})
     flash("Book Successfully Deleted")
-    print("DELETED")
     return redirect(url_for("books"))
 
 # Tells app how and where to host application
