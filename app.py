@@ -81,9 +81,6 @@ def books(page=1):
     # For deciding "active" class
     current_page = int(page)
 
-    # previous_page = int(page) - 1
-    # next_page = int(page) + 1
-
     # Retrieve books
     books = list(mongo.db.books.aggregate([
         {

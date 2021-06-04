@@ -4,8 +4,8 @@
 
     <section id="books-page-wrapper">
 
-        <section id="pagination-area">
-            <div id="pagination-container">
+        <section class="pagination-area">
+            <div class="pagination-container">
                 <ul class="pagination">
 
                     {# Enables/Disables backwards chevron link #}
@@ -73,6 +73,56 @@
 
                 </div>
             {% endfor %}
+        </section>
+
+        <section class="pagination-area">
+            <div class="pagination-container">
+                <ul class="pagination">
+
+                    {# Enables/Disables backwards chevron link #}
+                    {% if current_page == 1 %}
+                        <li class="disabled pag-link">
+                            <a href="#">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="waves-effect pag-link">
+                            <a href="{{ url_for('books', page=previous_page) }}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for page in range(0, number_of_pages) %}
+                        {# Creates links and give active class to current page #}
+                        {% if page+1 == current_page %}
+                            <li class="pag-active pag-link">
+                                <a href="{{ url_for('books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                            </li>
+                        {% else %}
+                            <li class="waves-effect pag-link">
+                                <a href="{{ url_for('books', page=page+1) }}">{{ page+1 }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {# Enables/Disables backwards chevron link #}
+                    {% if current_page == number_of_pages %}
+                        <li class="disabled pag-link">
+                            <a href="#">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="waves-effect pag-link">
+                            <a href="{{ url_for('books', page=next_page) }}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </section>
 
     </section>
