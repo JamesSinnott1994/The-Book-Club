@@ -102,8 +102,6 @@ def book(book_id):
 
     if request.method == "POST":
         # Add Review
-
-
         review = {
             "title": request.form.get("title"),
             "comment": request.form.get("comment"),
@@ -112,19 +110,22 @@ def book(book_id):
             "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
             "rating": 3
         }
-        print("*********************************")
-        print(book_id)
-        print(review)
-        print("*********************************")
         mongo.db.reviews.insert_one(review)
         flash("Review added!")
         return redirect(url_for("book", book_id=book_id))
-
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print(book_id)
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
-    return render_template("book.html", book=book)
+    # reviews = list(mongo.db.reviews.find())
+    # reviews = mongo.db.reviews.find_one({"book_id": book_id})
+    # db.collection.find({ "fieldToCheck": { $exists: true, $ne: null } })
+    # reviews = mongo.db.reviews.find({ "book_id": {"$exists": True, "$ne": None }})
+
+    # https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists
+    query = {"book_id": {"$eq": book_id}}
+    reviews = list(mongo.db.reviews.find(query)) 
+    print(reviews)
+
+    return render_template("book.html", book=book, reviews=reviews)
 
 
 # Contact page

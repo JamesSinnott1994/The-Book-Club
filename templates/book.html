@@ -50,7 +50,7 @@
         </section>
 
         <section id="reviews">
-            <h5>Reviews</h5>
+            <h5>Add Review</h5>
 
             {% if session.user %}
             <div class="row lft">
@@ -90,6 +90,11 @@
 
             </div>
             {% endif %}
+
+            <h5>Reviews</h5>
+            {% for review in reviews %}
+            <p>{{ review.title }}</p>
+            {% endfor %}
 
         </section>
 
