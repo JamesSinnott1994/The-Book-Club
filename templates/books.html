@@ -17,7 +17,7 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
-                            <a href="{{ url_for('books', page=previous_page) }}">
+                            <a href="{{ url_for('get_books', page=previous_page) }}">
                                 <i class="fas fa-chevron-left"></i>
                             </a>
                         </li>
@@ -27,11 +27,11 @@
                         {# Creates links and give active class to current page #}
                         {% if page+1 == current_page %}
                             <li class="pag-active pag-link">
-                                <a href="{{ url_for('books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                                <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
                             </li>
                         {% else %}
                             <li class="waves-effect pag-link">
-                                <a href="{{ url_for('books', page=page+1) }}">{{ page+1 }}</a>
+                                <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
@@ -45,7 +45,7 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
-                            <a href="{{ url_for('books', page=next_page) }}">
+                            <a href="{{ url_for('get_books', page=next_page) }}">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>
@@ -88,7 +88,7 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
-                            <a href="{{ url_for('books', page=previous_page) }}">
+                            <a href="{{ url_for('get_books', page=previous_page) }}">
                                 <i class="fas fa-chevron-left"></i>
                             </a>
                         </li>
@@ -98,11 +98,11 @@
                         {# Creates links and give active class to current page #}
                         {% if page+1 == current_page %}
                             <li class="pag-active pag-link">
-                                <a href="{{ url_for('books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                                <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
                             </li>
                         {% else %}
                             <li class="waves-effect pag-link">
-                                <a href="{{ url_for('books', page=page+1) }}">{{ page+1 }}</a>
+                                <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
@@ -116,7 +116,7 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
-                            <a href="{{ url_for('books', page=next_page) }}">
+                            <a href="{{ url_for('get_books', page=next_page) }}">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </li>

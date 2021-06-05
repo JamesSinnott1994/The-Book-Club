@@ -51,13 +51,37 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "POST":
+        query = request.form.get("query")
+        books = list(mongo.db.books.find({"$text": {"$search": query}}))
+
+        search = True
+        # return render_template("books.html", books=books)
+        return redirect(url_for("contact", search=search))
+
+    return render_template("index.html")
+
+
 # Books page
-@app.route("/books")
+@app.route("/books", methods=["GET", "POST"])
 @app.route("/books/<page>")
-def books(page=1):
+def get_books(page=1):
+
+    # For Search query from Home page
+    books = None
+    if request.method == "POST":
+        query = request.form.get("query")
+        books = list(mongo.db.books.find({"$text": {"$search": query}}))
+
     # 1.
     # Gets the number of books in the books collection
-    number_of_books = mongo.db.books.estimated_document_count()
+    number_of_books = 0
+    if books is None:
+        number_of_books = mongo.db.books.estimated_document_count()
+    else:
+        number_of_books = len(books)
 
     # Books per page
     BOOKS_PER_PAGE = 8
@@ -81,15 +105,16 @@ def books(page=1):
     # For deciding "active" class
     current_page = int(page)
 
-    # Retrieve books
-    books = list(mongo.db.books.aggregate([
-        {
-            "$skip": (BOOKS_PER_PAGE * (offset + int(page)))
-        },
-        {
-            "$limit": BOOKS_PER_PAGE
-        }
-    ]))
+    # Retrieve books if there is no search query
+    if books is None:
+        books = list(mongo.db.books.aggregate([
+            {
+                "$skip": (BOOKS_PER_PAGE * (offset + int(page)))
+            },
+            {
+                "$limit": BOOKS_PER_PAGE
+            }
+        ]))
 
     return render_template("books.html", number_of_pages=number_of_pages, books=books, page=page, next_page=next_page, previous_page=previous_page, current_page=current_page)
 
@@ -126,7 +151,11 @@ def book(book_id):
 
 # Contact page
 @app.route("/contact")
-def contact():
+def contact(search=False):
+
+    print("£££££££££££££££££££")
+    print(search)
+    print("£££££££££££££££££££")
 
     if request.method == "POST":
         pass

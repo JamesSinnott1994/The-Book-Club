@@ -4,7 +4,7 @@
 
     <section id="search-area">
 
-        <form action="" method="post">
+        <form action="{{ url_for('get_books') }}" method="post">
 
             <div class="search-container row valign-wrapper center-align">
 
@@ -52,7 +52,7 @@
                 <p class="center-align">Have a peruse through The Book Club library.</p>
 
                 <div class="btn-container center-align">
-                    <a href="{{ url_for('books') }}" class="btn-large cta-btn">View Library</a>
+                    <a href="{{ url_for('get_books') }}" class="btn-large cta-btn">View Library</a>
                 </div>
 
             </div>
