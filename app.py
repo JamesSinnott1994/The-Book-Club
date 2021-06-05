@@ -75,7 +75,6 @@ def get_books(page=1):
         query = request.form.get("query")
         books = list(mongo.db.books.find({"$text": {"$search": query}}))
 
-    # 1.
     # Gets the number of books in the books collection
     number_of_books = 0
     if books is None:
@@ -83,11 +82,26 @@ def get_books(page=1):
     else:
         number_of_books = len(books)
 
-    # Books per page
-    BOOKS_PER_PAGE = 8
+    # Call helper function
+    pagination_data = get_pagination_data(number_of_books, page)
 
-    # For going through pages
-    offset = -1
+    # Retrieve books if there is no search query
+    if books is None:
+        books = list(mongo.db.books.aggregate([
+            {
+                "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+            },
+            {
+                "$limit": pagination_data["BOOKS_PER_PAGE"]
+            }
+        ]))
+
+    return render_template("books.html", number_of_pages=pagination_data["number_of_pages"], books=books, page=page, next_page=pagination_data["next_page"], previous_page=pagination_data["previous_page"], current_page=pagination_data["current_page"])
+
+
+# Helper function
+def get_pagination_data(number_of_books, page):
+    BOOKS_PER_PAGE = 8
 
     # Gets the number of pages for pagination
     number_of_pages = math.ceil(number_of_books / BOOKS_PER_PAGE)
@@ -96,27 +110,26 @@ def get_books(page=1):
     previous_page = 1
     next_page = number_of_pages
 
-    if page == 0:  # Prevents going to page 0
+    # Prevents going to page 0
+    if page == 0:  
         previous_page = 1
-    
-    if page == number_of_pages:  # Prevents going beyond the max number of pages
+
+    # Prevents going beyond the max number of pages
+    if page == number_of_pages:  
         next_page = number_of_pages
 
     # For deciding "active" class
     current_page = int(page)
 
-    # Retrieve books if there is no search query
-    if books is None:
-        books = list(mongo.db.books.aggregate([
-            {
-                "$skip": (BOOKS_PER_PAGE * (offset + int(page)))
-            },
-            {
-                "$limit": BOOKS_PER_PAGE
-            }
-        ]))
-
-    return render_template("books.html", number_of_pages=number_of_pages, books=books, page=page, next_page=next_page, previous_page=previous_page, current_page=current_page)
+    pagination_data = {
+        "BOOKS_PER_PAGE": BOOKS_PER_PAGE,
+        "offset": -1,
+        "number_of_pages": number_of_pages,
+        "previous_page": previous_page,
+        "current_page": current_page,
+        "next_page": next_page
+    }
+    return pagination_data
 
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
