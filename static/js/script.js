@@ -38,4 +38,11 @@ $(document).ready(function(){
         console.log("HERE");
     }
     makeBookDivHeightSame();
+
+    // Expandable search icon
+    $(".fa-search").click(function(){
+        $(".searchbar").toggleClass("active");
+        $(".icon").toggleClass("active");
+        $("input[type='text']").toggleClass("active");
+    });
 });

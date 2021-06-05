@@ -25,6 +25,53 @@ nav {
     background-color: #4021BD;
 }
 
+/* Help with Searchbar inside of Navbar */
+/* https://www.youtube.com/watch?v=L3K45LKJWSQ */
+.searchbar {
+  position: relative;
+  background-color: white;
+}
+
+.searchbar input[type="text"] {
+  border: 0;
+  padding: 0;
+  width: 0px;
+  height: 35px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.searchbar .icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 100%;
+  background: none;
+  color: #fff;
+  transition: all 0.5s 0.3s ease;
+}
+
+.searchbar .icon i {
+  position: absolute;
+  top: 75%;
+  left: 65%;
+  transform: translate(-75%,-50%);
+  cursor: pointer;
+  color: white;
+}
+
+.searchbar .icon.active {
+  background: #4021BD;
+  transition: all 0.3s ease;
+}
+
+.searchbar input[type="text"].active {
+  width: 150px;
+  padding: 0 10px;
+  transition: all 0.5s 0.2s ease;
+}
+
 .flashes {
     line-height: 2;
     color: white;
@@ -298,6 +345,17 @@ form i {
         font-size: 2.5rem;
         margin-left: 2em;
     }
+    .searchbar .icon{
+        width: 50px;
+    }
+    .searchbar .icon i {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .searchbar input[type="text"].active {
+        width: 250px;
+    }
     .row-spacing {
         margin-bottom: 80px;
     }
@@ -350,6 +408,20 @@ form i {
 @media (min-width: 992px) {
     #logo {
         margin-left: 0.5em;
+    }
+    .searchbar {
+        margin-left: 3em;
+    }
+    .searchbar.active {
+        margin-left: 0;
+    }
+    .searchbar .icon.active {
+        border-right: 1px solid white;
+    }
+    .searchbar input[type="text"].active {
+        width: 350px;
+        padding: 0 10px;
+        transition: all 0.5s 0.2s ease;
     }
     /* Book page */
     .book-page-img-container {
