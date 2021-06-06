@@ -13,31 +13,34 @@
             </div>
 
             <div class="book-page-info col s12 m7">
+                
                 <div class="book-details">
                     <h4 class="left-align">{{ book.title }}</h4>
                     <h6>{{ book.author }}</h6>
                     <h6>Genre: {{ book.genre }}</h6>
                 </div>
 
-                <div class="book-btn-container left-align">
-                    <a href="#" class="btn book-btn">
-                        Buy
-                    </a>
+                <div class="book-btns-container">
+                    <div class="book-btn-container">
+                        <a href="#" class="btn book-btn">
+                            Buy
+                        </a>
+                    </div>
+
+                    {% if session.user|lower == book.uploaded_by|lower %}
+                        <div class="book-btn-container">
+                            <a href="{{ url_for('edit_book', book_id=book._id) }}" class="btn book-btn">
+                                Edit
+                            </a>
+                        </div>
+
+                        <div class="book-btn-container">
+                            <a href="{{ url_for('delete_book', book_id=book._id) }}" class="btn book-btn">
+                                Delete
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
-
-                {% if session.user|lower == book.uploaded_by|lower %}
-                    <div class="book-btn-container left-align">
-                        <a href="{{ url_for('edit_book', book_id=book._id) }}" class="btn book-btn">
-                            Edit
-                        </a>
-                    </div>
-
-                    <div class="book-btn-container left-align">
-                        <a href="{{ url_for('delete_book', book_id=book._id) }}" class="btn book-btn">
-                            Delete
-                        </a>
-                    </div>
-                {% endif %}
 
             </div>
                 

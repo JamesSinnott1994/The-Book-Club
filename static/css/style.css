@@ -266,6 +266,10 @@ form i {
     margin: 0 auto;
 }
 
+.book-page-info {
+    position: relative;
+}
+
 #book-page-info-area {
     margin-top: 3em;
 }
@@ -277,6 +281,11 @@ form i {
 }
 
 .book-details {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.book-btns-container {
     margin: 0 auto;
     width: 80%;
 }
@@ -296,6 +305,8 @@ form i {
 }
 
 .book-btn-container {
+    background-color: red;
+    display: inline-block;
 }
 
 .book-btn {
@@ -382,8 +393,15 @@ form i {
     #quotes-area p, q {
         font-size: 1.5em;
     }
-    /* Book page */
-
+    /* Book Page */
+    .book-page-info {
+        height: 400px;
+    }
+    .book-btns-container {
+        position: absolute;
+        bottom: 2.5%;
+        left: 10%;
+    }
     /* 404 Error Page */
     #error-page .row {
         margin-top: 2em;
@@ -424,6 +442,9 @@ form i {
         transition: all 0.5s 0.2s ease;
     }
     /* Book page */
+    .book-page-info {
+        height: 500px;
+    }
     .book-page-img-container {
         height: 500px;
     }
