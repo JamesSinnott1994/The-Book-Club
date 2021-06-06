@@ -51,54 +51,6 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    if request.method == "POST":
-        query = request.form.get("query")
-        books = list(mongo.db.books.find({"$text": {"$search": query}}))
-
-        search = True
-        # return render_template("books.html", books=books)
-        return redirect(url_for("contact", search=search))
-
-    return render_template("index.html")
-
-
-# Books page
-@app.route("/books", methods=["GET", "POST"])
-@app.route("/books/<page>")
-def get_books(page=1):
-
-    # For Search query from Home page
-    books = None
-    if request.method == "POST":
-        query = request.form.get("query")
-        books = list(mongo.db.books.find({"$text": {"$search": query}}))
-
-    # Gets the number of books in the books collection
-    number_of_books = 0
-    if books is None:
-        number_of_books = mongo.db.books.estimated_document_count()
-    else:
-        number_of_books = len(books)
-
-    # Call helper function
-    pagination_data = get_pagination_data(number_of_books, page)
-
-    # Retrieve books if there is no search query
-    if books is None:
-        books = list(mongo.db.books.aggregate([
-            {
-                "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
-            },
-            {
-                "$limit": pagination_data["BOOKS_PER_PAGE"]
-            }
-        ]))
-
-    return render_template("books.html", number_of_pages=pagination_data["number_of_pages"], books=books, page=page, next_page=pagination_data["next_page"], previous_page=pagination_data["previous_page"], current_page=pagination_data["current_page"])
-
-
 # Helper function
 def get_pagination_data(number_of_books, page):
     BOOKS_PER_PAGE = 8
@@ -130,6 +82,84 @@ def get_pagination_data(number_of_books, page):
         "next_page": next_page
     }
     return pagination_data
+
+@app.route("/search", methods=["GET", "POST"])
+@app.route("/search/<page>")
+def search(page=1):
+
+    # Store query in session
+    if request.method == "POST":
+        session["query"] = request.form.get("query")
+
+        number_of_books = len(list(mongo.db.books.find({"$text": {"$search": session["query"]}})))
+
+        pagination_data = get_pagination_data(number_of_books, page)
+
+        books = list(mongo.db.books.aggregate([
+            {
+                "$match": { "$text": { "$search": session["query"] } }
+            },
+            {
+                "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+            },
+            {
+                "$limit": pagination_data["BOOKS_PER_PAGE"]
+            }
+        ]))
+        return redirect(url_for("search", page=page))
+
+    if request.method == "GET":
+        if session["query"]:
+            number_of_books = len(list(mongo.db.books.find({"$text": {"$search": session["query"]}})))
+            pagination_data = get_pagination_data(number_of_books, page)
+            books = list(mongo.db.books.aggregate([
+                {
+                    "$match": { "$text": { "$search": session["query"] } }
+                },
+                {
+                    "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+                },
+                {
+                    "$limit": pagination_data["BOOKS_PER_PAGE"]
+                }
+            ]))
+            return render_template("books.html", number_of_pages=pagination_data["number_of_pages"], books=books, page=page, next_page=pagination_data["next_page"], previous_page=pagination_data["previous_page"], current_page=pagination_data["current_page"], query_exists=True)
+
+        return render_template("index.html")
+
+
+# Books page
+@app.route("/books", methods=["GET", "POST"])
+@app.route("/books/<page>")
+def get_books(page=1):
+    # For Search query from Home page
+    books = None
+    if request.method == "POST":
+        query = request.form.get("query")
+        books = list(mongo.db.books.find({"$text": {"$search": query}}))
+
+    # Gets the number of books in the books collection
+    number_of_books = 0
+    if books is None:
+        number_of_books = mongo.db.books.estimated_document_count()
+    else:
+        number_of_books = len(books)
+
+    # Call helper function
+    pagination_data = get_pagination_data(number_of_books, page)
+
+    # Retrieve books if there is no search query
+    if books is None:
+        books = list(mongo.db.books.aggregate([
+            {
+                "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+            },
+            {
+                "$limit": pagination_data["BOOKS_PER_PAGE"]
+            }
+        ]))
+
+    return render_template("books.html", number_of_pages=pagination_data["number_of_pages"], books=books, page=page, next_page=pagination_data["next_page"], previous_page=pagination_data["previous_page"], current_page=pagination_data["current_page"], query_exists=False)
 
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])

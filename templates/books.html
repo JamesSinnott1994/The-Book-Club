@@ -17,9 +17,15 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
+                            {% if query_exists %}
+                            <a href="{{ url_for('search', page=previous_page) }}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            {% else %}
                             <a href="{{ url_for('get_books', page=previous_page) }}">
                                 <i class="fas fa-chevron-left"></i>
                             </a>
+                            {% endif %}
                         </li>
                     {% endif %}
 
@@ -27,11 +33,19 @@
                         {# Creates links and give active class to current page #}
                         {% if page+1 == current_page %}
                             <li class="pag-active pag-link">
+                                {% if query_exists %}
+                                <a href="{{ url_for('search', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                                {% else %}
                                 <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                                {% endif %}
                             </li>
                         {% else %}
                             <li class="waves-effect pag-link">
+                                {% if query_exists %}
+                                <a href="{{ url_for('search', page=page+1) }}">{{ page+1 }}</a>
+                                {% else %}
                                 <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
+                                {% endif %}
                             </li>
                         {% endif %}
                     {% endfor %}
@@ -45,9 +59,15 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
+                            {% if query_exists %}
+                            <a href="{{ url_for('search', page=next_page) }}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            {% else %}
                             <a href="{{ url_for('get_books', page=next_page) }}">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
+                            {% endif %}
                         </li>
                     {% endif %}
                 </ul>
@@ -88,9 +108,15 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
+                            {% if query_exists %}
+                            <a href="{{ url_for('search', page=previous_page) }}">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            {% else %}
                             <a href="{{ url_for('get_books', page=previous_page) }}">
                                 <i class="fas fa-chevron-left"></i>
                             </a>
+                            {% endif %}
                         </li>
                     {% endif %}
 
@@ -98,11 +124,19 @@
                         {# Creates links and give active class to current page #}
                         {% if page+1 == current_page %}
                             <li class="pag-active pag-link">
+                                {% if query_exists %}
+                                <a href="{{ url_for('search', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                                {% else %}
                                 <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+                                {% endif %}
                             </li>
                         {% else %}
                             <li class="waves-effect pag-link">
+                                {% if query_exists %}
+                                <a href="{{ url_for('search', page=page+1) }}">{{ page+1 }}</a>
+                                {% else %}
                                 <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
+                                {% endif %}
                             </li>
                         {% endif %}
                     {% endfor %}
@@ -116,9 +150,15 @@
                         </li>
                     {% else %}
                         <li class="waves-effect pag-link">
+                            {% if query_exists %}
+                            <a href="{{ url_for('search', page=next_page) }}">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            {% else %}
                             <a href="{{ url_for('get_books', page=next_page) }}">
                                 <i class="fas fa-chevron-right"></i>
                             </a>
+                            {% endif %}
                         </li>
                     {% endif %}
                 </ul>
