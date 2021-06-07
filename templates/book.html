@@ -55,9 +55,9 @@
         <section id="add-review">
             {% if session.user %}
             <h5>Add Review</h5>
-            <div class="row lft">
+            <div class="row">
 
-                <form class="col s12 m10 l8 xl-2 offset-m1 offset-l2 offset-xl2" method="POST" action="{{ url_for('book', book_id=book._id) }}" enctype="multipart/form-data">
+                <form class="col s12 m10 l6" method="POST" action="{{ url_for('book', book_id=book._id) }}" enctype="multipart/form-data">
 
                     <div class="card-panel">
 
@@ -81,7 +81,7 @@
 
                         <!-- submit button -->
                         <div class="row">
-                            <button type="submit" class="col s12 btn-large btn-color text-shadow">
+                            <button type="submit" class="col s12 btn btn-color text-shadow">
                                 Add Review <i class="far fa-plus-square white-text"></i>
                             </button>
                         </div>
@@ -95,6 +95,14 @@
         </section>
 
         <section id="reviews" class="row">
+            {% for review in reviews %}
+            <div class="review">
+                <h6><i class="fas fa-user prefix"></i> {{ review.reviewed_by }}</h6>
+                <h6><b>{{ review.title }}</b></h6>
+                <p>Reviewed: {{ review.review_date }}</p>
+                <p>{{ review.comment }}</p>
+            </div>
+            {% endfor %}
         </section>
 
     </section>

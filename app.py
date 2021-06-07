@@ -1,14 +1,12 @@
-import imghdr
 import os
 import math
 import datetime
 from flask import (
     Flask, flash, render_template,
-    redirect, request, session, url_for, abort)
+    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
 if os.path.exists("env.py"):
     import env
 
@@ -19,18 +17,7 @@ app = Flask(__name__)
 # App configuration
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.secret_key = os.environ.get("SECRET_KEY") # Required for some Flask functions
-
-# Prevents files that are over 1 MB from being uploaded as a Defensive Design feature
-# (This relates to uploading the cover image for a book)
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
-
-# Validating File Names
-app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
-
-# Location for uploaded images
-app.config['UPLOAD_PATH'] = 'uploads'
-
+app.secret_key = os.environ.get("SECRET_KEY")
 # Instance of PyMongo
 # Ensures our Flask app is properly communicating with the Mongo database
 mongo = PyMongo(app)
@@ -43,8 +30,6 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-# Default root
-# Home page
 @app.route("/")
 @app.route("/home")
 def home():
@@ -63,11 +48,11 @@ def get_pagination_data(number_of_books, page):
     next_page = number_of_pages
 
     # Prevents going to page 0
-    if page == 0:  
+    if page == 0:
         previous_page = 1
 
     # Prevents going beyond the max number of pages
-    if page == number_of_pages:  
+    if page == number_of_pages:
         next_page = number_of_pages
 
     # For deciding "active" class
@@ -82,6 +67,7 @@ def get_pagination_data(number_of_books, page):
         "next_page": next_page
     }
     return pagination_data
+
 
 @app.route("/search", methods=["GET", "POST"])
 @app.route("/search/<page>")
@@ -114,7 +100,7 @@ def search(page=1):
             pagination_data = get_pagination_data(number_of_books, page)
             books = list(mongo.db.books.aggregate([
                 {
-                    "$match": { "$text": { "$search": session["query"] } }
+                    "$match": {"$text": {"$search": session["query"]}}
                 },
                 {
                     "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
@@ -128,7 +114,6 @@ def search(page=1):
         return render_template("index.html")
 
 
-# Books page
 @app.route("/books", methods=["GET", "POST"])
 @app.route("/books/<page>")
 def get_books(page=1):
@@ -180,11 +165,11 @@ def book(book_id):
         return redirect(url_for("book", book_id=book_id))
     
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
+
     # reviews = list(mongo.db.reviews.find())
     # reviews = mongo.db.reviews.find_one({"book_id": book_id})
     # db.collection.find({ "fieldToCheck": { $exists: true, $ne: null } })
-    # reviews = mongo.db.reviews.find({ "book_id": {"$exists": True, "$ne": None }})
-
+    
     # https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists
     query = {"book_id": {"$eq": book_id}}
     reviews = list(mongo.db.reviews.find(query))
@@ -195,11 +180,6 @@ def book(book_id):
 # Contact page
 @app.route("/contact")
 def contact(search=False):
-
-    print("£££££££££££££££££££")
-    print(search)
-    print("£££££££££££££££££££")
-
     if request.method == "POST":
         pass
 
@@ -245,9 +225,9 @@ def login():
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        return redirect(url_for(
+                existing_user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    return redirect(url_for(
                             "profile", username=session["user"]))
             else:
                 # invalid password match
@@ -280,6 +260,7 @@ def profile(username):
         return render_template("profile.html", username=username)
 
     return redirect(url_for("login"))
+
 
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
@@ -338,5 +319,5 @@ def delete_book(book_id):
 # Tells app how and where to host application
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
-    port=int(os.environ.get("PORT")),
-    debug=True)
+        port=int(os.environ.get("PORT")),
+        debug=True)
