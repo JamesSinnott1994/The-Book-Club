@@ -20,6 +20,15 @@
                     <h4 class="left-align">{{ book.title }}</h4>
                     <h6>{{ book.author }}</h6>
                     <h6>Genre: {{ book.genre }}</h6>
+                    <h6>
+                        <a href="#reviews">{{ no_of_reviews }} Reviews</a>
+                        |
+                        {% if session.user %}
+                        <a href="#add-review">Add Review</a>
+                        {% else %}
+                        <a href="{{ url_for('login') }}">Add Review</a>
+                        {% endif %}
+                    </h6>
                     <div class="star-ratings">
                         <div class="fill-ratings" style="width: {{ rating }}%;">
                             <span>★★★★★</span>
@@ -63,8 +72,8 @@
         </section>
 
         <section id="add-review">
-            {% if session.user %}
             <h5>Add Review</h5>
+            {% if session.user %}
             <div class="row">
 
                 <form class="col s12 m10 l6" method="POST" action="{{ url_for('book', book_id=book._id) }}" enctype="multipart/form-data">
@@ -101,10 +110,16 @@
                 </form>
 
             </div>
+            {% else %}
+            <p>To add a review you must be logged in. Log in <a href="{{ url_for('login') }}">here.</a></p>
             {% endif %}
         </section>
 
         <section id="reviews" class="row">
+            <h5>Reviews</h5>
+            {% if no_of_reviews == 0 %}
+                <p>There are no reviews yet for this book.</p>
+            {% endif %}
             {% for review in reviews %}
             <div class="review">
                 <h6><i class="fas fa-user prefix"></i> {{ review.reviewed_by }}</h6>

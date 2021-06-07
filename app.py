@@ -180,11 +180,13 @@ def book(book_id):
         total_rating += review["rating"]
 
     no_of_reviews = len(reviews)
-    rating_average = total_rating / no_of_reviews
-    rating_percentage = (rating_average / 5.0) * 100
+    rating_percentage = 0
 
+    if no_of_reviews > 0:
+        rating_average = total_rating / no_of_reviews
+        rating_percentage = (rating_average / 5.0) * 100
 
-    return render_template("book.html", book=book, reviews=reviews, rating=rating_percentage)
+    return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage)
 
 
 # Contact page
