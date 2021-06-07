@@ -256,7 +256,7 @@ form i {
 }
 
 .book-img-container:hover {
-    opacity: 0.9;
+    opacity: 0.85;
 }
 
 /* Book page */
@@ -348,6 +348,10 @@ form i {
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+.star-size {
+    font-size: 20px;
 }
 
 .fill-ratings {
