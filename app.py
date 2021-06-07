@@ -158,8 +158,9 @@ def book(book_id):
             "book_id": book_id,
             "reviewed_by": session["user"],
             "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
-            "rating": 3
+            "rating": int(request.form.get("stars"))
         }
+        print(review)
         mongo.db.reviews.insert_one(review)
         flash("Review added!")
         return redirect(url_for("book", book_id=book_id))

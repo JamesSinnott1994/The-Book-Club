@@ -366,10 +366,29 @@ span {
     display: inline-block;
 }
 
+.star-ratings-review {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 32px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
 .empty-ratings {
     padding: 0;
     display: block;
     z-index: 0;
+}
+
+.empty-ratings-review {
+    padding: 0;
+    display: block;
+}
+
+.empty-ratings-review label {
+    font-size: 32px;
+    cursor: pointer;
 }
 
 /* 404 Error Page */

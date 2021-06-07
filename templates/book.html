@@ -89,11 +89,40 @@
                             </div>
                         </div>
 
+                        <!-- give rating -->
+                        <div class="star-ratings-review">
+                            <h6>Rating</h6>
+                            <div class="empty-ratings-review">
+                                <!-- <span>★★★★★</span> -->
+
+                                <!-- <span id="star-1">★</span>
+                                <span id="star-2">★</span>
+                                <span id="star-3">★</span>
+                                <span id="star-4">★</span>
+                                <span id="star-5">★</span> -->
+
+                                <label for="star-1"><span>★</span></label>
+                                <input type="radio" id="star-1" value="1" name="stars">
+
+                                <label for="star-2"><span>★</span></label>
+                                <input type="radio" id="star-2" value="2"  name="stars">
+
+                                <label for="star-3"><span>★</span></label>
+                                <input type="radio" id="star-3" value="3"  name="stars">
+
+                                <label for="star-4"><span>★</span></label>
+                                <input type="radio" id="star-4" value="4"  name="stars">
+
+                                <label for="star-5"><span>★</span></label>
+                                <input type="radio" id="star-5" value="5"  name="stars">
+                            </div>
+                        </div>
+
                         <!-- description -->
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="fas fa-comment prefix"></i>
-                                <textarea id="comment" name="comment" class="materialize-textarea"></textarea>
+                                <textarea id="comment" name="comment" class="materialize-textarea" required></textarea>
                                 <label for="comment">Comment</label>
                             </div>
                         </div>
