@@ -14,10 +14,20 @@
 
             <div class="book-page-info col s12 m7">
                 
+                <p class="rating-value" hidden>{{ rating }}</p>
+
                 <div class="book-details">
                     <h4 class="left-align">{{ book.title }}</h4>
                     <h6>{{ book.author }}</h6>
                     <h6>Genre: {{ book.genre }}</h6>
+                    <div class="star-ratings">
+                        <div class="fill-ratings" style="width: {{ rating }}%;">
+                            <span>★★★★★</span>
+                        </div>
+                        <div class="empty-ratings">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="book-btns-container">

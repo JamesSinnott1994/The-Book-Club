@@ -341,6 +341,37 @@ form i {
     box-shadow: 0 0 3px 0 silver;
 }
 
+.star-ratings {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 32px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.fill-ratings {
+    color: #e7711b;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+/* Allows us to grab the width of the span elements */
+span {
+    display: inline-block;
+}
+
+.empty-ratings {
+    padding: 0;
+    display: block;
+    z-index: 0;
+}
+
 /* 404 Error Page */
 
 #error-page {
@@ -418,6 +449,9 @@ form i {
     /* Book Page */
     .book-page-info {
         height: 400px;
+    }
+    .book-details h6 {
+        font-size: 1.5em;
     }
     .book-btns-container {
         position: absolute;

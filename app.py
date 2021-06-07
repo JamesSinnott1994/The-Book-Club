@@ -174,7 +174,17 @@ def book(book_id):
     query = {"book_id": {"$eq": book_id}}
     reviews = list(mongo.db.reviews.find(query))
 
-    return render_template("book.html", book=book, reviews=reviews)
+    # Calculate review rating percentage
+    total_rating = 0
+    for review in reviews:
+        total_rating += review["rating"]
+
+    no_of_reviews = len(reviews)
+    rating_average = total_rating / no_of_reviews
+    rating_percentage = (rating_average / 5.0) * 100
+
+
+    return render_template("book.html", book=book, reviews=reviews, rating=rating_percentage)
 
 
 # Contact page
