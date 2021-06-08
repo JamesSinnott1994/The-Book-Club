@@ -291,7 +291,7 @@ def add_book():
         }
         mongo.db.books.insert_one(book)
         flash("Book successfully added to the library!")
-        return redirect(url_for("books"))
+        return redirect(url_for("get_books"))
 
     genres = mongo.db.genres.find().sort("genre", 1)
     return render_template("add-book.html", genres=genres)
@@ -300,14 +300,19 @@ def add_book():
 @app.route("/edit_book/<book_id>", methods=["GET", "POST"])
 def edit_book(book_id):
     if request.method == "POST":
+
+        # Gets some old data that we don't want changed
+        old_book_data = mongo.db.books.find_one({"_id": ObjectId(book_id)})
+        print(old_book_data)
+
         updated_book = {
             "title": request.form.get("title"),
             "author": request.form.get("author"),
             "genre": request.form.get("genre"),
             "image": request.form.get("image"),
             "description": request.form.get("description"),
-            "uploaded_by": session["user"],
-            "rating": 0
+            "uploaded_by": old_book_data["uploaded_by"],
+            "rating": old_book_data["rating"]
         }
         mongo.db.books.update({"_id": ObjectId(book_id)}, updated_book)
         flash("Book Successfully Updated")
@@ -327,7 +332,7 @@ def delete_book(book_id):
     mongo.db.reviews.remove(query)
 
     flash("Book Successfully Deleted")
-    return redirect(url_for("books"))
+    return redirect(url_for("get_books"))
 
 # Tells app how and where to host application
 if __name__ == "__main__":
