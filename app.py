@@ -334,6 +334,17 @@ def delete_book(book_id):
     flash("Book Successfully Deleted")
     return redirect(url_for("get_books"))
 
+
+@app.route("/delete_review", methods=["GET", "POST"])
+def delete_review():
+    review_id  = request.args.get('review_id', None)
+    book_id  = request.args.get('book_id', None)
+
+    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+
+    flash("Review Successfully Deleted")
+    return redirect(url_for("book", book_id=book_id))
+
 # Tells app how and where to host application
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

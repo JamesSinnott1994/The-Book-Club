@@ -163,6 +163,23 @@
                         </div>
                     </div>
                     <p>{{ review.comment }}</p>
+
+                    <div class="review-edit-delete">
+                        {% if session.user|lower == book.uploaded_by|lower or session.user|lower == 'admin' %}
+                            <div class="book-btn-container">
+                                <a href="{{ url_for('delete_review', book_id=book._id, review_id=review._id) }}" class="btn book-btn">
+                                    Edit
+                                </a>
+                            </div>
+
+                            <div class="book-btn-container">
+                                <a href="{{ url_for('delete_review', book_id=book._id, review_id=review._id) }}" class="btn book-btn">
+                                    Delete
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+
                 </div>
             {% endfor %}
         </section>
