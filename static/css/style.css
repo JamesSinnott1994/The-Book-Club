@@ -379,6 +379,15 @@ span {
   padding: 0;
 }
 
+.star-ratings-already-reviewed {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 20px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
 .empty-ratings {
     padding: 0;
     display: block;
