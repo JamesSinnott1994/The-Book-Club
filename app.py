@@ -176,19 +176,25 @@ def book(book_id):
     reviews = list(mongo.db.reviews.find(query))
 
     # Calculate review rating percentage
+    no_of_reviews = len(reviews)
+    rating_percentage = get_rating(reviews, no_of_reviews)
+
+    return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage)
+
+
+# Helper function
+def get_rating(reviews, no_of_reviews):
     total_rating = 0
     for review in reviews:
         total_rating += review["rating"]
 
-    no_of_reviews = len(reviews)
     rating_percentage = 0
 
     if no_of_reviews > 0:
         rating_average = total_rating / no_of_reviews
         rating_percentage = (rating_average / 5.0) * 100
 
-    return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage)
-
+    return rating_percentage
 
 # Contact page
 @app.route("/contact")
