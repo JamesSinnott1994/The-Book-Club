@@ -149,36 +149,6 @@ def get_books(page=1):
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
 def book(book_id):
-    review_id  = request.args.get('review_id', None)
-
-    if request.method == "POST" and review_id is None:
-        # Add Review
-        review = {
-            "title": request.form.get("title"),
-            "comment": request.form.get("comment"),
-            "book_id": book_id,
-            "reviewed_by": session["user"],
-            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
-            "rating": int(request.form.get("stars"))
-        }
-        mongo.db.reviews.insert_one(review)
-        flash("Review added!")
-        return redirect(url_for("book", book_id=book_id))
-
-    if request.method == "POST" and review_id is not None:
-        # Edit Review
-        edited_review = {
-            "title": request.form.get("title"),
-            "comment": request.form.get("comment"),
-            "book_id": book_id,
-            "reviewed_by": session["user"],
-            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
-            "rating": int(request.form.get("stars"))
-        }
-        mongo.db.reviews.update({"_id": ObjectId(review_id)}, edited_review)
-        flash("Review edited!")
-        return redirect(url_for("book", book_id=book_id))
-    
     # GET
     review_id_to_edit  = request.args.get('review_id', None)
     old_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id_to_edit)})
@@ -209,6 +179,43 @@ def get_rating(reviews, no_of_reviews):
         rating_percentage = (rating_average / 5.0) * 100
 
     return rating_percentage
+
+
+@app.route("/add_review/<book_id>", methods=["GET", "POST"])
+def add_review(book_id):
+    if request.method == "POST":
+        # Add Review
+        review = {
+            "title": request.form.get("title"),
+            "comment": request.form.get("comment"),
+            "book_id": book_id,
+            "reviewed_by": session["user"],
+            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
+            "rating": int(request.form.get("stars"))
+        }
+        mongo.db.reviews.insert_one(review)
+        flash("Review added!")
+        return redirect(url_for("book", book_id=book_id))
+
+
+@app.route("/edit_review/<book_id>", methods=["GET", "POST"])
+def edit_review(book_id):
+    review_id  = request.args.get('review_id', None)
+
+    if request.method == "POST":
+        # Edit Review
+        edited_review = {
+            "title": request.form.get("title"),
+            "comment": request.form.get("comment"),
+            "book_id": book_id,
+            "reviewed_by": session["user"],
+            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
+            "rating": int(request.form.get("stars"))
+        }
+
+        mongo.db.reviews.update({"_id": ObjectId(review_id)}, edited_review)
+        flash("Review edited!")
+        return redirect(url_for("book", book_id=book_id))
 
 # Contact page
 @app.route("/contact")

@@ -82,7 +82,12 @@
             {% if session.user %}
             <div class="row">
 
-                <form class="col s12 m10 l6" method="POST" action="{{ url_for('book', book_id=book._id, review_id=review_id_to_edit) }}" enctype="multipart/form-data">
+                {% if review_id_to_edit == None %}
+                    <form class="col s12 m10 l6" method="POST" action="{{ url_for('add_review', book_id=book._id) }}" enctype="multipart/form-data">
+                {% else %}
+                    <form class="col s12 m10 l6" method="POST" action="{{ url_for('edit_review', book_id=book._id, review_id=review_id_to_edit) }}" enctype="multipart/form-data">
+                {% endif %}
+                <!-- <form class="col s12 m10 l6" method="POST" action="{{ url_for('book', book_id=book._id, review_id=review_id_to_edit) }}" enctype="multipart/form-data"> -->
 
                     <div class="card-panel">
 
