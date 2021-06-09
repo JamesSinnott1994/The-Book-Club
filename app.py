@@ -149,8 +149,9 @@ def get_books(page=1):
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
 def book(book_id):
+    review_id  = request.args.get('review_id', None)
 
-    if request.method == "POST":
+    if request.method == "POST" and review_id is None:
         # Add Review
         review = {
             "title": request.form.get("title"),
@@ -160,16 +161,33 @@ def book(book_id):
             "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
             "rating": int(request.form.get("stars"))
         }
-        print(review)
         mongo.db.reviews.insert_one(review)
         flash("Review added!")
         return redirect(url_for("book", book_id=book_id))
-    
-    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
 
-    # reviews = list(mongo.db.reviews.find())
-    # reviews = mongo.db.reviews.find_one({"book_id": book_id})
-    # db.collection.find({ "fieldToCheck": { $exists: true, $ne: null } })
+    if request.method == "POST" and review_id is not None:
+        # Edit Review
+        edited_review = {
+            "title": request.form.get("title"),
+            "comment": request.form.get("comment"),
+            "book_id": book_id,
+            "reviewed_by": session["user"],
+            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
+            "rating": int(request.form.get("stars"))
+        }
+        mongo.db.reviews.update({"_id": ObjectId(review_id)}, edited_review)
+        flash("Review edited!")
+        return redirect(url_for("book", book_id=book_id))
+    
+    # GET
+    review_id_to_edit  = request.args.get('review_id', None)
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(review_id_to_edit)
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    old_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id_to_edit)})
+    print(old_review)
+
+    book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
     
     # https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists
     query = {"book_id": {"$eq": book_id}}
@@ -179,7 +197,7 @@ def book(book_id):
     no_of_reviews = len(reviews)
     rating_percentage = get_rating(reviews, no_of_reviews)
 
-    return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage)
+    return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage, review_id_to_edit=review_id_to_edit, old_review=old_review)
 
 
 # Helper function

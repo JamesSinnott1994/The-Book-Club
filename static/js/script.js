@@ -58,8 +58,6 @@ $(document).ready(function(){
     // Add click event to star span elements on add review form
     $(`.empty-ratings-review input[type="radio"]`).each((i, star) => {
 
-        console.log("ERE ERE");
-
         $(star).bind('click', () => {
 
             let starNoClicked = parseInt(star.id.substring(star.id.indexOf('-') + 1));

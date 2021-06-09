@@ -365,6 +365,10 @@ form i {
     overflow: hidden;
 }
 
+.filled {
+    color: #e7711b;
+}
+
 /* Allows us to grab the width of the span elements */
 span {
     display: inline-block;

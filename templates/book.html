@@ -72,11 +72,17 @@
         </section>
 
         <section id="add-review">
-            <h5>Add Review</h5>
+
+            {% if review_id_to_edit == None %}
+                <h5>Add Review</h5>
+            {% else %}
+                <h5>Edit Review</h5>
+            {% endif %}
+
             {% if session.user %}
             <div class="row">
 
-                <form class="col s12 m10 l6" method="POST" action="{{ url_for('book', book_id=book._id) }}" enctype="multipart/form-data">
+                <form class="col s12 m10 l6" method="POST" action="{{ url_for('book', book_id=book._id, review_id=review_id_to_edit) }}" enctype="multipart/form-data">
 
                     <div class="card-panel">
 
@@ -84,7 +90,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="fas fa-book prefix"></i>
-                                <input id="title" name="title" type="text" minlength="2" maxlength="100" class="validate" placeholder="Review Title" required>
+                                <input id="title" name="title" type="text" minlength="2" maxlength="100" class="validate" value="{{ old_review.title }}" placeholder="Review Title" required>
                                 <label for="title">Review Title</label>
                             </div>
                         </div>
@@ -93,28 +99,47 @@
                         <div class="star-ratings-review">
                             <h6>Rating</h6>
                             <div class="empty-ratings-review">
-                                <!-- <span>★★★★★</span> -->
+                                {% if old_review %}
 
-                                <!-- <span id="star-1">★</span>
-                                <span id="star-2">★</span>
-                                <span id="star-3">★</span>
-                                <span id="star-4">★</span>
-                                <span id="star-5">★</span> -->
+                                    {% for n in range(5) %}
 
-                                <label for="star-1"><span>★</span></label>
-                                <input type="radio" id="star-1" value="1" name="stars">
+                                        {% if n in range(old_review.rating) %}
+                                            {% if n in range(old_review.rating) %}
+                                            <label for="star-{{n+1}}"><span class="filled">★</span></label>
+                                                {% if n+1 == old_review.rating %}
+                                                <input type="radio" id="star-{{n+1}}" value="{{n+1}}" name="stars" checked="checked">
+                                                {% else %}
+                                                <input type="radio" id="star-{{n+1}}" value="{{n+1}}" name="stars">
+                                                {% endif %}
+                                            {% endif %}
+                                        {% else %}
 
-                                <label for="star-2"><span>★</span></label>
-                                <input type="radio" id="star-2" value="2"  name="stars">
+                                            <label for="star-{{n+1}}"><span>★</span></label>
+                                            <input type="radio" id="star-{{n+1}}" value="{{n+1}}" name="stars">
 
-                                <label for="star-3"><span>★</span></label>
-                                <input type="radio" id="star-3" value="3"  name="stars">
+                                        {% endif %}
 
-                                <label for="star-4"><span>★</span></label>
-                                <input type="radio" id="star-4" value="4"  name="stars">
+                                    {% endfor %}
 
-                                <label for="star-5"><span>★</span></label>
-                                <input type="radio" id="star-5" value="5"  name="stars">
+                                {% else %}
+
+                                    <label for="star-1"><span>★</span></label>
+                                    <input type="radio" id="star-1" value="1" name="stars">
+
+                                    <label for="star-2"><span>★</span></label>
+                                    <input type="radio" id="star-2" value="2"  name="stars">
+
+                                    <label for="star-3"><span>★</span></label>
+                                    <input type="radio" id="star-3" value="3"  name="stars">
+
+                                    <label for="star-4"><span>★</span></label>
+                                    <input type="radio" id="star-4" value="4"  name="stars">
+
+                                    <label for="star-5"><span>★</span></label>
+                                    <input type="radio" id="star-5" value="5"  name="stars">
+
+                                {% endif %}
+
                             </div>
                         </div>
 
@@ -122,7 +147,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="fas fa-comment prefix"></i>
-                                <textarea id="comment" name="comment" class="materialize-textarea" required></textarea>
+                                <textarea id="comment" name="comment" class="materialize-textarea" required>{{ old_review.comment }}</textarea>
                                 <label for="comment">Comment</label>
                             </div>
                         </div>
@@ -130,7 +155,11 @@
                         <!-- submit button -->
                         <div class="row">
                             <button type="submit" class="col s12 btn btn-color text-shadow">
-                                Add Review <i class="far fa-plus-square white-text"></i>
+                                {% if review_id_to_edit == None %}
+                                    Add Review <i class="far fa-plus-square white-text"></i>
+                                {% else %}
+                                    Edit Review <i class="far fa-plus-square white-text"></i>
+                                {% endif %}
                             </button>
                         </div>
                         
@@ -146,9 +175,11 @@
 
         <section id="reviews" class="row">
             <h5>Reviews</h5>
+
             {% if no_of_reviews == 0 %}
                 <p>There are no reviews yet for this book.</p>
             {% endif %}
+
             {% for review in reviews %}
                 <div class="review">
                     <h6><i class="fas fa-user prefix"></i> {{ review.reviewed_by }}</h6>
@@ -167,7 +198,7 @@
                     <div class="review-edit-delete">
                         {% if session.user|lower == book.uploaded_by|lower or session.user|lower == 'admin' %}
                             <div class="book-btn-container">
-                                <a href="{{ url_for('delete_review', book_id=book._id, review_id=review._id) }}" class="btn book-btn">
+                                <a href="{{ url_for('book', _anchor='add-review', book_id=book._id, review_id=review._id) }}" class="btn book-btn">
                                     Edit
                                 </a>
                             </div>
