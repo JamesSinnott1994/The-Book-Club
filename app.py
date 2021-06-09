@@ -181,11 +181,7 @@ def book(book_id):
     
     # GET
     review_id_to_edit  = request.args.get('review_id', None)
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    print(review_id_to_edit)
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     old_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id_to_edit)})
-    print(old_review)
 
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
     

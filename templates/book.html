@@ -196,7 +196,7 @@
                     <p>{{ review.comment }}</p>
 
                     <div class="review-edit-delete">
-                        {% if session.user|lower == book.uploaded_by|lower or session.user|lower == 'admin' %}
+                        {% if session.user|lower == review.reviewed_by|lower or session.user|lower == 'admin' %}
                             <div class="book-btn-container">
                                 <a href="{{ url_for('book', _anchor='add-review', book_id=book._id, review_id=review._id) }}" class="btn book-btn">
                                     Edit
