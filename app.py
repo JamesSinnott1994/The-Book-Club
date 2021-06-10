@@ -161,16 +161,20 @@ def book(book_id):
 
     # Calculate review rating percentage
     no_of_reviews = len(reviews)
-    rating_percentage = get_rating(reviews, no_of_reviews)
+    rating_percentage = get_rating(reviews, no_of_reviews, book)
 
     return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage, review_id_to_edit=review_id_to_edit, old_review=old_review)
 
 
 # Helper function
-def get_rating(reviews, no_of_reviews):
+def get_rating(reviews, no_of_reviews, book):
     total_rating = 0
     for review in reviews:
         total_rating += review["rating"]
+
+    # Update total_rating value for this book
+    book["total_rating"] = total_rating
+    mongo.db.books.update({"_id": ObjectId(book["_id"])}, book)
 
     rating_percentage = 0
 
@@ -314,7 +318,7 @@ def add_book():
             "image": request.form.get("image"),
             "description": request.form.get("description"),
             "uploaded_by": session["user"],
-            "rating": 0
+            "total_rating": 0
         }
         mongo.db.books.insert_one(book)
         flash("Book successfully added to the library!")
@@ -339,7 +343,7 @@ def edit_book(book_id):
             "image": request.form.get("image"),
             "description": request.form.get("description"),
             "uploaded_by": old_book_data["uploaded_by"],
-            "rating": old_book_data["rating"]
+            "rating": old_book_data["total_rating"]
         }
         mongo.db.books.update({"_id": ObjectId(book_id)}, updated_book)
         flash("Book Successfully Updated")
