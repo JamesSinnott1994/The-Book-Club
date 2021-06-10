@@ -174,10 +174,13 @@ form i {
 #quotes-area {
     color: black;
     background-color: #FFE5B4;
+    margin-bottom: 0;
 }
 
-#quotes-area h4 {
+#quotes-area h4, #most-popular-area h4 {
     padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin: 0;
 }
 
 #quotes-area p, q {
@@ -195,6 +198,21 @@ form i {
 
 .btn-color:hover {
     background-color: rgb(96, 104, 216);
+}
+
+#most-popular-area {
+    color: white;
+    background-color: #4021BD;
+    margin-bottom: 0;
+}
+
+#most-popular-area .book {
+    margin-top: 2em;
+    padding-bottom: 2em;
+}
+
+#most-popular-area .book-img-container {
+    border: 2px solid white;
 }
 
 /* Books Page */

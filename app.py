@@ -33,7 +33,15 @@ def page_not_found(e):
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html")
+
+    # Get list of books in order of total_rating (i.e. most popular)
+
+    # db.restaurants.find().sort( { "borough": 1 } )
+    # db.collection.find( { $query: {}, $orderby: { age : -1 } } )
+    books = list(mongo.db.books.find({"$query": {}, "$orderby": { "total_rating" : -1 }}).limit(4))
+    print(books)
+
+    return render_template("index.html", books=books)
 
 
 # Helper function

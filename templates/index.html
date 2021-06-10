@@ -59,6 +59,23 @@
 
     </section>
 
+    <section id="most-popular-area" class="row">
+        <h4 class="center-align">Most Popular Books</h4>
+
+        {% for book in books %}
+            <div class="book col s12 m6 l3">
+
+                <div class="book-img-container">
+                    <a href="{{ url_for('book', book_id=book._id) }}">
+                        <img class="book-img" src="{{ book.image }}" alt="Book Image">
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </section>
+
     <section id="quotes-area" class="row">
 
         <h4 class="center-align">Reading Quotes</h4>
@@ -76,10 +93,3 @@
     </section>
 
 {% endblock %}
-
-<!-- <form action="">
-    <div id="search-container">
-        <button type="submit"><i class="fa fa-search"></i></button>
-        <input type="text" placeholder="Search.." name="search" > 
-    </div>
-</form> -->
