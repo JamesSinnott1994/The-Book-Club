@@ -2,6 +2,43 @@
 
 {% block content %}
 
-    <h2>Profile.html</h2>
+    <section id="profile-img">
+
+        <h4 class="center-align">Welcome {{ username }}!</h4>
+
+        <div id="profile-img-container">
+
+            <img src="{{ url_for('static', filename='images/avatar.jpg') }}" alt="avatar">
+
+        </div>
+
+    </section>
+
+    <section id="profile-book-display-area" class="row">
+
+        <h4 class="center-align">My Books</h4>
+
+        {% for book in books %}
+            <div class="book col s12 m6 l3">
+
+                <div class="book-img-container">
+                    <a href="{{ url_for('book', book_id=book._id) }}">
+                        <img class="book-img" src="{{ book.image }}">
+                    </a>
+                </div>
+
+                <div class="book-info left-align">
+                    <h6><a href="{{ url_for('book', book_id=book._id) }}"><b>{{ book.title }}</b></a></h6>
+                    <p>{{ book.author }}</p>
+                    <p>{{ book.genre }}</p>
+                    <p>€10</p>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </section>
+
+    
 
 {% endblock %}

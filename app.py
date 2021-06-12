@@ -309,7 +309,15 @@ def profile(username):
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        # get all books associated with the user
+        books = list(mongo.db.books.find({"uploaded_by": username}))
+
+        print("******************************")
+        for book in books:
+            print(book["title"])
+        print("******************************")
+
+        return render_template("profile.html", username=username, books=books)
 
     return redirect(url_for("login"))
 
