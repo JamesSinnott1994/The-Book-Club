@@ -215,6 +215,34 @@ form i {
     border: 2px solid white;
 }
 
+/* .social-links li {
+    border-radius: 50%;
+    background-color: white;
+    padding: 4px;
+}
+
+.social-links i {
+    color: #4021BD;
+    font-size: 20px;
+    margin-right: 3px;
+} */
+
+.social-links li a i {
+    width: 32px;
+    height: 32px;
+    padding: 12px 0;
+    font-size: 13px;
+    line-height: 7px;
+    border-radius: 50%;
+    border: 1px solid white;
+    color: #4021BD;
+    background: white;
+    transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
 /* Books Page */
 
 #books-page-wrapper {
