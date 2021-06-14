@@ -229,8 +229,10 @@
             </div>
 
             <div class="modal-footer">
-                <a href="{{ url_for('delete_book', book_id=book._id) }}" class="modal-close waves-effect waves-green btn-flat">Yes</a>
-                <a href="#" class="modal-close waves-effect waves-green btn-flat">No</a>
+                <div class="center-align">
+                    <a href="{{ url_for('delete_book', book_id=book._id) }}" class="modal-close waves-effect waves-green btn-flat yes-btn">Yes</a>
+                    <a href="#" class="modal-close waves-effect waves-green btn-flat no-btn">No</a>
+                </div>
             </div>
 
         </div>
@@ -244,9 +246,11 @@
 
             <div class="modal-footer">
 
-                <a id="delete-review" href="{{ url_for('delete_review', book_id=book._id) }}" class="modal-close waves-effect waves-green btn-flat">Yes</a>
+                <div class="center-align">
+                    <a id="delete-review" href="{{ url_for('delete_review', book_id=book._id) }}" class="modal-close waves-effect waves-green btn-flat yes-btn">Yes</a>
 
-                <a href="#" class="modal-close waves-effect waves-green btn-flat">No</a>
+                    <a href="#" class="modal-close waves-effect waves-green btn-flat no-btn">No</a>
+                </div>
                 
             </div>
 

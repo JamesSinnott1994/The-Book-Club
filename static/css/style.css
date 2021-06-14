@@ -374,17 +374,22 @@ form i {
 }
 
 .review {
-    /* margin: 5em auto;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 1em; */
-
     margin: 3em auto;
     padding: 1em;
     border: 0.5px solid silver;
     border-radius: 20px;
     
     box-shadow: 0 0 3px 0 silver;
+}
+
+.yes-btn {
+    color: white;
+    background-color: green;
+}
+
+.no-btn {
+    color: white;
+    background-color: red;
 }
 
 .star-ratings {
