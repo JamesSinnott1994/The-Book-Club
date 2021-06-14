@@ -79,4 +79,37 @@ $(document).ready(function(){
 
     });
 
+    // Modal
+    $('.modal').modal();
+
+    $(".review-edit-delete .delete-btn").each((i, review) => {
+        $(review).bind('click', () => {
+
+            // console.log(review);
+            // console.log(review.id);
+
+            let href = $("#delete-review").attr("href");
+            console.log(href);
+
+            let newHref = `?review_id=${review.id}`;
+
+            // console.log(newHref);
+            // console.log(href+newHref);
+
+            let combinedHref = href+newHref;
+            console.log(combinedHref);
+
+            $("#delete-review").attr("href", combinedHref);
+
+            // book_id = $("#book-id").attr("class");
+            // console.log(book_id);
+
+            // $("#review-modal .modal-footer").append(`
+            //     <a id="delete-review" href="{{ url_for('delete_review', book_id=${book_id}, review_id=${review.id}) }}" class="modal-close waves-effect waves-green btn-flat">Yes</a>
+            //     <a href="#" class="modal-close waves-effect waves-green btn-flat">No</a>
+            // `);
+
+         });
+    });
+
 });

@@ -41,7 +41,7 @@
 
                 <div class="book-btns-container">
                     <div class="book-btn-container">
-                        <a href="#" class="btn book-btn">
+                        <a href="#modal1" class="btn book-btn">
                             Buy
                         </a>
                     </div>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="book-btn-container">
-                            <a href="{{ url_for('delete_book', book_id=book._id) }}" class="btn book-btn">
+                            <a href="#book-modal" class="btn book-btn modal-trigger">
                                 Delete
                             </a>
                         </div>
@@ -207,9 +207,10 @@
                                     Edit
                                 </a>
                             </div>
-
+                            
                             <div class="book-btn-container">
-                                <a href="{{ url_for('delete_review', book_id=book._id, review_id=review._id) }}" class="btn book-btn">
+                                <!-- review._id below helps us define endpoint for URL from jquery -->
+                                <a id="{{review._id}}" href="#review-modal" class="delete-btn btn book-btn modal-trigger">
                                     Delete
                                 </a>
                             </div>
@@ -219,6 +220,37 @@
                 </div>
             {% endfor %}
         </section>
+
+        <!-- Delete book modal -->
+        <div id="book-modal" class="modal">
+
+            <div class="modal-content">
+                <h4 class="center-align">Are you sure you want to delete this book?</h4>
+            </div>
+
+            <div class="modal-footer">
+                <a href="{{ url_for('delete_book', book_id=book._id) }}" class="modal-close waves-effect waves-green btn-flat">Yes</a>
+                <a href="#" class="modal-close waves-effect waves-green btn-flat">No</a>
+            </div>
+
+        </div>
+
+        <!-- Delete review modal -->
+        <div id="review-modal" class="modal">
+
+            <div class="modal-content">
+                <h4 class="center-align">Are you sure you want to delete this review?</h4>
+            </div>
+
+            <div class="modal-footer">
+
+                <a id="delete-review" href="{{ url_for('delete_review', book_id=book._id) }}" class="modal-close waves-effect waves-green btn-flat">Yes</a>
+
+                <a href="#" class="modal-close waves-effect waves-green btn-flat">No</a>
+                
+            </div>
+
+        </div>
 
     </section>
 

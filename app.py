@@ -39,7 +39,6 @@ def home():
     # db.restaurants.find().sort( { "borough": 1 } )
     # db.collection.find( { $query: {}, $orderby: { age : -1 } } )
     books = list(mongo.db.books.find({"$query": {}, "$orderby": { "total_rating" : -1 }}).limit(4))
-    print(books)
 
     return render_template("index.html", books=books)
 
@@ -312,11 +311,6 @@ def profile(username):
         # get all books associated with the user
         books = list(mongo.db.books.find({"uploaded_by": username}))
 
-        print("******************************")
-        for book in books:
-            print(book["title"])
-        print("******************************")
-
         return render_template("profile.html", username=username, books=books)
 
     return redirect(url_for("login"))
@@ -350,7 +344,6 @@ def edit_book(book_id):
 
         # Gets some old data that we don't want changed
         old_book_data = mongo.db.books.find_one({"_id": ObjectId(book_id)})
-        print(old_book_data)
 
         updated_book = {
             "title": request.form.get("title"),
@@ -382,10 +375,9 @@ def delete_book(book_id):
     return redirect(url_for("get_books"))
 
 
-@app.route("/delete_review", methods=["GET", "POST"])
-def delete_review():
+@app.route("/delete_review/<book_id>")
+def delete_review(book_id):
     review_id  = request.args.get('review_id', None)
-    book_id  = request.args.get('book_id', None)
 
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
 
