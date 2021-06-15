@@ -173,7 +173,6 @@ form i {
 
 #quotes-area {
     color: black;
-    /* background-color: #FFE5B4; */
     margin-bottom: 1em;
     max-width: 1400px;
 }
@@ -259,7 +258,7 @@ form i {
     background: rgb(96, 104, 216);
 }
 
-/* Books Page */
+/*--------------------------------------------BOOKS PAGE*/
 
 #books-page-wrapper {
     max-width: 1400px;
@@ -321,7 +320,7 @@ form i {
     opacity: 0.85;
 }
 
-/* Book page */
+/*--------------------------------------------BOOK PAGE*/
 
 #book-page-wrapper {
     max-width: 1200px;
@@ -499,7 +498,7 @@ span {
     margin: 2em auto;
 }
 
-/* 404 Error Page */
+/*--------------------------------------------404 ERROR PAGE*/
 
 #error-page {
     max-width: 1200px;

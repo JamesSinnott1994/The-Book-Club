@@ -133,13 +133,20 @@ def search(page=1):
                     "$limit": pagination_data["BOOKS_PER_PAGE"]
                 }
             ]))
+
+            # Determines if there are any results to be displayed
+            # from query. Message displayed if not.
+            results = True
+            if number_of_books == 0:
+                results = False
+
             return render_template(
                 "books.html",
                 number_of_pages=pagination_data["number_of_pages"],
                 books=books, page=page, next_page=pagination_data["next_page"],
                 previous_page=pagination_data["previous_page"],
                 current_page=pagination_data["current_page"],
-                query_exists=True
+                query_exists=True, results=results
             )
 
         return render_template("index.html")
@@ -184,7 +191,7 @@ def get_books(page=1):
         books=books, page=page, next_page=pagination_data["next_page"],
         previous_page=pagination_data["previous_page"],
         current_page=pagination_data["current_page"],
-        query_exists=False
+        query_exists=False, results=True
     )
 
 

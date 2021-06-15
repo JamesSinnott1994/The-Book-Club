@@ -4,6 +4,8 @@
 
     <section id="books-page-wrapper">
 
+        {% if results %}
+
         <section class="pagination-area">
             <div class="pagination-container">
                 <ul class="pagination">
@@ -164,6 +166,14 @@
                 </ul>
             </div>
         </section>
+
+        {% else %}
+
+        <section id="no-results" class="row center-align">
+            <h4>There were no results for <q><b>{{ session.query }}</b></q>.</h4>
+        </section>
+
+        {% endif %}
 
     </section>
     
