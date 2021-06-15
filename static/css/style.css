@@ -361,6 +361,10 @@ form i {
     margin: 0 auto;
 }
 
+#reviews {
+    margin-bottom: 1em;
+}
+
 .book-btn-container {
     margin-top: 1em;
     display: inline-block;
