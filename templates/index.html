@@ -33,11 +33,23 @@
 
                 <h4 class="center-align">Contribute</h4>
 
-                <p class="center-align">Add to a growing catalogue of books by joining The Book Club!</p>
+                {% if session.user %}
 
-                <div class="btn-container center-align">
-                    <a href="{{ url_for('register') }}" class="btn-large cta-btn">Register</a>
-                </div>
+                    <p class="center-align">Add a new book to The Book Club's library!</p>
+
+                    <div class="btn-container center-align">
+                        <a href="{{ url_for('add_book') }}" class="btn-large cta-btn">Add Book</a>
+                    </div>
+
+                {% else %}
+
+                    <p class="center-align">Add to a growing catalogue of books by joining The Book Club!</p>
+
+                    <div class="btn-container center-align">
+                        <a href="{{ url_for('register') }}" class="btn-large cta-btn">Register</a>
+                    </div>
+
+                {% endif %}
 
             </div>
 
