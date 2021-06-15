@@ -173,8 +173,9 @@ form i {
 
 #quotes-area {
     color: black;
-    background-color: #FFE5B4;
-    margin-bottom: 0;
+    /* background-color: #FFE5B4; */
+    margin-bottom: 1em;
+    max-width: 1400px;
 }
 
 #quotes-area h4, #most-popular-area h4 {
@@ -183,13 +184,35 @@ form i {
     margin: 0;
 }
 
-#quotes-area p, q {
+.quote-paragraph {
+    margin: 1em 0;
+}
+
+.quote {
     font-size: 1.25em;
+    font-weight: 450;
     font-style: italic;
 }
 
-.quote-paragraph {
-    margin: 1em 0;
+.quote i {
+    font-size: 1em;
+}
+
+.author-name {
+    font-size: 1em;
+}
+
+.author-img-container {
+    border-radius: 50%;
+    border: 1px solid black;
+    width: 75px;
+    height: 75px;
+    float: right;
+}
+.author-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
 .btn-color {
@@ -214,18 +237,6 @@ form i {
 #most-popular-area .book-img-container {
     border: 2px solid white;
 }
-
-/* .social-links li {
-    border-radius: 50%;
-    background-color: white;
-    padding: 4px;
-}
-
-.social-links i {
-    color: #4021BD;
-    font-size: 20px;
-    margin-right: 3px;
-} */
 
 .social-links li a i {
     width: 32px;
@@ -550,10 +561,22 @@ span {
     .cta-icon {
         font-size: 75px;
     }
-    #quotes-area p, q {
+    .quote {
         font-size: 1.5em;
     }
-    /* Book Page */
+    .author-name {
+        font-size: 1.25em;
+    }
+
+    .author-img-container {
+        width: 125px;
+        height: 125px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    /*--------------------------------------------BOOK PAGE*/
+
     .book-page-info {
         height: 400px;
     }
@@ -565,6 +588,7 @@ span {
         bottom: 2.5%;
         left: 10%;
     }
+
     /*--------------------------------------------PROFILE PAGE*/
 
     #profile-img-container {
@@ -610,6 +634,11 @@ span {
         padding: 0 10px;
         transition: all 0.5s 0.2s ease;
     }
+    .author-img-container {
+        width: 150px;
+        height: 150px;
+    }
+
     /* Book page */
     .book-page-info {
         height: 500px;
