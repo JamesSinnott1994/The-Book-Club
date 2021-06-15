@@ -248,10 +248,15 @@ form i {
     border: 1px solid white;
     color: #4021BD;
     background: white;
-    transition: all 0.35s ease-in-out;
-    -moz-transition: all 0.35s ease-in-out;
-    -webkit-transition: all 0.35s ease-in-out;
-    -o-transition: all 0.35s ease-in-out;
+    transition: all 0.45s ease-in-out;
+    -moz-transition: all 0.45s ease-in-out;
+    -webkit-transition: all 0.45s ease-in-out;
+    -o-transition: all 0.45s ease-in-out;
+}
+
+.social-links li a i:hover {
+    color: white;
+    background: rgb(96, 104, 216);
 }
 
 /* Books Page */
