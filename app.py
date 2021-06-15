@@ -35,10 +35,12 @@ def page_not_found(e):
 def home():
 
     # Get list of books in order of total_rating (i.e. most popular)
-
-    # db.restaurants.find().sort( { "borough": 1 } )
-    # db.collection.find( { $query: {}, $orderby: { age : -1 } } )
-    books = list(mongo.db.books.find({"$query": {}, "$orderby": { "total_rating" : -1 }}).limit(4))
+    books = list(mongo.db.books.find(
+        {
+            "$query": {},
+            "$orderby": {"total_rating": -1}
+        }).limit(4)
+    )
 
     return render_template("index.html", books=books)
 
@@ -84,16 +86,23 @@ def search(page=1):
     if request.method == "POST":
         session["query"] = request.form.get("query")
 
-        number_of_books = len(list(mongo.db.books.find({"$text": {"$search": session["query"]}})))
+        number_of_books = len(list(mongo.db.books.find(
+            {
+                "$text": {"$search": session["query"]}
+            }))
+        )
 
         pagination_data = get_pagination_data(number_of_books, page)
 
         books = list(mongo.db.books.aggregate([
             {
-                "$match": { "$text": { "$search": session["query"] } }
+                "$match": {"$text": {"$search": session["query"]}}
             },
             {
-                "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+                "$skip": (
+                    pagination_data["BOOKS_PER_PAGE"]
+                    * (pagination_data["offset"] + int(page))
+                )
             },
             {
                 "$limit": pagination_data["BOOKS_PER_PAGE"]
@@ -103,20 +112,35 @@ def search(page=1):
 
     if request.method == "GET":
         if session["query"]:
-            number_of_books = len(list(mongo.db.books.find({"$text": {"$search": session["query"]}})))
+            number_of_books = len(list(mongo.db.books.find(
+                {
+                    "$text": {"$search": session["query"]}
+                }
+            )))
+
             pagination_data = get_pagination_data(number_of_books, page)
             books = list(mongo.db.books.aggregate([
                 {
                     "$match": {"$text": {"$search": session["query"]}}
                 },
                 {
-                    "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+                    "$skip": (
+                        pagination_data["BOOKS_PER_PAGE"]
+                        * (pagination_data["offset"] + int(page))
+                    )
                 },
                 {
                     "$limit": pagination_data["BOOKS_PER_PAGE"]
                 }
             ]))
-            return render_template("books.html", number_of_pages=pagination_data["number_of_pages"], books=books, page=page, next_page=pagination_data["next_page"], previous_page=pagination_data["previous_page"], current_page=pagination_data["current_page"], query_exists=True)
+            return render_template(
+                "books.html",
+                number_of_pages=pagination_data["number_of_pages"],
+                books=books, page=page, next_page=pagination_data["next_page"],
+                previous_page=pagination_data["previous_page"],
+                current_page=pagination_data["current_page"],
+                query_exists=True
+            )
 
         return render_template("index.html")
 
@@ -144,24 +168,35 @@ def get_books(page=1):
     if books is None:
         books = list(mongo.db.books.aggregate([
             {
-                "$skip": (pagination_data["BOOKS_PER_PAGE"] * (pagination_data["offset"] + int(page)))
+                "$skip": (
+                    pagination_data["BOOKS_PER_PAGE"]
+                    * (pagination_data["offset"] + int(page))
+                )
             },
             {
                 "$limit": pagination_data["BOOKS_PER_PAGE"]
             }
         ]))
 
-    return render_template("books.html", number_of_pages=pagination_data["number_of_pages"], books=books, page=page, next_page=pagination_data["next_page"], previous_page=pagination_data["previous_page"], current_page=pagination_data["current_page"], query_exists=False)
+    return render_template(
+        "books.html",
+        number_of_pages=pagination_data["number_of_pages"],
+        books=books, page=page, next_page=pagination_data["next_page"],
+        previous_page=pagination_data["previous_page"],
+        current_page=pagination_data["current_page"],
+        query_exists=False
+    )
 
 
 @app.route("/book/<book_id>", methods=["GET", "POST"])
 def book(book_id):
     # GET
-    review_id_to_edit  = request.args.get('review_id', None)
-    old_review = mongo.db.reviews.find_one({"_id": ObjectId(review_id_to_edit)})
+    review_id_to_edit = request.args.get('review_id', None)
+    old_review = mongo.db.reviews.find_one(
+        {"_id": ObjectId(review_id_to_edit)}
+    )
 
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
-    
     # https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists
     query = {"book_id": {"$eq": book_id}}
     reviews = list(mongo.db.reviews.find(query))
@@ -170,7 +205,14 @@ def book(book_id):
     no_of_reviews = len(reviews)
     rating_percentage = get_rating(reviews, no_of_reviews, book)
 
-    return render_template("book.html", book=book, reviews=reviews, no_of_reviews=no_of_reviews, rating=rating_percentage, review_id_to_edit=review_id_to_edit, old_review=old_review)
+    return render_template(
+        "book.html",
+        book=book, reviews=reviews,
+        no_of_reviews=no_of_reviews,
+        rating=rating_percentage,
+        review_id_to_edit=review_id_to_edit,
+        old_review=old_review
+    )
 
 
 # Helper function
@@ -211,7 +253,7 @@ def add_review(book_id):
 
 @app.route("/edit_review/<book_id>", methods=["GET", "POST"])
 def edit_review(book_id):
-    review_id  = request.args.get('review_id', None)
+    review_id = request.args.get('review_id', None)
 
     if request.method == "POST":
         # Edit Review
@@ -230,10 +272,7 @@ def edit_review(book_id):
 
 # Contact page
 @app.route("/contact")
-def contact(search=False):
-    if request.method == "POST":
-        pass
-
+def contact():
     return render_template("contact.html")
 
 
@@ -276,10 +315,10 @@ def login():
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    return redirect(url_for(
-                            "profile", username=session["user"]))
+                existing_user["password"], request.form.get("password")
+            ):
+                session["user"] = request.form.get("username").lower()
+                return redirect(url_for("profile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -377,15 +416,16 @@ def delete_book(book_id):
 
 @app.route("/delete_review/<book_id>")
 def delete_review(book_id):
-    review_id  = request.args.get('review_id', None)
+    review_id = request.args.get('review_id', None)
 
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
 
     flash("Review Successfully Deleted")
     return redirect(url_for("book", book_id=book_id))
 
+
 # Tells app how and where to host application
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
-        port=int(os.environ.get("PORT")),
-        debug=True)
+            port=int(os.environ.get("PORT")),
+            debug=True)
