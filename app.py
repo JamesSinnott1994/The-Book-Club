@@ -351,17 +351,29 @@ def contact():
         comment = request.form.get("comment")
 
         # puts together message
-        msg = Message(
-                subject=f"Mail from {name}",
-                body=f"Name: {name}\nE-Mail: {email}\n\n\n{comment}",
-                sender=email,
-                recipients=[os.environ.get("MAIL_USERNAME")]
-        )
+        # msg = Message(
+        #         subject=f"Mail from {name}",
+        #         body=f"Name: {name}\nE-Mail: {email}\n\n\n{comment}",
+        #         sender=email,
+        #         recipients=[os.environ.get("MAIL_USERNAME")]
+        # )
+
+        msg = Message("Hello",
+                  sender="JamesRichardSinnott@gmail.com",
+                  recipients=["JamesRichardSinnott@gmail.com"])
 
         # sends message
-        mail.send(msg)
+        exception = False
+        try:
+            mail.send(msg)
+        except:
+            exception = True
+            print("An exception occurred")
 
-        flash("Email sent!")
+        if exception:
+            flash("Email could not be sent")
+        else:
+            flash("Email sent!")
 
     return render_template("contact.html", success=True)
 
