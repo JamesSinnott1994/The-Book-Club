@@ -185,8 +185,8 @@ def get_pagination_data(number_of_books, page):
     number_of_pages = math.ceil(number_of_books / BOOKS_PER_PAGE)
 
     # For chevron links
-    previous_page = 1
-    next_page = number_of_pages
+    previous_page = int(page) - 1
+    next_page = int(page) + 1
 
     # Prevents going to page 0
     if page == 0:
