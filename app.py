@@ -18,6 +18,7 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
+
 # Instance of PyMongo
 # Ensures our Flask app is properly communicating with the Mongo database
 mongo = PyMongo(app)
@@ -25,6 +26,8 @@ mongo = PyMongo(app)
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """Returns template for the 404 Error page"""
+
     # https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
@@ -33,8 +36,9 @@ def page_not_found(e):
 @app.route("/")
 @app.route("/home")
 def home():
+    """Returns template for Home page"""
 
-    # Get list of books in order of total_rating (i.e. most popular)
+    # Get the top 4 most popular books in order of total_rating
     books = list(mongo.db.books.find(
         {
             "$query": {},
@@ -45,8 +49,161 @@ def home():
     return render_template("index.html", books=books)
 
 
-# Helper function
+@app.route("/search", methods=["GET", "POST"])
+@app.route("/search/<page>")
+def search(page=1):
+    """
+    1. If user submits a query, find books associated
+    with query.
+
+    - User is then redirected to this search route
+    (Helps get rid of an issue with the URL)
+
+    2. Retrieves submitted query
+
+    - If there are no results from the query, then
+    a message will be displayed in template based on 
+    the "results" boolean
+    """
+
+    # 1. store submitted query in session
+    if request.method == "POST":
+        session["query"] = request.form.get("query")
+
+        # get number of books. Helps get pagination data
+        number_of_books = len(list(mongo.db.books.find(
+            {
+                "$text": {"$search": session["query"]}
+            }))
+        )
+
+        pagination_data = get_pagination_data(number_of_books, page)
+
+        # retrieve books based on search query
+        books = list(mongo.db.books.aggregate([
+            {
+                "$match": {"$text": {"$search": session["query"]}}
+            },
+            {
+                "$skip": (
+                    pagination_data["BOOKS_PER_PAGE"]
+                    * (pagination_data["offset"] + int(page))
+                )
+            },
+            {
+                "$limit": pagination_data["BOOKS_PER_PAGE"]
+            }
+        ]))
+        return redirect(url_for("search", page=page))
+
+    # 2. retrieve submitted query which is stored in session
+    if request.method == "GET":
+        if session["query"]:
+            number_of_books = len(list(mongo.db.books.find(
+                {
+                    "$text": {"$search": session["query"]}
+                }
+            )))
+
+            pagination_data = get_pagination_data(number_of_books, page)
+
+            books = list(mongo.db.books.aggregate([
+                {
+                    "$match": {"$text": {"$search": session["query"]}}
+                },
+                {
+                    "$skip": (
+                        pagination_data["BOOKS_PER_PAGE"]
+                        * (pagination_data["offset"] + int(page))
+                    )
+                },
+                {
+                    "$limit": pagination_data["BOOKS_PER_PAGE"]
+                }
+            ]))
+
+            # determines if there are any results to be displayed
+            # from query.
+            results = True
+            if number_of_books == 0:
+                results = False
+
+            return render_template(
+                "books.html",
+                number_of_pages=pagination_data["number_of_pages"],
+                books=books, page=page, next_page=pagination_data["next_page"],
+                previous_page=pagination_data["previous_page"],
+                current_page=pagination_data["current_page"],
+                query_exists=True, results=results
+            )
+
+        return render_template("index.html")
+
+
+@app.route("/books", methods=["GET", "POST"])
+@app.route("/books/<page>")
+def get_books(page=1):
+    """
+    Returns template for the Books page
+
+    - "books" will hold either books based on a search query,
+    or it will hold all books from the books collection.
+
+    - Initially it is set to "None", this is to accomodate a
+    search query from the user.
+
+    - If there is no POST request, then that means there was no
+    search query. "books" will therefore be "None", so all books are
+    then retrieved from the database.
+    """
+
+    books = None  # default value
+
+    # for search query from Home page
+    if request.method == "POST":
+        query = request.form.get("query")
+        books = list(mongo.db.books.find({"$text": {"$search": query}}))
+
+    # gets the number of books
+    number_of_books = 0
+    if books is None:  # calculate number of books in database
+        number_of_books = mongo.db.books.estimated_document_count()
+    else:  # get number of books retrieved from search query
+        number_of_books = len(books)
+
+    # call helper function
+    pagination_data = get_pagination_data(number_of_books, page)
+
+    # retrieve books if there is no search query
+    if books is None:
+        books = list(mongo.db.books.aggregate([
+            {
+                "$skip": (
+                    pagination_data["BOOKS_PER_PAGE"]
+                    * (pagination_data["offset"] + int(page))
+                )
+            },
+            {
+                "$limit": pagination_data["BOOKS_PER_PAGE"]
+            }
+        ]))
+
+    return render_template(
+        "books.html",
+        number_of_pages=pagination_data["number_of_pages"],
+        books=books, page=page, next_page=pagination_data["next_page"],
+        previous_page=pagination_data["previous_page"],
+        current_page=pagination_data["current_page"],
+        query_exists=False, results=True
+    )
+
+
 def get_pagination_data(number_of_books, page):
+    """
+    Helper function
+
+    Returns a dictionary containing data used for pagination
+    """
     BOOKS_PER_PAGE = 8
 
     # Gets the number of pages for pagination
@@ -78,126 +235,17 @@ def get_pagination_data(number_of_books, page):
     return pagination_data
 
 
-@app.route("/search", methods=["GET", "POST"])
-@app.route("/search/<page>")
-def search(page=1):
-
-    # Store query in session
-    if request.method == "POST":
-        session["query"] = request.form.get("query")
-
-        number_of_books = len(list(mongo.db.books.find(
-            {
-                "$text": {"$search": session["query"]}
-            }))
-        )
-
-        pagination_data = get_pagination_data(number_of_books, page)
-
-        books = list(mongo.db.books.aggregate([
-            {
-                "$match": {"$text": {"$search": session["query"]}}
-            },
-            {
-                "$skip": (
-                    pagination_data["BOOKS_PER_PAGE"]
-                    * (pagination_data["offset"] + int(page))
-                )
-            },
-            {
-                "$limit": pagination_data["BOOKS_PER_PAGE"]
-            }
-        ]))
-        return redirect(url_for("search", page=page))
-
-    if request.method == "GET":
-        if session["query"]:
-            number_of_books = len(list(mongo.db.books.find(
-                {
-                    "$text": {"$search": session["query"]}
-                }
-            )))
-
-            pagination_data = get_pagination_data(number_of_books, page)
-            books = list(mongo.db.books.aggregate([
-                {
-                    "$match": {"$text": {"$search": session["query"]}}
-                },
-                {
-                    "$skip": (
-                        pagination_data["BOOKS_PER_PAGE"]
-                        * (pagination_data["offset"] + int(page))
-                    )
-                },
-                {
-                    "$limit": pagination_data["BOOKS_PER_PAGE"]
-                }
-            ]))
-
-            # Determines if there are any results to be displayed
-            # from query. Message displayed if not.
-            results = True
-            if number_of_books == 0:
-                results = False
-
-            return render_template(
-                "books.html",
-                number_of_pages=pagination_data["number_of_pages"],
-                books=books, page=page, next_page=pagination_data["next_page"],
-                previous_page=pagination_data["previous_page"],
-                current_page=pagination_data["current_page"],
-                query_exists=True, results=results
-            )
-
-        return render_template("index.html")
-
-
-@app.route("/books", methods=["GET", "POST"])
-@app.route("/books/<page>")
-def get_books(page=1):
-    # For Search query from Home page
-    books = None
-    if request.method == "POST":
-        query = request.form.get("query")
-        books = list(mongo.db.books.find({"$text": {"$search": query}}))
-
-    # Gets the number of books in the books collection
-    number_of_books = 0
-    if books is None:
-        number_of_books = mongo.db.books.estimated_document_count()
-    else:
-        number_of_books = len(books)
-
-    # Call helper function
-    pagination_data = get_pagination_data(number_of_books, page)
-
-    # Retrieve books if there is no search query
-    if books is None:
-        books = list(mongo.db.books.aggregate([
-            {
-                "$skip": (
-                    pagination_data["BOOKS_PER_PAGE"]
-                    * (pagination_data["offset"] + int(page))
-                )
-            },
-            {
-                "$limit": pagination_data["BOOKS_PER_PAGE"]
-            }
-        ]))
-
-    return render_template(
-        "books.html",
-        number_of_pages=pagination_data["number_of_pages"],
-        books=books, page=page, next_page=pagination_data["next_page"],
-        previous_page=pagination_data["previous_page"],
-        current_page=pagination_data["current_page"],
-        query_exists=False, results=True
-    )
-
-
 @app.route("/book/<book_id>", methods=["GET", "POST"])
 def book(book_id):
-    # GET
+    """
+    Returns template for Book page
+
+    Gets book information, including all reviews associated
+    with the book
+    """
+
+    # "review_id_to_edit" and "old_review" values are set
+    # when user clicks "Edit" button on a review.
     review_id_to_edit = request.args.get('review_id', None)
     old_review = mongo.db.reviews.find_one(
         {"_id": ObjectId(review_id_to_edit)}
@@ -208,7 +256,7 @@ def book(book_id):
     query = {"book_id": {"$eq": book_id}}
     reviews = list(mongo.db.reviews.find(query))
 
-    # Calculate review rating percentage
+    # calculate review rating percentage
     no_of_reviews = len(reviews)
     rating_percentage = get_rating(reviews, no_of_reviews, book)
 
@@ -222,16 +270,29 @@ def book(book_id):
     )
 
 
-# Helper function
 def get_rating(reviews, no_of_reviews, book):
+    """
+    Helper function
+
+    1. Gets sum of all ratings for the book
+
+    2. Updates rating value for the book in
+    the books collection
+
+    3. Calculates the rating percentage for a book
+    Used for filling the stars display
+    """
+
+    # gets the sum of all the ratings for this book
     total_rating = 0
     for review in reviews:
         total_rating += review["rating"]
 
-    # Update total_rating value for this book
+    # update total_rating value for this book
     book["total_rating"] = total_rating
     mongo.db.books.update({"_id": ObjectId(book["_id"])}, book)
 
+    # gets rating percentage
     rating_percentage = 0
 
     if no_of_reviews > 0:
@@ -243,6 +304,11 @@ def get_rating(reviews, no_of_reviews, book):
 
 @app.route("/add_review/<book_id>", methods=["GET", "POST"])
 def add_review(book_id):
+    """
+    Adds a review to the reviews collection
+
+    Redirects to the Book page on which the review was added
+    """
     if request.method == "POST":
         # Add Review
         review = {
@@ -260,6 +326,11 @@ def add_review(book_id):
 
 @app.route("/edit_review/<book_id>", methods=["GET", "POST"])
 def edit_review(book_id):
+    """
+    Updates the specific review in the reviews collection
+
+    Redirects to the Book page on which the review is located
+    """
     review_id = request.args.get('review_id', None)
 
     if request.method == "POST":
@@ -277,15 +348,22 @@ def edit_review(book_id):
         flash("Review edited!")
         return redirect(url_for("book", book_id=book_id))
 
-# Contact page
+
+
 @app.route("/contact")
 def contact():
+    """Returns template for Contact page"""
     return render_template("contact.html")
 
 
-# Register page
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Returns template for Register page
+
+    Inserts user if username doesn't already exist
+    """
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -311,9 +389,17 @@ def register():
     return render_template("register.html")
 
 
-# Login page
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Returns template for the Login page
+
+    Once form data is submitted, checks if user exists.
+    Also checks if password is correct.
+
+    Redirects to Profile page if data is correct
+    """
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
@@ -341,14 +427,26 @@ def login():
 
 @app.route("/logout")
 def logout():
-    # remove user from session cookie
-    flash("You have been logged out")
+    """
+    Removes user from session cookie
+
+    Redirects to the Login page
+    """
     session.pop("user")
+
+    flash("You have been logged out")
+
     return redirect(url_for("login"))
 
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    """
+    Returns template for Profile page is user is in session
+
+    All books associated with the user will be displayed on
+    this page
+    """
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -364,6 +462,11 @@ def profile(username):
 
 @app.route("/add_book", methods=["GET", "POST"])
 def add_book():
+    """
+    Returns template for Add Book page
+
+    Adds book to the books collection
+    """
     # https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
     if request.method == "POST":
         # Create book document for books collection
@@ -386,9 +489,16 @@ def add_book():
 
 @app.route("/edit_book/<book_id>", methods=["GET", "POST"])
 def edit_book(book_id):
+    """
+    Returns template for the Edit Book page
+
+    Updates the details for the book in the books collection
+    """
     if request.method == "POST":
 
-        # Gets some old data that we don't want changed
+        # gets some old book data that we don't want changed
+        # i.e. book's rating (defined by reviewers) and who
+        # the book was uploaded by
         old_book_data = mongo.db.books.find_one({"_id": ObjectId(book_id)})
 
         updated_book = {
@@ -411,6 +521,13 @@ def edit_book(book_id):
 
 @app.route("/delete_book/<book_id>")
 def delete_book(book_id):
+    """
+    Removes the book selected on the Book page from the database
+
+    Also removes all reviews associated with the book
+
+    Redirects to the Books page
+    """
     mongo.db.books.remove({"_id": ObjectId(book_id)})
 
     # Delete all reviews associated with the book
@@ -423,6 +540,11 @@ def delete_book(book_id):
 
 @app.route("/delete_review/<book_id>")
 def delete_review(book_id):
+    """
+    Removes the review selected on the Book page from the database
+
+    Redirects to the same Book page
+    """
     review_id = request.args.get('review_id', None)
 
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
@@ -431,7 +553,7 @@ def delete_review(book_id):
     return redirect(url_for("book", book_id=book_id))
 
 
-# Tells app how and where to host application
+# tells app how and where to host application
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
