@@ -28,13 +28,13 @@ $(document).ready(function(){
     function makeBookDivHeightSame() {
         let maxHeight = 0;
 
-        $("#book-display-area .book").each((i, book) => {
+        $(".books-display-area .book").each((i, book) => {
             if ($(book).height() > maxHeight) { 
                 maxHeight = $(book).height();
             }
         });
 
-        $("#book-display-area .book").height(maxHeight);
+        $(".books-display-area .book").height(maxHeight);
     }
     makeBookDivHeightSame();
 
