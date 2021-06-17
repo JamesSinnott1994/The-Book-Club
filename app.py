@@ -69,31 +69,6 @@ def search(page=1):
     # 1. store submitted query in session
     if request.method == "POST":
         session["query"] = request.form.get("query")
-
-        # get number of books. Helps get pagination data
-        number_of_books = len(list(mongo.db.books.find(
-            {
-                "$text": {"$search": session["query"]}
-            }))
-        )
-
-        pagination_data = get_pagination_data(number_of_books, page)
-
-        # retrieve books based on search query
-        books = list(mongo.db.books.aggregate([
-            {
-                "$match": {"$text": {"$search": session["query"]}}
-            },
-            {
-                "$skip": (
-                    pagination_data["BOOKS_PER_PAGE"]
-                    * (pagination_data["offset"] + int(page))
-                )
-            },
-            {
-                "$limit": pagination_data["BOOKS_PER_PAGE"]
-            }
-        ]))
         return redirect(url_for("search", page=page))
 
     # 2. retrieve submitted query which is stored in session
