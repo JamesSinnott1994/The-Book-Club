@@ -5,6 +5,7 @@ from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
+from flask_mail import Mail, Message
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -19,10 +20,19 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
+app.config['MAIL_SERVER'] = "smtp.gmail.com"
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
+
 # Instance of PyMongo
 # Ensures our Flask app is properly communicating with the Mongo database
 mongo = PyMongo(app)
 
+# Flask Mail
+mail = Mail(app)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -325,10 +335,35 @@ def edit_review(book_id):
 
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    """Returns template for Contact page"""
-    return render_template("contact.html")
+    """
+    Returns template for Contact page
+
+    Takes in form data and sends it as an email
+    to the site administrator
+    """
+
+    if request.method == "POST":
+        # gets contact form data
+        name = request.form.get("name")
+        email = request.form.get("email")
+        comment = request.form.get("comment")
+
+        # puts together message
+        msg = Message(
+                subject=f"Mail from {name}",
+                body=f"Name: {name}\nE-Mail: {email}\n\n\n{comment}",
+                sender=email,
+                recipients=[os.environ.get("MAIL_USERNAME")]
+        )
+
+        # sends message
+        mail.send(msg)
+
+        flash("Email sent!")
+
+    return render_template("contact.html", success=True)
 
 
 
