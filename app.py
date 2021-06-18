@@ -7,6 +7,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from flask_mail import Mail, Message
 from bson.objectid import ObjectId
+from smtplib import SMTPException
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -33,6 +34,7 @@ mongo = PyMongo(app)
 
 # Flask Mail
 mail = Mail(app)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -72,7 +74,7 @@ def search(page=1):
     2. Retrieves submitted query
 
     - If there are no results from the query, then
-    a message will be displayed in template based on 
+    a message will be displayed in template based on
     the "results" boolean
     """
 
@@ -351,32 +353,28 @@ def contact():
         comment = request.form.get("comment")
 
         # puts together message
-        # msg = Message(
-        #         subject=f"Mail from {name}",
-        #         body=f"Name: {name}\nE-Mail: {email}\n\n\n{comment}",
-        #         sender=email,
-        #         recipients=[os.environ.get("MAIL_USERNAME")]
-        # )
+        msg = Message(
+                subject=f"Mail from {name}",
+                body=f"Name: {name}\nE-Mail: {email}\n\n\n{comment}",
+                sender=email,
+                recipients=[os.environ.get("MAIL_USERNAME")]
+        )
 
-        msg = Message("Hello",
-                  sender="JamesRichardSinnott@gmail.com",
-                  recipients=["JamesRichardSinnott@gmail.com"])
-
-        # sends message
-        exception = False
+        # tries to send message
+        exception_exists = False
         try:
             mail.send(msg)
-        except:
-            exception = True
-            print("An exception occurred")
+        except SMTPException as e:
+            exception_exists = True
+            print(e)
 
-        if exception:
+        # flash message for whether or not email was sent
+        if exception_exists:
             flash("Email could not be sent")
         else:
             flash("Email sent!")
 
     return render_template("contact.html", success=True)
-
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -409,7 +407,6 @@ def register():
         return redirect(url_for("profile", username=session["user"]))
 
     return render_template("register.html")
-
 
 
 @app.route("/login", methods=["GET", "POST"])
