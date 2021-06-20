@@ -32,7 +32,7 @@
                     {% endif %}
                 </ul>
 
-                <!-- Search icon will be seen on all screen sizes -->
+                <!-- These will only be seen from the Burger menu on medium and smaller screen sizes -->
                 <ul class="right">
                     <li>
                         <!-- <a href="#"><i class="fas fa-search"></i></a> -->
@@ -48,17 +48,13 @@
                             </div>
                         </form>
                     </li>
-                </ul>
-
-                <!-- These will only be seen from the Burger menu on medium and smaller screen sizes -->
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="hide-on-med-and-down"><a href="{{ url_for('home') }}">Home</a></li>
                     {% if session.user %}
-                        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <li><a href="{{ url_for('add_book') }}">Add Book</a></li>
+                        <li class="hide-on-med-and-down"><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                        <li class="hide-on-med-and-down"><a href="{{ url_for('add_book') }}">Add Book</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('get_books') }}">Books</a></li>
-                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li class="hide-on-med-and-down"><a href="{{ url_for('get_books') }}">Books</a></li>
+                    <li class="hide-on-med-and-down"><a href="{{ url_for('contact') }}">Contact</a></li>
                 </ul>
 
             </div>
