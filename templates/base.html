@@ -82,10 +82,20 @@
 
     <section>
         <!-- flash messages -->
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(category_filter=["success"]) %}
             {% if messages %}
                 {% for message in messages %}
-                    <div class="row flashes">
+                    <div class="row flash-success">
+                        <h4 class="center-align">{{ message }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flash-error">
                         <h4 class="center-align">{{ message }}</h4>
                     </div>
                 {% endfor %}

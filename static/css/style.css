@@ -72,10 +72,16 @@ nav {
   transition: all 0.5s 0.2s ease;
 }
 
-.flashes {
+.flash-success {
     line-height: 2;
     color: white;
-    background-color: #EA0F0B;
+    background-color: forestgreen;
+}
+
+.flash-error {
+    line-height: 2;
+    color: white;
+    background-color: red;
 }
 
 #logo {

@@ -307,7 +307,7 @@ def add_review(book_id):
             "rating": int(request.form.get("stars"))
         }
         mongo.db.reviews.insert_one(review)
-        flash("Review added!")
+        flash("Review added!", "success")
         return redirect(url_for("book", book_id=book_id))
 
 
@@ -332,7 +332,7 @@ def edit_review(book_id):
         }
 
         mongo.db.reviews.update({"_id": ObjectId(review_id)}, edited_review)
-        flash("Review edited!")
+        flash("Review edited!", "success")
         return redirect(url_for("book", book_id=book_id))
 
 
@@ -370,9 +370,9 @@ def contact():
 
         # flash message for whether or not email was sent
         if exception_exists:
-            flash("Email could not be sent")
+            flash("Email could not be sent", "error")
         else:
-            flash("Email sent!")
+            flash("Email sent!", "success")
 
     return render_template("contact.html", success=True)
 
@@ -390,7 +390,7 @@ def register():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            flash("Username already exists")
+            flash("Username already exists", "error")
             return redirect(url_for("register"))
 
         register = {
@@ -403,7 +403,7 @@ def register():
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
-        flash("Registration Successful!")
+        flash("Registration Successful!", "success")
         return redirect(url_for("profile", username=session["user"]))
 
     return render_template("register.html")
@@ -433,12 +433,12 @@ def login():
                 return redirect(url_for("profile", username=session["user"]))
             else:
                 # invalid password match
-                flash("Incorrect Username and/or Password")
+                flash("Incorrect Username and/or Password", "error")
                 return redirect(url_for("login"))
 
         else:
             # username doesn't exist
-            flash("Incorrect Username and/or Password")
+            flash("Incorrect Username and/or Password", "error")
             return redirect(url_for("login"))
 
     return render_template("login.html")
@@ -453,7 +453,7 @@ def logout():
     """
     session.pop("user")
 
-    flash("You have been logged out")
+    flash("You have been logged out", "success")
 
     return redirect(url_for("login"))
 
@@ -499,7 +499,7 @@ def add_book():
             "total_rating": 0
         }
         mongo.db.books.insert_one(book)
-        flash("Book successfully added to the library!")
+        flash("Book successfully added to the library!", "success")
         return redirect(url_for("get_books"))
 
     genres = mongo.db.genres.find().sort("genre", 1)
@@ -530,7 +530,7 @@ def edit_book(book_id):
             "rating": old_book_data["total_rating"]
         }
         mongo.db.books.update({"_id": ObjectId(book_id)}, updated_book)
-        flash("Book Successfully Updated")
+        flash("Book Successfully Edited", "success")
         return redirect(url_for("book", book_id=book_id))
 
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
@@ -553,7 +553,7 @@ def delete_book(book_id):
     query = {"book_id": {"$eq": book_id}}
     mongo.db.reviews.remove(query)
 
-    flash("Book Successfully Deleted")
+    flash("Book Successfully Deleted", "success")
     return redirect(url_for("get_books"))
 
 
@@ -568,7 +568,7 @@ def delete_review(book_id):
 
     mongo.db.reviews.remove({"_id": ObjectId(review_id)})
 
-    flash("Review Successfully Deleted")
+    flash("Review Successfully Deleted", "success")
     return redirect(url_for("book", book_id=book_id))
 
 
