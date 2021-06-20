@@ -378,6 +378,11 @@ form i {
     border-radius: 10px;
     background-color: #4021BD;
     color: white;
+
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
 }
 
 .book-btn:hover {
@@ -399,6 +404,24 @@ form i {
     border-radius: 20px;
     
     box-shadow: 0 0 3px 0 silver;
+}
+
+.edit-btn {
+    color: #26a69a;
+    background-color: rgba(255, 255, 255, 1);
+}
+.edit-btn:hover {
+    color: white;
+    background-color: #26a69a;
+}
+
+.delete-btn {
+    color: gray;
+    background-color: rgba(255, 255, 255, 1);
+}
+.delete-btn:hover {
+    color: white;
+    background-color: gray;
 }
 
 .yes-btn {
