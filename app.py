@@ -243,6 +243,13 @@ def book(book_id):
     query = {"book_id": {"$eq": book_id}}
     reviews = list(mongo.db.reviews.find(query))
 
+    reviews = list(mongo.db.reviews.find(
+        {
+            "$query": {"book_id": {"$eq": book_id}},
+            "$orderby": {"review_date": -1}
+        })
+    )
+
     # calculate review rating percentage
     no_of_reviews = len(reviews)
     rating_percentage = get_rating(reviews, no_of_reviews, book)
