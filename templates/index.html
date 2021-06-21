@@ -79,7 +79,7 @@
 
                 <div class="book-img-container">
                     <a href="{{ url_for('book', book_id=book._id) }}">
-                        <img class="book-img" src="{{ book.image }}" alt="Book Image">
+                        <img class="book-img" src="{{ book.image }}" alt="{{ book.title }}">
                     </a>
                 </div>
 
@@ -95,7 +95,7 @@
         <div class="quote-paragraph col s12 m6">
 
             <div class="author-img-container left">
-                <img class="author-img" src="{{ url_for('static', filename='images/4480.jpg') }}" alt="Author Image">
+                <img class="author-img" src="{{ url_for('static', filename='images/george-rr-martin.jpg') }}" alt="George RR Martin">
             </div>
             <p class="quote center-align"><i class="fas fa-quote-left"></i> A mind needs books as a sword needs a whetstone if it is to keep its edge. <i class="fas fa-quote-right"></i></p>
             <p class="author-name center-align">~ George R.R. Martin</p>
@@ -105,7 +105,7 @@
         <div class="quote-paragraph col s12 m6">
 
             <div class="author-img-container">
-                <img class="author-img" src="{{ url_for('static', filename='images/12121.jpg') }}" alt="Author Image">
+                <img class="author-img" src="{{ url_for('static', filename='images/mark-twain.jpg') }}" alt="Mark Twain">
             </div>
             <p class="quote center-align"><i class="fas fa-quote-left"></i> The man who does not read good books has no advantage over the man who can't read them. <i class="fas fa-quote-right"></i></p>
             <p class="author-name center-align">~ Mark Twain</p>

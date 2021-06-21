@@ -34,13 +34,11 @@
 
                 <!-- These will only be seen from the Burger menu on medium and smaller screen sizes -->
                 <ul class="right">
+                    <!-- expandable search icon -->
                     <li>
-                        <!-- <a href="#"><i class="fas fa-search"></i></a> -->
                         <form action="{{ url_for('search') }}" method="post">
                             <div class="searchbar">
-
                                 <input type="text" name="query" placeholder="search">
-
                                 <div class="icon">
                                     <i class="fas fa-search"></i>
                                 </div>
@@ -49,10 +47,13 @@
                         </form>
                     </li>
                     <li class="hide-on-med-and-down"><a href="{{ url_for('home') }}">Home</a></li>
+
+                    <!-- links for logged in user -->
                     {% if session.user %}
                         <li class="hide-on-med-and-down"><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <li class="hide-on-med-and-down"><a href="{{ url_for('add_book') }}">Add Book</a></li>
                     {% endif %}
+
                     <li class="hide-on-med-and-down"><a href="{{ url_for('get_books') }}">Books</a></li>
                     <li class="hide-on-med-and-down"><a href="{{ url_for('contact') }}">Contact</a></li>
                 </ul>
@@ -65,6 +66,7 @@
             <li><h5 class="center-align deep-purple-text text-darken 4">The Book Club</h5></li>
             <li><a href="{{ url_for('home') }}">Home</a></li>
         
+            <!-- different links for a logged in user -->
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                 <li><a href="{{ url_for('add_book') }}">Add Book</a></li>
@@ -81,7 +83,7 @@
     </header>
 
     <section>
-        <!-- flash messages -->
+        <!-- flash success messages -->
         {% with messages = get_flashed_messages(category_filter=["success"]) %}
             {% if messages %}
                 {% for message in messages %}
@@ -92,6 +94,7 @@
             {% endif %}
         {% endwith %}
 
+        <!-- flash error messages -->
         {% with messages = get_flashed_messages(category_filter=["error"]) %}
             {% if messages %}
                 {% for message in messages %}
@@ -119,6 +122,7 @@
                     <p class="grey-text text-lighten-4">© 2021 The Book Club</p>
                 </div>
 
+                <!-- social media links -->
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">Links</h5>
                     <ul class="social-links">
