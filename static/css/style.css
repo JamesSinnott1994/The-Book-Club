@@ -507,6 +507,12 @@ span {
     cursor: pointer;
 }
 
+/*--------------------------------------------EDIT BOOK PAGE*/
+
+#edit-submit-btn {
+    margin-bottom: 1em;
+}
+
 /*--------------------------------------------PROFILE PAGE*/
 
 #profile-img-container {
@@ -624,6 +630,12 @@ span {
         position: absolute;
         bottom: 2.5%;
         left: 10%;
+    }
+
+    /*--------------------------------------------EDIT BOOK PAGE*/
+
+    #edit-submit-btn {
+        margin-bottom: 0;
     }
 
     /*--------------------------------------------PROFILE PAGE*/
