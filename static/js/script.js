@@ -1,42 +1,14 @@
 $(document).ready(function(){
-    // Sidenav
     $('.sidenav').sidenav();
 
     // Resize event, for making paragraph text the same height
-    // (Keeps CTA buttons at the one level)
+    // (Keeps Call-to-action buttons at the one level)
     // https://www.techiedelight.com/trigger-window-resize-event-javascript/
     $(window).trigger('resize');
     $(window).resize(makeParagraphHeightSame);
 
-    // Make height of CTA (Call-To-Action) paragraphs the same
-    function makeParagraphHeightSame() {
-        let maxHeight = 0;
-
-        $(".call-to-action-area p").each((i, p) => {
-            if ($(p).height() > maxHeight) { 
-                maxHeight = $(p).height();
-            }
-        });
-
-        $(".call-to-action-area p").height(maxHeight);
-    }
-
     // Genre select
     $('select').formSelect();
-
-    // Make each book div the same height on the books page
-    function makeBookDivHeightSame() {
-        let maxHeight = 0;
-
-        $(".books-display-area .book").each((i, book) => {
-            if ($(book).height() > maxHeight) { 
-                maxHeight = $(book).height();
-            }
-        });
-
-        $(".books-display-area .book").height(maxHeight);
-    }
-    makeBookDivHeightSame();
 
     // Expandable search icon
     $(".fa-search").click(function(){
@@ -45,51 +17,117 @@ $(document).ready(function(){
         $("input[type='text']").toggleClass("active");
     });
 
-    // Star ratings
-    // https://codepen.io/mcallaro88/pen/EWQdRX?html-preprocessor=pug
+    makeBookDivHeightSame();
+    fillStars();
+    bindStarClickEvents();
+    bindDeleteBtnClickEvents();
 
-    // Gets the span width of the filled-ratings span
-    // this will be the same for each rating
+    // Opens modal with trigger
+    $('.modal').modal();
+});
+
+function makeParagraphHeightSame() {
+    /*
+    Make height of CTA (Call-To-Action) paragraphs the same
+    */
+    let maxHeight = 0;
+
+    $(".call-to-action-area p").each((i, p) => {
+        if ($(p).height() > maxHeight) { 
+            maxHeight = $(p).height();
+        }
+    });
+
+    $(".call-to-action-area p").height(maxHeight);
+}
+
+function makeBookDivHeightSame() {
+    /*
+    Make each book div the same height on the books page
+    */
+    let maxHeight = 0;
+
+    $(".books-display-area .book").each((i, book) => {
+        if ($(book).height() > maxHeight) { 
+            maxHeight = $(book).height();
+        }
+    });
+
+    $(".books-display-area .book").height(maxHeight);
+}
+
+function fillStars() {
+    /*
+    Star ratings
+    https://codepen.io/mcallaro88/pen/EWQdRX?html-preprocessor=pug
+
+    Gets the span width of the filled-ratings span,
+    this will be the same for each rating
+
+    Sets the container of the ratings to span width
+    thus the percentages in mobile will never be wrong
+    */
     var star_rating_width = $('.fill-ratings span').width();
-    // Sets the container of the ratings to span width
-    // thus the percentages in mobile will never be wrong
     $('.star-ratings').width(star_rating_width);
+}
 
-    // Add click event to star span elements on add review form
+function bindStarClickEvents() {
+    /*
+    Adds click event to the star radio buttons on the add review form
+    */
     $(`.empty-ratings-review input[type="radio"]`).each((i, star) => {
 
         $(star).bind('click', () => {
 
+            // Gets star number
             let starNoClicked = parseInt(star.id.substring(star.id.indexOf('-') + 1));
 
+            // Fills up the stars with a golden colour based
+            // on the star number clicked
             $(".empty-ratings-review span").each((i, span) => {
                 let currentStar = i+1;
 
                 if (currentStar <= starNoClicked) {
-                    console.log("ZZZZZZZZ")
                     $(span).css('color', '#e7711b');
                 } else {
                     $(span).css('color', '#ccc');
                 }
             })
 
-         });
+        });
 
     });
+}
 
-    // Modal
-    $('.modal').modal();
+function bindDeleteBtnClickEvents() {
+    /*
+    For each delete button on the Book page we bind a click event
 
+    This event triggers an anonymous function, which creates
+    a new href attribute based on the "review_id" of the review to
+    be deleted
+
+    This is then added to the "delete-review" id for the "Yes"
+    button in the modal window
+    */
     $(".review-edit-delete .delete-btn").each((i, review) => {
         $(review).bind('click', () => {
 
-            let href = $("#delete-review").attr("href");
-            let newHref = `?review_id=${review.id}`;
-            let combinedHref = href+newHref;
+            // Gets href off of "Yes" button in modal window
+            // i.e. {{ url_for('delete_review', book_id=book._id) }}
+            // i.e. /delete_review/60b4ce2f61f366b649e89519
+            let oldHref = $("#delete-review").attr("href");
 
-            $("#delete-review").attr("href", combinedHref);
+            // Gets id of review to be deleted
+            // .ie ?review_id=60d0c56af773271d99833a63
+            let reviewQueryString = `?review_id=${review.id}`;
+
+            // Combines the two
+            let newHref = oldHref+reviewQueryString;
+
+            // Creates a new URL for the "Yes" button
+            $("#delete-review").attr("href", newHref);
 
          });
     });
-
-});
+}

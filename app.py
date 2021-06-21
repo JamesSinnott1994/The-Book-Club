@@ -349,7 +349,6 @@ def edit_review(book_id):
         return redirect(url_for("book", book_id=book_id))
 
 
-
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     """
