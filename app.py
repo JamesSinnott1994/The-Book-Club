@@ -36,6 +36,12 @@ mongo = PyMongo(app)
 mail = Mail(app)
 
 
+@app.errorhandler(500)
+def internal_error(e):
+    """Returns template for the 500 Error page"""
+    return render_template('500.html'), 500
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     """Returns template for the 404 Error page"""

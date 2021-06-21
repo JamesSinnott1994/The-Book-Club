@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section id="error-page">
+
+        <div class="row">
+
+            <div class="error-col col s12 l6">
+
+                <div class="error-img-container">
+                    <img alt="Not Found Image" class="error-img" src="{{ url_for('static', filename='images/404-1.png') }}">
+                </div>
+
+            </div>
+
+            <div class="error-col col s12 l6">
+                <div class="error-description">
+                    <h4 class="center-align">500 Error: Internal Server Error</h4>
+                    <p>The page you were looking for could not be found. Please use the navigation bar to go back to the Home page.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}
