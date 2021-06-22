@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Oswald:100,200,300,400,500,600,700');
 
+/*--------------------------------------------BASE TEMPLATE*/
+
 * {
     margin: 0;
     padding: 0;
@@ -10,10 +12,6 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-}
-
-.footer-bg-color {
-    background-color: #4021BD;
 }
 
 .page-footer ul li {
@@ -101,6 +99,47 @@ main h4 {
     letter-spacing: 1px;
 }
 
+/*--------------------------------------------COMMON SELECTORS*/
+
+.btn-color, .pag-active, .footer-bg-color {
+    background-color: #4021BD;
+}
+
+.book-btn:hover, .cta-btn:hover, .btn-color:hover {
+    background-color: rgb(96, 104, 216);
+}
+
+#error-page, #book-page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.author-img, #profile-img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.book-img, .error-img {
+    width: 100%;
+    height: 100%;
+}
+
+.book-details, .book-btns-container  {
+    margin: 0 auto;
+    width: 80%;
+}
+
+#call-to-action-area p, #book-description p {
+    font-size: 1.25em;
+}
+
+#reviews, #edit-submit-btn {
+    margin-bottom: 1em;
+}
+
+/*--------------------------------------------HOME PAGE*/
+
 form i {
     color: #4021BD;
 }
@@ -155,14 +194,6 @@ form i {
     font-size: 50px;
 }
 
-#call-to-action-area p {
-    font-size: 1.25em;
-}
-
-.cta-col {
-    background-color: white;
-}
-
 .btn-container {
     margin-top: 2em;
     margin-bottom: 3.5em;
@@ -171,10 +202,6 @@ form i {
 .cta-btn {
     border-radius: 20px;
     background-color: #4021BD;
-}
-
-.cta-btn:hover {
-    background-color: rgb(96, 104, 216);
 }
 
 #quotes-area {
@@ -199,11 +226,7 @@ form i {
     font-style: italic;
 }
 
-.quote i {
-    font-size: 1em;
-}
-
-.author-name {
+.quote i, .author-name {
     font-size: 1em;
 }
 
@@ -213,19 +236,6 @@ form i {
     width: 75px;
     height: 75px;
     float: right;
-}
-.author-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
-.btn-color {
-    background-color: #4021BD;
-}
-
-.btn-color:hover {
-    background-color: rgb(96, 104, 216);
 }
 
 #most-popular-area {
@@ -290,10 +300,6 @@ form i {
     transform: translate(-50%, -50%);
 }
 
-.pag-active {
-    background-color: #4021BD;
-}
-
 .book {
     margin-bottom: 2em;
 }
@@ -302,11 +308,6 @@ form i {
     margin: 0 auto;
     width: 60%;
     height: 300px;
-}
-
-.book-img {
-    width: 100%;
-    height: 100%;
 }
 
 .book-info {
@@ -328,11 +329,6 @@ form i {
 
 /*--------------------------------------------BOOK PAGE*/
 
-#book-page-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 .book-page-info {
     position: relative;
 }
@@ -347,16 +343,6 @@ form i {
     height: 400px;
 }
 
-.book-details {
-    margin: 0 auto;
-    width: 80%;
-}
-
-.book-btns-container {
-    margin: 0 auto;
-    width: 80%;
-}
-
 .book-details h4 {
     font-family: Georgia, 'Times New Roman', Times, serif;
     letter-spacing: normal;
@@ -369,10 +355,6 @@ form i {
 #book-description, #add-review, #reviews {
     width: 90%;
     margin: 0 auto;
-}
-
-#reviews {
-    margin-bottom: 1em;
 }
 
 .book-btn-container {
@@ -391,16 +373,8 @@ form i {
     -o-transition: all 0.3s ease-in-out;
 }
 
-.book-btn:hover {
-    background-color: rgb(96, 104, 216);
-}
-
 #book-description, #add-review {
     margin-top: 3em;
-}
-
-#book-description p {
-    font-size: 1.25em;
 }
 
 .review {
@@ -408,7 +382,6 @@ form i {
     padding: 1em;
     border: 0.5px solid silver;
     border-radius: 20px;
-    
     box-shadow: 0 0 3px 0 silver;
 }
 
@@ -440,7 +413,7 @@ form i {
     background-color: red;
 }
 
-.star-ratings {
+.star-ratings, .star-ratings-review  {
   unicode-bidi: bidi-override;
   color: #ccc;
   font-size: 32px;
@@ -473,24 +446,6 @@ span {
     display: inline-block;
 }
 
-.star-ratings-review {
-  unicode-bidi: bidi-override;
-  color: #ccc;
-  font-size: 32px;
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-
-.star-ratings-already-reviewed {
-  unicode-bidi: bidi-override;
-  color: #ccc;
-  font-size: 20px;
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-
 .empty-ratings {
     padding: 0;
     display: block;
@@ -507,12 +462,6 @@ span {
     cursor: pointer;
 }
 
-/*--------------------------------------------EDIT BOOK PAGE*/
-
-#edit-submit-btn {
-    margin-bottom: 1em;
-}
-
 /*--------------------------------------------PROFILE PAGE*/
 
 #profile-img-container {
@@ -523,22 +472,11 @@ span {
     border-radius: 50%;
 }
 
-#profile-img-container img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
 #profile-book-display-area h4 {
     margin: 2em auto;
 }
 
 /*--------------------------------------------404 ERROR PAGE*/
-
-#error-page {
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .error-img-container {
     width: 80%;
@@ -547,22 +485,18 @@ span {
     border: 1px solid black;
 }
 
-.error-img {
-    width: 100%;
-    height: 100%;
-}
-
 .error-col p {
     margin-top: 1.5em;
     font-size: 1.25em;
 }
 
-/* Stars */
-
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+
+    /*--------------------------------------------BASE TEMPLATE*/
+
     nav ul a {
         font-size: 2rem;
     }
@@ -584,7 +518,6 @@ span {
     .row-spacing {
         margin-bottom: 80px;
     }
-
     .search-bar button {
         padding-top: 20px;
         padding-bottom: 10px;
@@ -597,6 +530,9 @@ span {
     main h4 {
         font-size: 2.5rem;
     }
+
+    /*--------------------------------------------HOME PAGE*/
+
     #call-to-action-area p {
         margin-top: 2rem;
         font-size: 1.5em;
@@ -668,6 +604,9 @@ span {
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+
+    /*--------------------------------------------BASE TEMPLATE*/
+
     #logo {
         margin-left: 0.5em;
     }
@@ -685,6 +624,9 @@ span {
         padding: 0 10px;
         transition: all 0.5s 0.2s ease;
     }
+
+    /*--------------------------------------------HOME PAGE*/
+
     .author-img-container {
         width: 150px;
         height: 150px;
@@ -692,10 +634,7 @@ span {
 
     /*--------------------------------------------BOOK PAGE*/
 
-    .book-page-info {
-        height: 500px;
-    }
-    .book-page-img-container {
+    .book-page-info, .book-page-img-container {
         height: 500px;
     }
 
