@@ -4,174 +4,301 @@
 
     <section id="books-page-wrapper">
 
+        <!-- 
+        "results" is a boolean passed into the template
+
+        It's default will be True, however if a user submits
+        a search query for which there are no results, then
+        "results" will be false
+         -->
         {% if results %}
 
-        <section class="pagination-area">
-            <div class="pagination-container">
-                <ul class="pagination">
+            <section class="pagination-area">
 
-                    {# Enables/Disables backwards chevron link #}
-                    {% if current_page == 1 %}
-                        <li class="disabled pag-link">
-                            <a href="#">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="waves-effect pag-link">
-                            {% if query_exists %}
-                            <a href="{{ url_for('search', page=previous_page) }}">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                            {% else %}
-                            <a href="{{ url_for('get_books', page=previous_page) }}">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                            {% endif %}
-                        </li>
-                    {% endif %}
+                <div class="pagination-container">
 
-                    {% for page in range(0, number_of_pages) %}
-                        {# Creates links and give active class to current page #}
-                        {% if page+1 == current_page %}
-                            <li class="pag-active pag-link">
-                                {% if query_exists %}
-                                <a href="{{ url_for('search', page=page+1) }}" class="white-text">{{ page+1 }}</a>
-                                {% else %}
-                                <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
-                                {% endif %}
+                    <ul class="pagination">
+
+                        {# Enables/Disables backwards chevron link #}
+                        {% if current_page == 1 %}
+
+                            <!-- Disable leftwards chevron if on page 1 -->
+                            <li class="disabled pag-link">
+                                <a href="#">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
                             </li>
+
                         {% else %}
+
+                            <!-- Enabled leftwards chevron -->
                             <li class="waves-effect pag-link">
+
                                 {% if query_exists %}
-                                <a href="{{ url_for('search', page=page+1) }}">{{ page+1 }}</a>
+
+                                    <!-- If a query exists, we cycle through books based on what user searched for -->
+                                    <a href="{{ url_for('search', page=previous_page) }}">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+
                                 {% else %}
-                                <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
+
+                                    <!-- Cycle through all books on website (As no query exists) -->
+                                    <a href="{{ url_for('get_books', page=previous_page) }}">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+
                                 {% endif %}
+
                             </li>
+
                         {% endif %}
-                    {% endfor %}
 
-                    {# Enables/Disables backwards chevron link #}
-                    {% if current_page == number_of_pages %}
-                        <li class="disabled pag-link">
-                            <a href="#">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="waves-effect pag-link">
-                            {% if query_exists %}
-                            <a href="{{ url_for('search', page=next_page) }}">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
+                        {% for page in range(0, number_of_pages) %}
+
+                            {# Creates pagination numbered links and give active class to current page #}
+                            {% if page+1 == current_page %}
+
+                                <!-- Active link -->
+                                <li class="pag-active pag-link">
+
+                                    {% if query_exists %}
+
+                                        <!-- If a query exists, we cycle through books based on what user searched for -->
+                                        <a href="{{ url_for('search', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+
+                                    {% else %}
+
+                                        <!-- Cycle through all books on website (As no query exists) -->
+                                        <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+
+                                    {% endif %}
+
+                                </li>
+
                             {% else %}
-                            <a href="{{ url_for('get_books', page=next_page) }}">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
+
+                                <!-- Ordinary link -->
+                                <li class="waves-effect pag-link">
+
+                                    {% if query_exists %}
+
+                                        <!-- If a query exists, we cycle through books based on what user searched for -->
+                                        <a href="{{ url_for('search', page=page+1) }}">{{ page+1 }}</a>
+
+                                    {% else %}
+
+                                        <!-- Cycle through all books on website (As no query exists) -->
+                                        <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
+
+                                    {% endif %}
+
+                                </li>
+
                             {% endif %}
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </section>
+                            
+                        {% endfor %}
 
-        <section id="book-display-area" class="row books-display-area">
-            {% for book in books %}
-                <div class="book col s12 m6 l3">
+                        {# Enables/Disables forwards chevron link #}
+                        {% if current_page == number_of_pages %}
 
-                    <div class="book-img-container">
-                        <a href="{{ url_for('book', book_id=book._id) }}">
-                            <img class="book-img" src="{{ book.image }}">
-                        </a>
-                    </div>
+                            <!-- Disable rightwards chevron if on last page -->
+                            <li class="disabled pag-link">
 
-                    <div class="book-info left-align">
-                        <h6><a href="{{ url_for('book', book_id=book._id) }}"><b>{{ book.title }}</b></a></h6>
-                        <p>{{ book.author }}</p>
-                        <p>{{ book.genre }}</p>
-                        <p>€10</p>
-                    </div>
+                                <a href="#">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+
+                            </li>
+
+                        {% else %}
+
+                            <!-- Enabled rightwards chevron -->
+                            <li class="waves-effect pag-link">
+
+                                {% if query_exists %}
+
+                                    <!-- If a query exists, we cycle through books based on what user searched for -->
+                                    <a href="{{ url_for('search', page=next_page) }}">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                
+                                {% else %}
+
+                                    <!-- Cycle through all books on website (As no query exists) -->
+                                    <a href="{{ url_for('get_books', page=next_page) }}">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+
+                                {% endif %}
+
+                            </li>
+
+                        {% endif %}
+                    </ul>
 
                 </div>
-            {% endfor %}
-        </section>
 
-        <section class="pagination-area">
-            <div class="pagination-container">
-                <ul class="pagination">
+            </section>
 
-                    {# Enables/Disables backwards chevron link #}
-                    {% if current_page == 1 %}
-                        <li class="disabled pag-link">
-                            <a href="#">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="waves-effect pag-link">
-                            {% if query_exists %}
-                            <a href="{{ url_for('search', page=previous_page) }}">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                            {% else %}
-                            <a href="{{ url_for('get_books', page=previous_page) }}">
-                                <i class="fas fa-chevron-left"></i>
-                            </a>
-                            {% endif %}
-                        </li>
-                    {% endif %}
+            <section class="row books-display-area">
 
-                    {% for page in range(0, number_of_pages) %}
-                        {# Creates links and give active class to current page #}
-                        {% if page+1 == current_page %}
-                            <li class="pag-active pag-link">
-                                {% if query_exists %}
-                                <a href="{{ url_for('search', page=page+1) }}" class="white-text">{{ page+1 }}</a>
-                                {% else %}
-                                <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
-                                {% endif %}
+                {% for book in books %}
+
+                    <div class="book col s12 m6 l3">
+
+                        <div class="book-img-container">
+                            <a href="{{ url_for('book', book_id=book._id) }}">
+                                <img class="book-img" src="{{ book.image }}">
+                            </a>
+                        </div>
+
+                        <div class="book-info left-align">
+                            <h6><a href="{{ url_for('book', book_id=book._id) }}"><b>{{ book.title }}</b></a></h6>
+                            <p>{{ book.author }}</p>
+                            <p>{{ book.genre }}</p>
+                            <p>€10</p>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </section>
+
+            <section class="pagination-area">
+
+                <div class="pagination-container">
+
+                    <ul class="pagination">
+
+                        {# Enables/Disables backwards chevron link #}
+                        {% if current_page == 1 %}
+
+                            <!-- Disable leftwards chevron if on page 1 -->
+                            <li class="disabled pag-link">
+                                <a href="#">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
                             </li>
+
                         {% else %}
-                            <li class="waves-effect pag-link">
-                                {% if query_exists %}
-                                <a href="{{ url_for('search', page=page+1) }}">{{ page+1 }}</a>
-                                {% else %}
-                                <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
-                                {% endif %}
-                            </li>
-                        {% endif %}
-                    {% endfor %}
 
-                    {# Enables/Disables backwards chevron link #}
-                    {% if current_page == number_of_pages %}
-                        <li class="disabled pag-link">
-                            <a href="#">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                        </li>
-                    {% else %}
-                        <li class="waves-effect pag-link">
-                            {% if query_exists %}
-                            <a href="{{ url_for('search', page=next_page) }}">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
+                            <!-- Enabled leftwards chevron -->
+                            <li class="waves-effect pag-link">
+
+                                {% if query_exists %}
+
+                                    <!-- If a query exists, we cycle through books based on what user searched for -->
+                                    <a href="{{ url_for('search', page=previous_page) }}">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+
+                                {% else %}
+
+                                    <!-- Cycle through all books on website (As no query exists) -->
+                                    <a href="{{ url_for('get_books', page=previous_page) }}">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+
+                                {% endif %}
+
+                            </li>
+
+                        {% endif %}
+
+                        {% for page in range(0, number_of_pages) %}
+
+                            {# Creates pagination numbered links and give active class to current page #}
+                            {% if page+1 == current_page %}
+
+                                <!-- Active link -->
+                                <li class="pag-active pag-link">
+
+                                    {% if query_exists %}
+
+                                        <!-- If a query exists, we cycle through books based on what user searched for -->
+                                        <a href="{{ url_for('search', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+
+                                    {% else %}
+
+                                        <!-- Cycle through all books on website (As no query exists) -->
+                                        <a href="{{ url_for('get_books', page=page+1) }}" class="white-text">{{ page+1 }}</a>
+
+                                    {% endif %}
+
+                                </li>
+
                             {% else %}
-                            <a href="{{ url_for('get_books', page=next_page) }}">
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
+
+                                <!-- Ordinary link -->
+                                <li class="waves-effect pag-link">
+
+                                    {% if query_exists %}
+
+                                        <!-- If a query exists, we cycle through books based on what user searched for -->
+                                        <a href="{{ url_for('search', page=page+1) }}">{{ page+1 }}</a>
+
+                                    {% else %}
+
+                                        <!-- Cycle through all books on website (As no query exists) -->
+                                        <a href="{{ url_for('get_books', page=page+1) }}">{{ page+1 }}</a>
+
+                                    {% endif %}
+
+                                </li>
+
                             {% endif %}
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </section>
+                            
+                        {% endfor %}
+
+                        {# Enables/Disables forwards chevron link #}
+                        {% if current_page == number_of_pages %}
+
+                            <!-- Disable rightwards chevron if on last page -->
+                            <li class="disabled pag-link">
+
+                                <a href="#">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+
+                            </li>
+
+                        {% else %}
+
+                            <!-- Enabled rightwards chevron -->
+                            <li class="waves-effect pag-link">
+
+                                {% if query_exists %}
+
+                                    <!-- If a query exists, we cycle through books based on what user searched for -->
+                                    <a href="{{ url_for('search', page=next_page) }}">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                
+                                {% else %}
+
+                                    <!-- Cycle through all books on website (As no query exists) -->
+                                    <a href="{{ url_for('get_books', page=next_page) }}">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+
+                                {% endif %}
+
+                            </li>
+
+                        {% endif %}
+                    </ul>
+
+                </div>
+
+            </section>
 
         {% else %}
 
-        <section id="no-results" class="row center-align">
-            <h4>There were no results for <q><b>{{ session.query }}</b></q>.</h4>
-        </section>
+            <section id="no-results" class="row center-align">
+                <h4>There were no results for <q><b>{{ session.query }}</b></q>.</h4>
+            </section>
 
         {% endif %}
 

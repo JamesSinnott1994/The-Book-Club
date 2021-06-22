@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <section id="profile-img">
+    <section>
 
         <h4 class="center-align">Welcome {{ username }}!</h4>
 
@@ -20,7 +20,9 @@
 
         {% if books %}
 
+            <!-- Display all the books that belong to the user -->
             {% for book in books %}
+
                 <div class="book col s12 m6 l3">
 
                     <div class="book-img-container">
@@ -37,10 +39,14 @@
                     </div>
 
                 </div>
+
             {% endfor %}
 
         {% else %}
+
+                <!-- If no books added, include link for user to go to Add Book page -->
                 <p class="center-align">No books added yet. <a href="{{ url_for('add_book') }}">Add a book now.</a></p>
+
         {% endif %}
 
     </section>

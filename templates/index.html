@@ -10,7 +10,6 @@
 
                 <div class="search-bar input-field col s12">
 
-                    <!-- <i class="fas fa-search prefix light-blue-text text-darken-4"></i> -->
                     <button class="prefix light-blue-text text-darken-4"><i class="fas fa-search"></i></button>
                     
                     <input type="text" name="query" id="query" minlength="3" placeholder="Search" required>
@@ -23,58 +22,63 @@
 
     </section>
 
-    <section class="row call-to-action-area">
+    <section id="call-to-action-area" class="row">
         
-            <div class="col s12 m6 cta-col">
+        <div class="col s12 m6 cta-col">
 
-                <div class="center-align">
-                    <i class="fas fa-seedling cta-icon"></i>
-                </div>
-
-                <h4 class="center-align">Contribute</h4>
-
-                {% if session.user %}
-
-                    <p class="center-align">Add a new book to The Book Club's library!</p>
-
-                    <div class="btn-container center-align">
-                        <a href="{{ url_for('add_book') }}" class="btn-large cta-btn">Add Book</a>
-                    </div>
-
-                {% else %}
-
-                    <p class="center-align">Add to a growing catalogue of books by joining The Book Club!</p>
-
-                    <div class="btn-container center-align">
-                        <a href="{{ url_for('register') }}" class="btn-large cta-btn">Register</a>
-                    </div>
-
-                {% endif %}
-
+            <div class="center-align">
+                <i class="fas fa-seedling cta-icon"></i>
             </div>
 
-            <div class="col s12 m6 cta-col">
+            <h4 class="center-align">Contribute</h4>
 
-                <div class="center-align">
-                    <i class="fas fa-book-reader cta-icon"></i>
-                </div>
+            <!-- If user logged in, encourage to add book -->
+            {% if session.user %}
 
-                <h4 class="center-align">Library</h4>
-                
-                <p class="center-align">Have a peruse through The Book Club library.</p>
+                <p class="center-align">Add a new book to The Book Club's library!</p>
 
                 <div class="btn-container center-align">
-                    <a href="{{ url_for('get_books') }}" class="btn-large cta-btn">View Library</a>
+                    <a href="{{ url_for('add_book') }}" class="btn-large cta-btn">Add Book</a>
                 </div>
 
+            <!-- If not logged in, encourage to register -->
+            {% else %}
+
+                <p class="center-align">Add to a growing catalogue of books by joining The Book Club!</p>
+
+                <div class="btn-container center-align">
+                    <a href="{{ url_for('register') }}" class="btn-large cta-btn">Register</a>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="col s12 m6 cta-col">
+
+            <div class="center-align">
+                <i class="fas fa-book-reader cta-icon"></i>
             </div>
+
+            <h4 class="center-align">Library</h4>
+            
+            <p class="center-align">Have a peruse through The Book Club library.</p>
+
+            <div class="btn-container center-align">
+                <a href="{{ url_for('get_books') }}" class="btn-large cta-btn">View Library</a>
+            </div>
+
+        </div>
 
     </section>
 
     <section id="most-popular-area" class="row">
+
         <h4 class="center-align">Most Popular Books</h4>
 
         {% for book in books %}
+
+            <!-- Create a div for the top 4 books -->
             <div class="book col s12 m6 l3">
 
                 <div class="book-img-container">
@@ -84,6 +88,7 @@
                 </div>
 
             </div>
+
         {% endfor %}
 
     </section>
@@ -94,20 +99,30 @@
 
         <div class="quote-paragraph col s12 m6">
 
+            <!-- Author image -->
             <div class="author-img-container left">
                 <img class="author-img" src="{{ url_for('static', filename='images/george-rr-martin.jpg') }}" alt="George RR Martin">
             </div>
+
+            <!-- Quote -->
             <p class="quote center-align"><i class="fas fa-quote-left"></i> A mind needs books as a sword needs a whetstone if it is to keep its edge. <i class="fas fa-quote-right"></i></p>
+
+            <!-- Author name -->
             <p class="author-name center-align">~ George R.R. Martin</p>
 
         </div>
 
         <div class="quote-paragraph col s12 m6">
 
+            <!-- Author image -->
             <div class="author-img-container">
                 <img class="author-img" src="{{ url_for('static', filename='images/mark-twain.jpg') }}" alt="Mark Twain">
             </div>
+
+            <!-- Quote -->
             <p class="quote center-align"><i class="fas fa-quote-left"></i> The man who does not read good books has no advantage over the man who can't read them. <i class="fas fa-quote-right"></i></p>
+
+            <!-- Author name -->
             <p class="author-name center-align">~ Mark Twain</p>
 
         </div>

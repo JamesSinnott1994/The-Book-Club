@@ -145,7 +145,7 @@ form i {
     border-bottom: none;
 }
 
-.call-to-action-area {
+#call-to-action-area {
     margin-top: 2rem;
 }
 
@@ -155,7 +155,7 @@ form i {
     font-size: 50px;
 }
 
-.call-to-action-area p {
+#call-to-action-area p {
     font-size: 1.25em;
 }
 
@@ -597,7 +597,7 @@ span {
     main h4 {
         font-size: 2.5rem;
     }
-    .call-to-action-area p {
+    #call-to-action-area p {
         margin-top: 2rem;
         font-size: 1.5em;
     }
@@ -644,7 +644,9 @@ span {
         width: 250px;
         height: 250px;
     }
-    /* 404 Error Page */
+
+    /*--------------------------------------------404 ERROR PAGE*/
+
     #error-page .row {
         margin-top: 2em;
     }
@@ -688,14 +690,17 @@ span {
         height: 150px;
     }
 
-    /* Book page */
+    /*--------------------------------------------BOOK PAGE*/
+
     .book-page-info {
         height: 500px;
     }
     .book-page-img-container {
         height: 500px;
     }
-    /* 404 Error Page */
+
+    /*--------------------------------------------404 ERROR PAGE*/
+
     .error-img-container {
         width: 85%;
         height: 550px;
