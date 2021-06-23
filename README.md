@@ -262,3 +262,37 @@ A different website structure appears depending on whether a user is logged in o
 ### Wireframes
 
 - [Balsamiq](https://balsamiq.com/)
+
+---
+## Credits
+
+### Code Attribution
+- [Materialize Navbar](https://materializecss.com/navbar.html)
+- [Materialize Sidenav](https://materializecss.com/sidenav.html)
+- [Materialize Search Bar](https://materializecss.com/navbar.html#search-docs)
+- [Materialize Footer](https://materializecss.com/footer.html)
+- [Materialize Text Inputs](https://materializecss.com/text-inputs.html)
+- [Materialize Radio Buttons](https://materializecss.com/radio-buttons.html)
+- [Materialize Pagination](https://materializecss.com/pagination.html)
+- Help with [Pagination](https://betterprogramming.pub/simple-flask-pagination-example-4190b12c2e2e)
+- Video tutorial on [Flask Mail](https://youtu.be/6VGu1CwCN2Y)
+- [StackOverFlow post](https://stackoverflow.com/questions/34926570/flask-securitys-flask-mail-registration-receives-smtplib-smtpauthenticationerro) on Flask Mail
+- Check if [field exists](https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists) with PyMongo
+- Flask [error handlers](https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/)
+- [Video tutorial](https://www.youtube.com/watch?v=L3K45LKJWSQ) on Searchbar inside of Navbar
+- [Trigger window resive](https://www.techiedelight.com/trigger-window-resize-event-javascript/) jQuery code
+- [Star ratings](https://codepen.io/mcallaro88/pen/EWQdRX?html-preprocessor=pug) code
+
+
+### Image Source Attribution
+- Book images are uploaded by the user. This is done by copying the "Image Address" of a book cover on Google images for examples.
+- [George RR Martin](https://i.guim.co.uk/img/media/5203ee41de0280a5e56a2e3c4f28bbbba36ba2b4/0_1319_4480_2688/master/4480.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=17e04733fdd5e2ecc32537807968d1c8)
+- [Mark Twain](https://wskg.org/wp-content/uploads/2019/02/marktwain.jpg)
+- [Profile Avatar](https://www.worldfuturecouncil.org/wp-content/uploads/2020/06/blank-profile-picture-973460_1280-1.png)
+
+### Acknowledgements
+I would like to thank:
+- My mentor [Maranatha Ilesanmi](https://ng.linkedin.com/in/ilesanmimaranatha) for his very helpful advice during the project meetings.
+- Anna Greaves for her videos on doing the Readme document.
+- The Slack Community for help with certain problems.
+- Tutor Support.

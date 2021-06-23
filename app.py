@@ -498,7 +498,6 @@ def add_book():
 
     Adds book to the books collection
     """
-    # https://blog.miguelgrinberg.com/post/handling-file-uploads-with-flask
     if request.method == "POST":
         # Create book document for books collection
         book = {
