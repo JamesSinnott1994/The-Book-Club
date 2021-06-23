@@ -230,3 +230,35 @@ A different website structure appears depending on whether a user is logged in o
     4. genres
 
 ![Database Schema](readme-images/schema.png)
+
+---
+## Technologies
+
+### Workspace
+
+- [Gitpod](https://www.gitpod.io/)
+
+### Languages
+
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript](https://www.javascript.com/)
+- [Python](https://www.python.org/)
+
+### Frameworks, Libraries, Other
+
+- [Heroku](https://dashboard.heroku.com/). The cloud platform used to deploy and run the code pushed to the associated GitHub repository.
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/) microframework used to construct the application.
+- [MongoDB](https://www.mongodb.com/). The cloud database service that allows for creation, modification, deletion and storage of database collections used in the application.
+- [MaterializeCSS](https://materializecss.com/)
+- [jQuery](https://jquery.com/)
+- [Google Fonts](https://fonts.google.com/)
+
+### Version Control
+
+- [Git](https://git-scm.com/)
+- [Github](https://github.com/)
+
+### Wireframes
+
+- [Balsamiq](https://balsamiq.com/)
