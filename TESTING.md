@@ -13,6 +13,12 @@ Back to [Readme file.](README.md)
 ---
 ### Code Validation
 
+#### Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
+- There was 1 error relating to the value for the font-weight:
+![CSS Error](readme-images/css-error.png)
+
+- Warnings were also discovered, but these relate mainly to "unknown vendor extensions", which can be safely ignored.
+
 #### Testing JavaScript with [JSHint](https://jshint.com/)
 
 - When I Initially put my app.js code into JSHint, I was given 17 warnings:

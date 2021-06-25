@@ -222,7 +222,7 @@ form i {
 
 .quote {
     font-size: 1.25em;
-    font-weight: 450;
+    font-weight: 500;
     font-style: italic;
 }
 
@@ -260,7 +260,6 @@ form i {
     font-size: 13px;
     line-height: 7px;
     border-radius: 50%;
-    border: 1px solid white;
     color: #4021BD;
     background: white;
     transition: all 0.45s ease-in-out;
