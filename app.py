@@ -106,8 +106,8 @@ def search(page=1):
                 },
                 {
                     "$skip": (
-                        pagination_data["BOOKS_PER_PAGE"]
-                        * (pagination_data["offset"] + int(page))
+                        pagination_data["BOOKS_PER_PAGE"] *
+                        (pagination_data["offset"] + int(page))
                     )
                 },
                 {
@@ -172,8 +172,8 @@ def get_books(page=1):
         books = list(mongo.db.books.aggregate([
             {
                 "$skip": (
-                    pagination_data["BOOKS_PER_PAGE"]
-                    * (pagination_data["offset"] + int(page))
+                    pagination_data["BOOKS_PER_PAGE"] *
+                    (pagination_data["offset"] + int(page))
                 )
             },
             {
