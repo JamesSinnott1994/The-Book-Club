@@ -263,6 +263,9 @@ A different website structure appears depending on whether a user is logged in o
 
 - [Balsamiq](https://balsamiq.com/)
 
+## Testing
+Separate file for testing is located [here.](TESTING.md)
+
 ---
 ## Deployment
 
