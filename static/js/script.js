@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+/*globals $:false */
 $(document).ready(function(){
     $('.sidenav').sidenav();
 
@@ -92,7 +94,7 @@ function bindStarClickEvents() {
                 } else {
                     $(span).css('color', '#ccc');
                 }
-            })
+            });
 
         });
 
