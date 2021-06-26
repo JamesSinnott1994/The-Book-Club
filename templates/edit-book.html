@@ -33,7 +33,6 @@
                     <div class="input-field col s12">
                         <i class="fas fa-folder prefix"></i>
                         <select id="genre" name="genre" class="validate" required>
-                            <option value="" disabled selected>Choose your genre</option>
                             {% for genre in genres %}
                                 {% if genre.genre == book.genre %}
                                     <option selected value="{{ genre.genre }}">{{ genre.genre }}</option>
