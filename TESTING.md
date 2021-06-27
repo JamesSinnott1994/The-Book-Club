@@ -13,7 +13,7 @@ Back to [Readme file.](README.md)
 ---
 ### Code Validation
 
-#### Testing HTML with [The W3C Markup Validation Service](https://validator.w3.org/)
+#### 1. Testing HTML with [The W3C Markup Validation Service](https://validator.w3.org/)
 
 - Home page:
     - No errors. Two minor warnings about sections lacking a heading. These are warning are not an issue and can be safely ignored.
@@ -38,13 +38,13 @@ Back to [Readme file.](README.md)
 - Contact/Login/Register page:
     - No errors on the three pages. 1 Section lacking a heading warning for each.
 
-#### Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
+#### 2. Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
 - There was 1 error relating to the value for the font-weight:
 ![CSS Error](readme-images/css-error.png)
 
 - Warnings were also discovered, but these relate mainly to "unknown vendor extensions", which can be safely ignored.
 
-#### Testing JavaScript with [JSHint](https://jshint.com/)
+#### 3. Testing JavaScript with [JSHint](https://jshint.com/)
 
 - When I Initially put my app.js code into JSHint, I was given 17 warnings:
 
@@ -60,7 +60,7 @@ Back to [Readme file.](README.md)
 - JSHint also had an issue with undefined variable '$', used for jQuery. The solution was to put the following at the top of the app.js file:
     - /*globals $:false */
 
-#### Testing Python with [PEP8 online](http://pep8online.com/)
+#### 4. Testing Python with [PEP8 online](http://pep8online.com/)
 
 - When I initially put my app.py code into the PEP8 validator, I was given 2 minor issues:
 
@@ -79,6 +79,62 @@ Back to [Readme file.](README.md)
             pagination_data["BOOKS_PER_PAGE"] *
             (pagination_data["offset"] + int(page))
         )
+
+---
+### Performance Testing
+
+Testing page with Lighthouse in Chrome Dev Tools to optimise performance, accessibility, best practices and SEO
+
+#### Desktop Performance
+
+- Lighthouse Desktop Home page report:
+    - As can be seen from the image below, performance was excellent.
+    - Accessibiltiy was improved from it's original score of 84 by the following actions: 
+        - Adding an aria-label to the button element which contained the search icon. It needed a name.
+        - Adding aria-labels to the social media links.
+    - Best Practices was improved from it's original score of 87 by:
+        - Adding the 'rel="noopener"' to the external links i.e. Buy & Social media buttons.
+    - SEO was improved by:
+        - Adding a `<meta name="description">` element, which describes what the website is all about.
+
+- Lighthouse Desktop report for the Books, Book, Contact, Login, Register pages had roughly the same scores as for the Home page and therefore solutions were the same.
+    - Performance was slightly worse on Books because of more Book images being shown.
+
+- Lighthouse Desktop Profile page report:
+
+![Lighthouse Desktop Profile Page Report](readme-images/performance-screenshots/profile-desktop.JPG)
+
+- Lighthouse Desktop Add Book page report:
+
+![Lighthouse Desktop Add Book Page Report](readme-images/performance-screenshots/add-book-desktop.JPG)
+
+- Lighthouse Desktop Edit Book page report:
+
+![Lighthouse Desktop Edit Book Page Report](readme-images/performance-screenshots/edit-book-desktop.JPG)
+
+#### Mobile Performance
+
+- Lighthouse Desktop Home page report:
+
+    - Performance and Best practices was improved on mobile by re-sizing the images for George RR Martin and Mark Twain i.e making them smaller.
+    - Unfortunately nothing could be done about the book images as they are taken from other sources on the internet and therefore I could not make them smaller myself before they are resized and loaded on the website.
+
+![Lighthouse Desktop Home Page Report](readme-images/performance-screenshots/home-mobile.JPG)
+
+- Lighthouse Desktop report for the Books, Book, Contact, Login, Register pages had roughly the same scores as for the Home page and therefore solutions were the same.
+    - Performance was slightly worse on Books because of more Book images being shown.
+
+- Lighthouse Desktop Profile page report:
+
+![Lighthouse Desktop Profile Page Report](readme-images/performance-screenshots/profile-mobile.JPG)
+
+- Lighthouse Desktop Add Book page report:
+
+![Lighthouse Desktop Add Book Page Report](readme-images/performance-screenshots/add-book-mobile.JPG)
+
+- Lighthouse Desktop Edit Book page report:
+
+![Lighthouse Desktop Edit Book Page Report](readme-images/performance-screenshots/edit-book-mobile.JPG)
 
 ---
 ## Bugs
