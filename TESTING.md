@@ -38,15 +38,6 @@ Back to [Readme file.](README.md)
 - Contact/Login/Register page:
     - No errors on the three pages. 1 Section lacking a heading warning for each.
 
-    - Minor warning about the section containing the "Play" and "Instructions" buttons lacking a header. Not an issue as the buttons are self-explanatory and therefore the section does not need an "identifying heading".
-- Instructions page:
-    - Same warning as above, this time about no h2-h6 heading element for the section containing the instructions text. Again this is not an issue for the instructions page as there is a h1 element in the header element which describes the content in the section containing the text.
-- Game page:
-    - 11 similar warning about the no h2-h6 heading in section elements. Again this is not an issue for the game page.
-    - 5 warnings about the document containing more than one `main` element.
-        - The reason for having mulitple `main` elements is that each element represents a screen of the Game page.
-        - Initially, the display for 5 of the 6 `main` elements was set to none, so they were not seen until the user clicked through each of the screens. This wasn't good enough for the HTML validator however, so the solution was to add a `hidden` attribute to 5 of the elements.
-
 #### Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
 - There was 1 error relating to the value for the font-weight:
 ![CSS Error](readme-images/css-error.png)
@@ -88,3 +79,12 @@ Back to [Readme file.](README.md)
             pagination_data["BOOKS_PER_PAGE"] *
             (pagination_data["offset"] + int(page))
         )
+
+---
+## Bugs
+
+**Bug:** There was an issue whereby books were not displaying in the correct order on the Books page. For example, if there were five books displayed from left to right (with 4 books per line), then the 5th book would not appear in the left-most position of it's line.
+
+**Fix:** The reason for this was because of the different heights of the Book divs. The solution was to use JavaScript to make each book div equal to the height of the longest div.
+
+Aside from the above, there were no more real bugs. Mainly there was just a lot of refactoring.
