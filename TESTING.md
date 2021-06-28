@@ -87,7 +87,7 @@ Testing page with Lighthouse in Chrome Dev Tools to optimise performance, access
 
 #### Desktop Performance
 
-- Lighthouse Desktop Home page report:
+- **Lighthouse Desktop Home page report**:
     - As can be seen from the image below, performance was excellent.
     - Accessibiltiy was improved from it's original score of 84 by the following actions: 
         - Adding an aria-label to the button element which contained the search icon. It needed a name.
@@ -99,27 +99,33 @@ Testing page with Lighthouse in Chrome Dev Tools to optimise performance, access
 
 ![Lighthouse Desktop Home Page Report](readme-images/performance-screenshots/home-desktop.JPG)
 
-- Lighthouse Desktop report for the Books, Book, Contact, Login, Register pages had roughly the same scores as for the Home page and therefore solutions were the same.
+- **Lighthouse Desktop Home page report Improvements**:
+
+    - As can be seen from the image below, the solutions above led to major improvements for the Home page and indeed for every page on the website.
+
+![Lighthouse Desktop Home Page Improvement Report](readme-images/performance-screenshots/home-desktop-improvement.JPG)
+
+- **Lighthouse Desktop report for the Books, Book, Contact, Login, Register pages** had roughly the same scores as for the Home page and therefore solutions were the same.
     - Performance was slightly worse on Books because of more Book images being shown.
 
-- Lighthouse Desktop Profile page report:
+- **Lighthouse Desktop Profile page report**:
     - As can be seen from image below, Best Practices was 80. This was because when a user logs in to the app, it can sometimes disable the HTTPS.
 
 ![Lighthouse Desktop Profile Page Report](readme-images/performance-screenshots/profile-desktop.JPG)
 
 #### Mobile Performance
 
-- Lighthouse Mobile Home page report:
+- **Lighthouse Mobile Home page report**:
 
     - Performance and Best practices was improved on mobile by re-sizing the images for George RR Martin and Mark Twain i.e making them smaller.
     - Unfortunately nothing could be done about the book images as they are taken from other sources on the internet and therefore I could not make them smaller myself before they are resized and loaded on the website.
 
 ![Lighthouse Mobile Home Page Report](readme-images/performance-screenshots/home-mobile.JPG)
 
-- Lighthouse Mobile report for the Books, Book, Contact, Login, Register pages had roughly the same scores as for the Home page and therefore solutions were the same.
+- **Lighthouse Mobile report for the Books, Book, Contact, Login, Register** pages had roughly the same scores as for the Home page and therefore solutions were the same.
     - Performance was slightly worse on Books because of more Book images being shown.
 
-- Lighthouse Mobile Profile page report:
+- **Lighthouse Mobile Profile page report**:
     - Images affected performance worse on mobile.
 
 ![Lighthouse Mobile Profile Page Report](readme-images/performance-screenshots/profile-mobile.JPG)
