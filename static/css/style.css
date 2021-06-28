@@ -648,9 +648,16 @@ span {
 /* // X-Large devices (large desktops, 1280px and up) */
 /* @media (min-width: 1280px) and (min-height: 802px):  { */
 @media (min-width: 1280px) {
+
 }
 
 /* // XX-Large devices (larger desktops, 1600px and up) */
 /* @media (min-width: 1600px) and (min-height: 992px){ */
-@media (min-width: 1600px) {
+@media (min-width: 1600px) and (min-height: 992px){
+    #search-area {
+        height: 45vh;
+    }
+    #call-to-action-area {
+        margin-top: 6rem;
+    }
 }
