@@ -153,6 +153,128 @@ Testing page with Lighthouse in Chrome Dev Tools to optimise performance, access
 ![Lighthouse Mobile Profile Page Report](readme-images/performance-screenshots/profile-mobile.JPG)
 
 ---
+### User Stories Testing
+
+As a **first-time player**, I want:
+1. To see a visually appealing website.
+
+- The website looks visually appealing, with attractive book covers, author images, colour contrasts, and a nice colour scheme. The main purple background colour exudes feelings of royalty, high quality, and intrigue.
+
+![Visual Appeal](readme-images/user-story-screenshots/visual-appeal.png)
+
+2. The website to be intuitive and simple to use.
+
+- The main navigation bar makes the website intuitive and easy to use.
+
+![Intuitive](readme-images/user-story-screenshots/intuitive.png)
+
+3. To be able to browse through the books on the site.
+
+- User can browse through books on the Books page.
+
+![Browse](readme-images/user-story-screenshots/browse.png)
+
+4. To be able to search for books by name.
+
+- User can search for books by name through the search bar on the home page and also through the search bar in the navigation bar.
+
+![Search](readme-images/user-story-screenshots/search.png)
+
+5. To be able to purchase books from the site.
+
+- "Buy" button on a Book page would enable user to buy a book (Directs to Amazon).
+
+![Purchase](readme-images/user-story-screenshots/purchase.png)
+
+6. To be able to Register as a User on the site.
+
+- User can register an account through the Register form
+
+![Register](readme-images/user-story-screenshots/register.png)
+
+7. To be able to get visual feedback when an action is completed.
+
+- Flash message give user visual feedback on their actions.
+
+![Flash](readme-images/user-story-screenshots/flash.png)
+
+8. To be able to contact the Site Owner for any queries.
+
+- Users can contact site owner through the form on the Contact page.
+
+![Contact](readme-images/user-story-screenshots/contact.png)
+
+As a **returning signed-up user**, in addition to the above, I want:
+
+1. To be able to login to the site.
+
+- User can login through the form on the Login page.
+
+![Login](readme-images/user-story-screenshots/login.png)
+
+2. To be able to add books and their details.
+
+- This can be done from the form on the Add Book page.
+
+![Add Book](readme-images/user-story-screenshots/add-book.png)
+
+3. To be able to view books that you added.
+
+- User can see their books from the Profile page.
+
+![Profile](readme-images/user-story-screenshots/profile.png)
+
+4. To be able to write reviews about any book.
+
+- Can be done from the Add Review form on a Book's page.
+
+![Add Review](readme-images/user-story-screenshots/add-review.png)
+
+5. To be able to edit details of books and reviews you added.
+
+- Can edit book details by clicking the "Edit" button located beside the "Buy" button. This brings user to the Edit Book page.
+
+![Edit Book](readme-images/user-story-screenshots/edit-book.png)
+
+- Can edit review by clicking the "Edit" button beside your review. Brings you up to the Edit Review form.
+
+![Edit Review](readme-images/user-story-screenshots/edit-review.png)
+ 
+6. To be able to delete details of books and reviews you added.
+
+- User can delete books and reviews that belong to them by clicking the "Delete" button and then clicking "Yes" in the modal window.
+
+![Delete](readme-images/user-story-screenshots/delete.png)
+
+As the **site owner**, I want:
+
+1. To earn money on each book purchased on the site via a link from the site.
+
+- See image containing "Buy" button above.
+
+2. To have the ability as Administrator to remove any books and reviews added by users of the site.
+
+- Administrator has the right to delete all books and reviews on the site. (For image below I am logged in as Administrator and as can be seen can delete both reviews by different users).
+
+![Admin](readme-images/user-story-screenshots/admin.png)
+
+3. To create a website that looks well on different devices and screen sizes.
+
+- The website is responsive and looks well on different devices and screen sizes.
+
+![IPAD](readme-images/user-story-screenshots/ipad.png)
+
+![Mobile](readme-images/user-story-screenshots/mobile.png)
+
+4. To provide a visually appealing and intuitive website for users.
+
+- See visually appealing image mentioned above.
+
+5. To provide details for users to contact me if they need help with a query.
+
+- See Contact form image above.
+
+---
 ## Bugs
 
 **Bug:** There was an issue whereby books were not displaying in the correct order on the Books page. For example, if there were five books displayed from left to right (with 4 books per line), then the 5th book would not appear in the left-most position of it's line.
