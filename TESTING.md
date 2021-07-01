@@ -11,6 +11,74 @@ Back to [Readme file.](README.md)
 - [Bugs](#bugs)
 
 ---
+### Functionality Testing
+
+- Testing was applied throughout development to make sure everything worked as it should.
+
+#### Base Template (From which all pages inherit)
+
+- "The Book Club" icon in the navbar correctly goes to the Home page.
+- Search bar in navbar successfully returns books that the user search for.
+- All the navigation links work as they should.
+- All the sidebar navigation links work as they should.
+- The Footer social media links correctly go to the right destination.
+
+#### Home Page
+
+- Main search bar successfully returns the right results for the user.
+- "Register" button in the call-to-action area successfully takes user to the Register page (Appears if user is not logged in).
+- "Add Book" button in the call-to-action area successfully takes user to the Add Book page (Only appears if user is logged in).
+- "View Library" button in the call-to-action area successfully takes user to the Books page.
+- Clicking any of the books in the "Most Popular Books" section successfully takes user to the page for that book.
+
+#### Books Page
+
+- Clicking any of the books successfully takes user to the page for that book.
+- Clicking any of the pagination page elements successfully shows the book results for that page.
+- Clicking the left and right chevrons successfully takes user either forwards or backwards through the pages.
+
+#### Book Page
+
+- Clicking the reviews link (which shows the number of reviews for the book), successfully takes user down to the Reviews section on the page.
+- If user is not logged in, clicking the "Add Review" link successfully takes user to the Login page.
+- If user is logged in, clicking the "Add Review" link successfully takes user down to the Add Review form.
+- Clicking the "Buy" button successfully takes user to Amazon.com.
+- Clicking the "Edit" button successfully takes user to the Edit Book page.
+- Clicking the "Delete" button successfully brings up a modal window which contains a "Yes" button and "No" button for deleting the book.
+    - If user clicks "Yes", the book is then successfully deleted from the website, and the user is redirected to the Home page. All reviews associated with the book are also successfully deleted.
+    - If user clicks "No", then the modal window is successfully closed.
+- If user enters valid details on the Add Review form, and clicks the "Add Review" button, then the page is successfully reloaded and the new review will appear in the Reviews section.
+- If user clicks the "Edit" button beside their review, then they are successfully taken up to the Edit Review form.
+- If user enters valid details on the Edit Review form, and clicks the "Edit Review" button, then the page is successfully reloaded and the review will be updated in the Reviews section.
+- If user clicks the "Delete" button beside a review, a modal window appears with a similar process to deleting a book.
+
+#### Contact Page
+
+- User can enter their details in the contact form.
+- If details are valid then user can successfully send an email to the Site Administrator by clicking the "Submit" button.
+
+#### Login Page
+
+- If user's login details are correct, then they can successfully login by clicking the "Log In" button.
+
+#### Register Page
+
+- If user's details are valid, then they can successfully register an account with the site by clicking the "Register" button.
+
+#### Profile Page
+
+- Clicking any of the books that belong to the user successfully takes user to the page for that book.
+
+#### Add Book Page
+
+- If user enters valid details then they can successfully add a book to the site by clicking the "Add Book" button on the form.
+
+#### Edit Book Page
+
+- If user enters valid details then they can successfully edit a book on the site by clicking the "Edit Book" button on the form.
+- If a user clicks the "Cancel" button on the form then they are successfully taken back to the Books page.
+
+---
 ### Browser Compatability
 
 - I tested the appearance and responsiveness of the website across many different devices and browsers. Generally, the appearance and responsiveness looks quite good on the different devices, and there is no difference between the browsers.
