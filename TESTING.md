@@ -349,4 +349,8 @@ As the **site owner**, I want:
 
 **Fix:** The reason for this was because of the different heights of the Book divs. The solution was to use JavaScript to make each book div equal to the height of the longest div.
 
+**Bug:** There was an issue whereby emails couldn't be sent to gmail, specifically a smtplib.SMTPAuthenticationError from smtp.gmail.com.
+
+**Fix:** Solution was to follow the [advice given here](https://stackoverflow.com/questions/34926570/flask-securitys-flask-mail-registration-receives-smtplib-smtpauthenticationerro) and create an app specific password and enable two-step verification for my gmail account.
+
 Aside from the above, there were no more real bugs. Mainly there was just a lot of refactoring.
