@@ -77,21 +77,21 @@ As the **site owner**, I want:
 
 #### Strategy Tradeoffs
 
-Opportunity/Problem | Importance (1-5) | Viability/Feasibility (1-5)
-:-------- |:--------:|:--------:
-Search Feature | 5 | 3
-Add Book | 5 | 4
-Edit Book | 4 | 4
-Delete Book | 4 | 4
-Add Review | 4 | 4
-Edit Review | 3 | 4
-Delete Review | 3 | 4
-Register | 5 | 4
-Log in | 5 | 4
-Log out | 4 | 4
-Contact | 3 | 5
-Purchase | 4 | 5
-Site Analytics | 1 | 1
+Opportunity/Problem | Importance (1-5) | Viability/Feasibility (1-5) | Implemented
+:-------- |:--------:|:--------:|:--------:
+Search Feature | 5 | 3 | :heavy_check_mark:
+Add Book | 5 | 4 | :heavy_check_mark:
+Edit Book | 4 | 4 | :heavy_check_mark:
+Delete Book | 4 | 4 | :heavy_check_mark:
+Add Review | 4 | 4 | :heavy_check_mark:
+Edit Review | 3 | 4 | :heavy_check_mark:
+Delete Review | 3 | 4 | :heavy_check_mark:
+Register | 5 | 4 | :heavy_check_mark:
+Log in | 5 | 4 | :heavy_check_mark:
+Log out | 4 | 4 | :heavy_check_mark:
+Contact | 3 | 5 | :heavy_check_mark:
+Purchase | 4 | 5 | :heavy_check_mark:
+Site Analytics | 1 | 1 | :x:
 
 ### Scope
 - Main features (For Minimal Viable Product)
@@ -245,7 +245,7 @@ A different website structure appears depending on whether a user is logged in o
 - [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [JavaScript](https://www.javascript.com/)
-- [Python](https://www.python.org/)
+- [Python3](https://www.python.org/)
 
 ### Frameworks, Libraries, Other
 
