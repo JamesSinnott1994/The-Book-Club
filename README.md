@@ -232,6 +232,17 @@ A different website structure appears depending on whether a user is logged in o
 
 ![Database Schema](readme-images/schema.png)
 
+- The image above was the data model that I came up with for the project.
+
+    - The "users" and "genre" collections match what exists for the project.
+
+    - Slight differences for the "books" collection as can be seen below:
+    ![Books collection](readme-images/books-collection.JPG)
+
+    - Slight differences for the "reviews" collection as can be seen below:
+    ![Books collection](readme-images/reviews-collection.JPG)
+
+
 ---
 ## Technologies
 
