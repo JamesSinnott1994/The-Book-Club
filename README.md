@@ -363,6 +363,10 @@ To contribute to this website you can Fork it by following the procedure below:
 ---
 ## Credits
 
+### Book / Reviews Attributions
+- Info for some of the book descriptions was taken from Wikipedia pages about the particular book.
+- One or two example reviews were taken from Amazon.
+
 ### Code Attribution
 - [Materialize Navbar](https://materializecss.com/navbar.html)
 - [Materialize Sidenav](https://materializecss.com/sidenav.html)
