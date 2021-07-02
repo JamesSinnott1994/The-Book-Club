@@ -196,6 +196,8 @@ A different website structure appears depending on whether a user is logged in o
 10. 404 Error Page Wireframe
     - [404 Error Page](https://github.com/JamesSinnott1994/the-book-club/blob/master/wireframes/404-error-page.pdf)
 
+- I decided not to create a Search page, and instead just used the Books page for displaying the results from a query.
+
 ### Surface
 - Typography:
     - Oswald will be the font that is used for header, titles and links.
