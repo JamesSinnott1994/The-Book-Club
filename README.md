@@ -1,5 +1,7 @@
 # The Book Club
 
+![image](readme-images/am-i-responsive.JPG)
+
 The purpose of this project is to build a book review and recommendation site.
 
 ## Table of Contents
