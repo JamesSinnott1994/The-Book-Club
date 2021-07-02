@@ -209,16 +209,18 @@ A different website structure appears depending on whether a user is logged in o
     - For the navbar and footbar, the colour used is Medium Blue.
     - Colour for the main search area and ordinary buttons is Iris.
     - Primary background colour is White.
-    - Secondary background colour is Peach.
-    - Edit Buttons are Slimy Green.
-    - Register and Delete buttons are Vermillion.
+    - Colours below were never implemented in the project:
+        - Secondary background colour is Peach.
+        - Edit Buttons are Slimy Green.
+        - Register and Delete buttons are Vermillion.
 
 - Media:
-    - The only images used on the site will be those uploaded by users i.e. book covers.
+    - The images mainly used on the site are those uploaded by users i.e. book covers.
+    - There is also an image of George R.R. Martin and Mark Twain.
 
 - Effects:
-    - There will be Flash messages to give the user feedback on some of their actions.
-    - There will be hover effects over links, buttons and input boxes.
+    - Flash messages give the user feedback on some of their actions.
+    - Hover effects over book images, links, buttons and input boxes.
 
 ## Database Schema
 
