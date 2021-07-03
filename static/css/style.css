@@ -385,12 +385,13 @@ form i {
 }
 
 .edit-btn {
-    color: #26a69a;
+    color: rgb(96, 104, 216);
     background-color: rgba(255, 255, 255, 1);
 }
+
 .edit-btn:hover {
     color: white;
-    background-color: #26a69a;
+    background-color: rgb(96, 104, 216);
 }
 
 .delete-btn {
