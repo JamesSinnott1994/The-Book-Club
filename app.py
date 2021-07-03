@@ -246,8 +246,6 @@ def book(book_id):
 
     book = mongo.db.books.find_one({"_id": ObjectId(book_id)})
     # https://stackoverflow.com/questions/51244068/pymongo-how-to-check-if-field-exists
-    query = {"book_id": {"$eq": book_id}}
-    reviews = list(mongo.db.reviews.find(query))
 
     reviews = list(mongo.db.reviews.find(
         {
@@ -332,6 +330,9 @@ def edit_review(book_id):
     Redirects to the Book page on which the review is located
     """
     review_id = request.args.get('review_id', None)
+    old_review = mongo.db.reviews.find_one(
+        {"_id": ObjectId(review_id)}
+    )
 
     if request.method == "POST":
         # Edit Review
@@ -339,8 +340,8 @@ def edit_review(book_id):
             "title": request.form.get("title"),
             "comment": request.form.get("comment"),
             "book_id": book_id,
-            "reviewed_by": session["user"],
-            "review_date": datetime.datetime.now().strftime("%d-%m-%Y"),
+            "reviewed_by": old_review["reviewed_by"],
+            "review_date": old_review["review_date"],
             "rating": int(request.form.get("stars"))
         }
 
