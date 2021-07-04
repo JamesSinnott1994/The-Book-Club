@@ -199,11 +199,11 @@ A different website structure appears depending on whether a user is logged in o
 - I decided not to create a Search page, and instead just used the Books page for displaying the results from a query.
 
 ### Surface
-- Typography:
+- #### Typography:
     - Oswald will be the font that is used for header, titles and links.
     - Roboto will be the font used for the paragraph text.
 
-- Colour scheme:
+- #### Colour scheme:
     ![Colour Scheme](readme-images/palette.PNG)
 
     - For the navbar and footbar, the colour used is Medium Blue.
@@ -214,11 +214,11 @@ A different website structure appears depending on whether a user is logged in o
         - Edit Buttons are Slimy Green.
         - Register and Delete buttons are Vermillion.
 
-- Media:
+- #### Media:
     - The images mainly used on the site are those uploaded by users i.e. book covers.
     - There is also an image of George R.R. Martin and Mark Twain.
 
-- Effects:
+- #### Effects:
     - Flash messages give the user feedback on some of their actions.
     - Hover effects over book images, links, buttons and input boxes.
 
